@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Lazy loading all route components for code splitting
 const Home = lazy(() => import("./pages/Home"));
@@ -41,6 +42,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />

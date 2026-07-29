@@ -237,7 +237,7 @@ export default function Contact() {
                         name="name"
                         required
                         placeholder="Your Name"
-                        className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-[var(--color-cyber-muted-fg)] focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
+                        className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
                       />
                     </div>
                     <div className="space-y-2">
@@ -249,7 +249,7 @@ export default function Contact() {
                         name="email"
                         required
                         placeholder="your@email.com"
-                        className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-[var(--color-cyber-muted-fg)] focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
+                        className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
                       />
                     </div>
                   </div>
@@ -262,7 +262,7 @@ export default function Contact() {
                       type="text"
                       name="company"
                       placeholder="Your Company"
-                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-[var(--color-cyber-muted-fg)] focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
+                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
                     />
                   </div>
 
@@ -299,7 +299,7 @@ export default function Contact() {
                       required
                       rows={5}
                       placeholder="Tell us about your project..."
-                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-[var(--color-cyber-muted-fg)] focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors resize-none"
+                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors resize-none"
                     />
                   </div>
 

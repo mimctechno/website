@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import ScrollToTop from "./components/ScrollToTop";
+import CyberCursor from "./components/CyberCursor";
 
 // Lazy loading all route components for code splitting
 const Home = lazy(() => import("./pages/Home"));
@@ -41,6 +42,7 @@ const LoadingFallback = () => (
 export default function App() {
   return (
     <HelmetProvider>
+      <CyberCursor />
       <BrowserRouter>
         <ScrollToTop />
         <Suspense fallback={<LoadingFallback />}>

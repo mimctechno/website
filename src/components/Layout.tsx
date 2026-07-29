@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import Navbar from "./navigation/Navbar";
 import Footer from "./navigation/Footer";
-import CyberCursor from "./CyberCursor";
 
 function CyberGrid() {
   return (
@@ -120,7 +119,6 @@ export default function Layout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <CyberCursor />
       <CyberGrid />
 
       {/* Extracted Header Component */}

@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Share+Tech+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Share+Tech+Mono&display=swap");
 @import "tailwindcss";
 
 @theme {
   --font-cyber-head: "Space Mono", monospace;
   --font-cyber-body: "Space Mono", monospace;
   --font-cyber-accent: "Share Tech Mono", monospace;
-  
+
   --font-kinetic-main: "Space Grotesk", sans-serif;
 
   --color-cyber-bg: #050505;
@@ -17,7 +17,7 @@
   --color-cyber-accent2: #ff00ff;
   --color-cyber-accent3: #00d4ff;
   --color-cyber-border: #1a1a2e;
-  
+
   --color-kinetic-bg: #09090b;
   --color-kinetic-fg: #fafafa;
   --color-kinetic-muted: #27272a;
@@ -51,7 +51,7 @@
     text-shadow: -1px 0 #00d4ff;
     animation: glitch-anim2 3s infinite linear alternate-reverse;
   }
-  
+
   .cyber-scanlines::after {
     content: " ";
     display: block;
@@ -72,28 +72,40 @@
 
   .cyber-chamfer {
     clip-path: polygon(
-      0 16px, 16px 0,
-      100% 0, 100% calc(100% - 16px),
-      calc(100% - 16px) 100%, 0 100%
+      0 16px,
+      16px 0,
+      100% 0,
+      100% calc(100% - 16px),
+      calc(100% - 16px) 100%,
+      0 100%
     );
   }
-  
+
   .cyber-chamfer-reverse {
     clip-path: polygon(
-      0 0, calc(100% - 16px) 0,
-      100% 16px, 100% 100%,
-      16px 100%, 0 calc(100% - 16px)
+      0 0,
+      calc(100% - 16px) 0,
+      100% 16px,
+      100% 100%,
+      16px 100%,
+      0 calc(100% - 16px)
     );
   }
 
   .cyber-glow {
-    box-shadow: 0 0 5px var(--color-cyber-accent), 0 0 15px rgba(0, 255, 170, 0.3);
+    box-shadow:
+      0 0 5px var(--color-cyber-accent),
+      0 0 15px rgba(0, 255, 170, 0.3);
   }
   .cyber-glow-text {
-    text-shadow: 0 0 5px var(--color-cyber-accent), 0 0 15px rgba(0, 255, 170, 0.3);
+    text-shadow:
+      0 0 5px var(--color-cyber-accent),
+      0 0 15px rgba(0, 255, 170, 0.3);
   }
   .cyber-glow-secondary {
-    box-shadow: 0 0 5px var(--color-cyber-accent2), 0 0 15px rgba(255, 0, 255, 0.3);
+    box-shadow:
+      0 0 5px var(--color-cyber-accent2),
+      0 0 15px rgba(255, 0, 255, 0.3);
   }
 
   .kinetic-noise {
@@ -107,7 +119,7 @@
     opacity: 0.03;
     mix-blend-mode: overlay;
   }
-  
+
   .cyber-text-lines {
     background-image: repeating-linear-gradient(
       transparent,
@@ -148,8 +160,12 @@
   }
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .animate-marquee {
@@ -158,20 +174,49 @@
 }
 
 @keyframes glitch-anim2 {
-  0% { clip-path: inset(20% 0 60% 0); }
-  20% { clip-path: inset(50% 0 30% 0); }
-  40% { clip-path: inset(10% 0 80% 0); }
-  60% { clip-path: inset(75% 0 15% 0); }
-  80% { clip-path: inset(40% 0 50% 0); }
-  100% { clip-path: inset(85% 0 10% 0); }
+  0% {
+    clip-path: inset(20% 0 60% 0);
+  }
+  20% {
+    clip-path: inset(50% 0 30% 0);
+  }
+  40% {
+    clip-path: inset(10% 0 80% 0);
+  }
+  60% {
+    clip-path: inset(75% 0 15% 0);
+  }
+  80% {
+    clip-path: inset(40% 0 50% 0);
+  }
+  100% {
+    clip-path: inset(85% 0 10% 0);
+  }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 .animate-blink {
   animation: blink 1s step-end infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.animate-scanline {
+  animation: scanline 2s linear infinite;
 }
 
 body {

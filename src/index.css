@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-cyber-head: "Space Mono", monospace;
+  --font-cyber-body: "Space Mono", monospace;
+  --font-cyber-accent: "Share Tech Mono", monospace;
+  
+  --font-kinetic-main: "Space Grotesk", sans-serif;
+
+  --color-cyber-bg: #050505;
+  --color-cyber-fg: #e0e0e0;
+  --color-cyber-card: #0a0a0f;
+  --color-cyber-muted: #1c1c2e;
+  --color-cyber-muted-fg: #6b7280;
+  --color-cyber-accent: #00ffaa;
+  --color-cyber-accent2: #ff00ff;
+  --color-cyber-accent3: #00d4ff;
+  --color-cyber-border: #1a1a2e;
+  
+  --color-kinetic-bg: #09090b;
+  --color-kinetic-fg: #fafafa;
+  --color-kinetic-muted: #27272a;
+  --color-kinetic-muted-fg: #a1a1aa;
+  --color-kinetic-accent: #dfe104;
+  --color-kinetic-border: #3f3f46;
+}
+
+@layer utilities {
+  .cyber-glitch {
+    position: relative;
+    display: inline-block;
+  }
+  .cyber-glitch::before,
+  .cyber-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+  .cyber-glitch::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff00ff;
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+  }
+  .cyber-glitch::after {
+    left: -2px;
+    text-shadow: -1px 0 #00d4ff;
+    animation: glitch-anim2 3s infinite linear alternate-reverse;
+  }
+  
+  .cyber-scanlines::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .cyber-chamfer {
+    clip-path: polygon(
+      0 16px, 16px 0,
+      100% 0, 100% calc(100% - 16px),
+      calc(100% - 16px) 100%, 0 100%
+    );
+  }
+  
+  .cyber-chamfer-reverse {
+    clip-path: polygon(
+      0 0, calc(100% - 16px) 0,
+      100% 16px, 100% 100%,
+      16px 100%, 0 calc(100% - 16px)
+    );
+  }
+
+  .cyber-glow {
+    box-shadow: 0 0 5px var(--color-cyber-accent), 0 0 15px rgba(0, 255, 170, 0.3);
+  }
+  .cyber-glow-text {
+    text-shadow: 0 0 5px var(--color-cyber-accent), 0 0 15px rgba(0, 255, 170, 0.3);
+  }
+  .cyber-glow-secondary {
+    box-shadow: 0 0 5px var(--color-cyber-accent2), 0 0 15px rgba(255, 0, 255, 0.3);
+  }
+
+  .kinetic-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+  
+  .cyber-text-lines {
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 2px,
+      currentColor 2px,
+      currentColor 4px
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @keyframes glitch-anim {
+    0% {
+      clip-path: inset(20% 0 80% 0);
+      transform: translate(-2px, 2px);
+    }
+    20% {
+      clip-path: inset(60% 0 10% 0);
+      transform: translate(2px, -2px);
+    }
+    40% {
+      clip-path: inset(40% 0 50% 0);
+      transform: translate(2px, 2px);
+    }
+    60% {
+      clip-path: inset(80% 0 5% 0);
+      transform: translate(-2px, -2px);
+    }
+    80% {
+      clip-path: inset(10% 0 70% 0);
+      transform: translate(2px, -2px);
+    }
+    100% {
+      clip-path: inset(30% 0 50% 0);
+      transform: translate(-2px, 2px);
+    }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip-path: inset(20% 0 60% 0); }
+  20% { clip-path: inset(50% 0 30% 0); }
+  40% { clip-path: inset(10% 0 80% 0); }
+  60% { clip-path: inset(75% 0 15% 0); }
+  80% { clip-path: inset(40% 0 50% 0); }
+  100% { clip-path: inset(85% 0 10% 0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}

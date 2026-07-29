@@ -62,6 +62,37 @@ export default function Layout({
     sameAs: [],
   };
 
+  // Generate dynamic Breadcrumbs schema based on current route
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const breadcrumbItems = pathParts.map((part, index) => {
+    const url = `https://www.mimctechnologies.com/${pathParts
+      .slice(0, index + 1)
+      .join("/")}`;
+    const name = part
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
+    return {
+      "@type": "ListItem",
+      position: index + 2,
+      name: name,
+      item: url,
+    };
+  });
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.mimctechnologies.com",
+      },
+      ...breadcrumbItems,
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[var(--color-cyber-bg)] text-[var(--color-cyber-fg)] font-[var(--font-cyber-body)] overflow-x-hidden selection:bg-[var(--color-cyber-accent)] selection:text-black md:cursor-none [&_*]:md:cursor-none">
       <Helmet>
@@ -83,6 +114,10 @@ export default function Layout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <CyberCursor />

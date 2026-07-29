@@ -1,43 +1,13 @@
 import { Terminal, Shield, Zap, ChevronRight, MapPin, Plus } from 'lucide-react';
-import CyberCursor from '../components/CyberCursor';
+import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--color-cyber-bg)] text-[var(--color-cyber-fg)] font-[var(--font-cyber-body)] overflow-hidden selection:bg-[var(--color-cyber-accent)] selection:text-black md:cursor-none [&_*]:md:cursor-none">
-      <CyberCursor />
-
-      {/* Background Grid Pattern */}
-      <div className="fixed inset-0 pointer-events-none opacity-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0, 255, 170, 0.5) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 170, 0.5) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px'
-        }}
-      ></div>
-
-      <div className="max-w-7xl mx-auto px-6 py-6 md:py-8 relative z-10">
-
-        {/* Navigation / Header */}
-        <header className="flex justify-between items-center mb-16 border-b border-[var(--color-cyber-border)] pb-6">
-          <div className="flex items-center gap-4">
-            <img src="/logo.png" alt="MIMC Logo" className="w-12 h-12 object-contain" />
-            <div className="flex flex-col leading-none">
-              <span className="font-[var(--font-cyber-head)] text-xl md:text-2xl font-bold tracking-widest uppercase text-white cyber-glitch" data-text="MIMC">
-                MIMC
-              </span>
-              <span className="text-[var(--color-cyber-accent)] text-[10px] md:text-xs tracking-[0.4em] font-[var(--font-cyber-accent)] uppercase mt-1">
-                TECHNOLOGIES
-              </span>
-            </div>
-          </div>
-          <nav className="hidden md:flex gap-8 font-[var(--font-cyber-accent)] text-sm tracking-[0.2em] uppercase">
-            <a href="#" className="hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Software</a>
-            <a href="#" className="hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">WhatsApp API</a>
-            <a href="#" className="text-[var(--color-cyber-accent2)] hover:cyber-glow-secondary transition-all">Contact</a>
-          </nav>
-        </header>
+    <Layout
+      title="Enterprise Software & WhatsApp API"
+      description="MIMC Technologies delivers ERP, CRM, official WhatsApp API, and Tally integration solutions globally from Canada and India."
+    >
+      <div className="max-w-7xl mx-auto px-6 py-8 relative z-10">
 
         {/* Hero Section */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-32 relative z-10">
@@ -195,65 +165,6 @@ export default function Home() {
         </section>
 
       </div>
-
-      {/* Massive Brutalist Footer (Cyberpunk Style) */}
-      <footer className="w-full bg-[#030303] text-[var(--color-cyber-fg)] pt-32 pb-12 px-6 md:px-12 border-t border-[var(--color-cyber-accent)] relative z-20">
-        <div className="absolute top-0 left-0 w-full h-[1px] shadow-[0_0_20px_rgba(0,255,170,1)]"></div>
-
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-6xl md:text-[8rem] lg:text-[10rem] font-black uppercase font-[var(--font-cyber-head)] tracking-widest leading-[0.9] mb-24 text-white">
-            READY TO <br /> TRANSFORM <br /> YOUR <span className="text-[var(--color-cyber-accent)]">WORKFLOW?</span>
-          </h2>
-
-          <div className="mb-32 max-w-2xl relative">
-            <input
-              type="email"
-              placeholder="ENTER_EMAIL_ADDRESS"
-              className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] pb-4 text-xl md:text-3xl font-bold uppercase tracking-widest font-[var(--font-cyber-accent)] placeholder:text-[var(--color-cyber-border)] text-[var(--color-cyber-accent)] focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors peer"
-            />
-            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--color-cyber-accent)] scale-x-0 origin-left transition-transform duration-300 pointer-events-none peer-focus:scale-x-100 shadow-[0_0_10px_rgba(0,255,170,0.8)]" id="input-glow"></div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 font-[var(--font-cyber-accent)] font-bold uppercase tracking-widest text-xs md:text-sm mb-32">
-            <div className="space-y-6">
-              <div className="mb-8 text-[var(--color-cyber-accent2)] flex items-center gap-2"><Terminal className="w-4 h-4" /> SERVICES</div>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">ERP & CRM</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">WhatsApp API</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Tally Integration</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Web Development</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">SEO & Marketing</a>
-            </div>
-            <div className="space-y-6">
-              <div className="mb-8 text-[var(--color-cyber-accent2)] flex items-center gap-2"><Shield className="w-4 h-4" /> COMPANY</div>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">About Us</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Global Offices</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Careers</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Contact</a>
-            </div>
-            <div className="space-y-6">
-              <div className="mb-8 text-[var(--color-cyber-accent2)] flex items-center gap-2"><MapPin className="w-4 h-4" /> COMM_LINK</div>
-              <a href="tel:+14168578831" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">+1 416-857-8831</a>
-              <a href="tel:+919259418994" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">+91 925941-8994</a>
-              <a href="mailto:info@mimctechnologies.com" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all text-[10px] md:text-xs">info@mimctechnologies.com</a>
-              <div className="pt-4 text-[var(--color-cyber-muted-fg)]">India & Canada</div>
-            </div>
-            <div className="space-y-6">
-              <div className="mb-8 text-[var(--color-cyber-accent2)] flex items-center gap-2"><Shield className="w-4 h-4" /> LEGAL</div>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Privacy Policy</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Terms of Service</a>
-              <a href="#" className="block hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text transition-all">Cookie Policy</a>
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row justify-between items-center border-t border-[var(--color-cyber-border)] pt-8 font-[var(--font-cyber-accent)] font-bold uppercase tracking-widest text-xs text-[var(--color-cyber-muted-fg)]">
-            <div className="flex items-center gap-4">
-              <img src="/logo.png" alt="MIMC Logo" className="w-6 h-6 opacity-50" />
-              <span>© 2026 MIMC TECHNOLOGIES. ALL RIGHTS RESERVED.</span>
-            </div>
-            <div className="mt-4 md:mt-0 text-[var(--color-cyber-accent)]">SYS.VER.9.4</div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

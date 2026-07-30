@@ -35,8 +35,9 @@ export default function ServiceSchema({
         "@id": `${url}#product`,
         name: name,
         description: description,
+        image: "https://www.mimctechnologies.com/logo.webp",
         brand: {
-          "@type": "Organization",
+          "@type": "Brand",
           name: "MIMC Technologies",
           url: "https://www.mimctechnologies.com",
         },

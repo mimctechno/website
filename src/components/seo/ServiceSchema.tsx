@@ -31,23 +31,14 @@ export default function ServiceSchema({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Service",
-        "@id": `${url}#service`,
+        "@type": "Product",
+        "@id": `${url}#product`,
         name: name,
         description: description,
-        provider: {
+        brand: {
           "@type": "Organization",
           name: "MIMC Technologies",
           url: "https://www.mimctechnologies.com",
-        },
-        areaServed: {
-          "@type": "GeoCircle",
-          geoMidpoint: {
-            "@type": "GeoCoordinates",
-            latitude: "43.6532",
-            longitude: "-79.3832",
-          },
-          geoRadius: "40000000",
         },
         aggregateRating: {
           "@type": "AggregateRating",
@@ -58,6 +49,8 @@ export default function ServiceSchema({
         },
         offers: {
           "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
           availability: "https://schema.org/InStock",
         },
       },

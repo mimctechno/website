@@ -1,16 +1,16 @@
 import {
-  Shield,
   CheckCircle,
   ChevronRight,
   Search,
   BarChart3,
   Users,
   Lightbulb,
-  FileText,
   Handshake,
+  FileText,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
+import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
 
 const features = [
@@ -161,27 +161,9 @@ export default function EnterpriseConsulting() {
             </div>
           </div>
 
-          {/* Image placeholder */}
-          <div
-            className="relative h-[440px] p-[2px]"
-            style={{
-              background: "linear-gradient(135deg, #ff00ff33, transparent)",
-            }}
-          >
-            <div className="absolute inset-[2px] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-              <Shield
-                className="w-16 h-16 text-[var(--color-cyber-accent2)] opacity-20"
-                strokeWidth={1}
-              />
-              <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center px-8">
-                [IMAGE PLACEHOLDER]
-                <br />
-                Consulting session / whiteboard strategy photo
-              </p>
-              <div className="absolute top-4 left-4 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent2)] uppercase tracking-widest opacity-60">
-                STRATEGY // ACTIVE
-              </div>
-            </div>
+          {/* Strategy Session Mockup */}
+          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[#ff00ff]/20 to-transparent group overflow-hidden">
+            <BrowserMockup title="mimc.tech/digital-strategy-plan" />
           </div>
         </section>
 
@@ -197,7 +179,7 @@ export default function EnterpriseConsulting() {
               key={s.label}
               className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent2)]/5 transition-colors"
             >
-              <div className="text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent2)]">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent2)]">
                 {s.value}
               </div>
               <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
@@ -250,7 +232,7 @@ export default function EnterpriseConsulting() {
         </section>
 
         {/* Deliverables */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-14 relative overflow-hidden group hover:border-[var(--color-cyber-accent2)]/50 transition-colors">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-14 relative overflow-hidden group hover:border-[var(--color-cyber-accent2)]/50 transition-colors">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--color-cyber-accent2)]/5 blur-[80px]" />
           <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 flex items-center gap-4">
             <span className="text-[var(--color-cyber-accent2)]">&gt;&gt;</span>{" "}
@@ -271,25 +253,9 @@ export default function EnterpriseConsulting() {
           </div>
         </section>
 
-        {/* Image placeholder */}
-        <section className="mb-24 h-52 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "linear-gradient(#ff00ff44 1px, transparent 1px), linear-gradient(90deg, #ff00ff44 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
-          />
-          <FileText
-            className="w-10 h-10 text-[var(--color-cyber-accent2)] opacity-30"
-            strokeWidth={1}
-          />
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-            [IMAGE PLACEHOLDER]
-            <br />
-            Sample audit report / roadmap diagram
-          </p>
+        {/* Audit Report Mockup */}
+        <section className="mb-24 p-1 group">
+          <BrowserMockup title="mimc.tech/audit-report-viewer" />
         </section>
 
         {/* FAQ */}
@@ -324,7 +290,7 @@ export default function EnterpriseConsulting() {
         {/* CTA */}
         <section className="text-center border-2 border-[var(--color-cyber-accent2)] p-12 md:p-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-[var(--color-cyber-accent2)]/3" />
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
             NOT SURE WHAT
             <br />
             <span className="text-[var(--color-cyber-accent2)]">

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Terminal,
   Shield,
@@ -10,6 +11,8 @@ import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 
 export default function Home() {
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   return (
     <Layout
       title="Enterprise Software & WhatsApp API"
@@ -24,8 +27,11 @@ export default function Home() {
               ONLINE
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-[1.1] text-white">
-              <span className="block cyber-glitch" data-text="ENTERPRISE">
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter font-[var(--font-cyber-head)] leading-none text-white">
+              <span
+                className="cyber-glitch block drop-shadow-[0_0_10px_rgba(0,255,170,0.5)]"
+                data-text="ENTERPRISE"
+              >
                 ENTERPRISE
               </span>
               <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] via-[var(--color-cyber-accent3)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,170,0.3)]">
@@ -60,96 +66,77 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-5 relative">
-            <div className="relative p-[2px] cyber-chamfer bg-gradient-to-br from-[var(--color-cyber-accent)] to-transparent h-[400px] overflow-hidden group">
+            <div className="relative p-[2px] cyber-chamfer bg-gradient-to-br from-[var(--color-cyber-accent)] to-transparent h-[500px] overflow-hidden group">
               <div className="absolute inset-[2px] cyber-chamfer bg-black overflow-hidden">
                 <div className="absolute top-4 right-4 text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-xs z-20 bg-black border border-[var(--color-cyber-accent)] px-3 py-1">
                   DATA.VIZ // LIVE
                 </div>
-                <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/10 group-hover:bg-transparent transition-colors z-10 mix-blend-overlay"></div>
 
                 <img
-                  src="/cyberpunk-hero.png"
+                  src="/cyberpunk-hero.webp"
                   alt="Cyberpunk Data Interface"
-                  className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 scale-105 group-hover:scale-100"
+                  className="w-full h-full object-cover transition-transform duration-700 scale-105 group-hover:scale-110"
                 />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Global Trust Signals / Tech Stack */}
-        <section className="mb-32 relative overflow-hidden border-y border-[var(--color-cyber-border)] bg-[#050508] py-8">
-          <div className="flex w-[200%]">
-            <div className="flex w-1/2 justify-around items-center animate-marquee whitespace-nowrap">
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                OFFICIAL WHATSAPP PARTNER
-              </span>
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                TALLY INTEGRATION
-              </span>
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                ERP SPECIALISTS
-              </span>
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                CANADA & INDIA HUB
-              </span>
-            </div>
-            <div
-              className="flex w-1/2 justify-around items-center animate-marquee whitespace-nowrap"
-              aria-hidden="true"
-            >
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                OFFICIAL WHATSAPP PARTNER
-              </span>
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                TALLY INTEGRATION
-              </span>
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                ERP SPECIALISTS
-              </span>
-              <span className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest flex items-center gap-4">
-                <img
-                  src="/logo.png"
-                  className="w-8 h-8 opacity-50"
-                  alt="icon"
-                />{" "}
-                CANADA & INDIA HUB
-              </span>
+        {/* Global Trust Signals / Stats Bar */}
+        <section className="mb-32 relative overflow-hidden border-y border-[var(--color-cyber-border)] bg-[#050508] py-10">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0">
+              {/* Stat 1 */}
+              <div className="flex flex-col md:border-r border-[var(--color-cyber-border)] md:pr-8">
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest mb-2">
+                  CLIENTS GLOBALLY
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] text-white mb-2">
+                  500+
+                </span>
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest flex items-center gap-1">
+                  <span className="text-[8px]">▲</span> Enterprises & SMBs
+                </span>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex flex-col md:border-r border-[var(--color-cyber-border)] md:px-8">
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest mb-2">
+                  SYSTEM UPTIME
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] text-white mb-2">
+                  99.99%
+                </span>
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest flex items-center gap-1">
+                  <span className="text-[8px]">▲</span> Enterprise-grade SLA
+                </span>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="flex flex-col md:border-r border-[var(--color-cyber-border)] md:px-8">
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest mb-2">
+                  MESSAGES AUTOMATED
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] text-white mb-2">
+                  5M+
+                </span>
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest flex items-center gap-1">
+                  <span className="text-[8px]">▲</span> via WhatsApp API
+                </span>
+              </div>
+
+              {/* Stat 4 */}
+              <div className="flex flex-col md:pl-8">
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest mb-2">
+                  SUPPORT ACCESS
+                </span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] text-white mb-2">
+                  24/7
+                </span>
+                <span className="text-[10px] md:text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest flex items-center gap-1">
+                  <span className="text-[8px]">▲</span> Dedicated IT Teams
+                </span>
+              </div>
             </div>
           </div>
         </section>
@@ -160,7 +147,7 @@ export default function Home() {
             <div className="bg-[var(--color-cyber-card)] cyber-chamfer-reverse p-8 md:p-16 h-full relative">
               <div className="absolute -top-32 -right-32 w-64 h-64 bg-[var(--color-cyber-accent)]/10 blur-[100px] group-hover:bg-[var(--color-cyber-accent)]/20 transition-colors"></div>
 
-              <h2 className="text-3xl md:text-5xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-12 flex items-center gap-4">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-8 sm:mb-12 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
                 <span className="text-[var(--color-cyber-accent)]">
                   &gt;&gt;
                 </span>{" "}
@@ -199,6 +186,86 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Partners & Backing Section */}
+        <section className="mb-32">
+          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
+            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] uppercase">
+              &gt;&gt; INFRASTRUCTURE & BACKING
+            </span>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              {
+                logo: "/Amazon_Web_Services_Logo.svg.webp",
+                tag: "[ CLOUD_COMPUTE_CREDITS ]",
+                alt: "AWS Logo",
+                imgClass: "w-32 h-16 object-contain bg-white rounded p-2",
+              },
+              {
+                logo: "/startup-india-4.webp",
+                tag: "[ GOVT_RECOGNITION ]",
+                alt: "Startup India Logo",
+                imgClass: "w-40 h-20 object-contain bg-white rounded p-2",
+              },
+              {
+                logo: "/Vercel_logo_2025.svg",
+                tag: "[ EDGE_NETWORK ]",
+                alt: "Vercel Logo",
+                imgClass: "w-32 h-16 object-contain bg-white rounded p-3",
+              },
+              {
+                logo: "/GitHub-Logo.webp",
+                tag: "[ STARTUP_PROGRAM ]",
+                alt: "GitHub Logo",
+                imgClass: "w-32 h-16 object-contain bg-white rounded p-2",
+              },
+              {
+                logo: "/Cloudflare_Logo.svg.webp",
+                tag: "[ SECURITY_PARTNER ]",
+                alt: "Cloudflare Logo",
+                imgClass: "w-32 h-16 object-contain bg-white rounded p-2",
+              },
+              {
+                logo: "/OpenAI_Logo.svg.webp",
+                tag: "[ AI_MODELS ]",
+                alt: "OpenAI Logo",
+                imgClass: "w-32 h-16 object-contain bg-white rounded p-2",
+              },
+              {
+                logo: "/elevenlabs-official-logo.svg",
+                tag: "[ VOICE_SYNTHESIS ]",
+                alt: "ElevenLabs Logo",
+                imgClass: "w-32 h-16 object-contain bg-white rounded p-2",
+              },
+            ].map((partner, i) => (
+              <div
+                key={i}
+                className="w-40 md:w-48 group relative border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] p-4 flex flex-col items-center justify-center hover:border-[var(--color-cyber-accent)] hover:shadow-[0_0_20px_rgba(0,255,170,0.1)] transition-all duration-300 h-40 cyber-chamfer overflow-hidden"
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.alt}
+                  className={`transition-all duration-500 group-hover:-translate-y-2 ${partner.imgClass}`}
+                />
+                <div className="absolute bottom-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-[10px] md:text-[11px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] tracking-widest text-center w-full px-2">
+                  {partner.tag}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <Link
+              to="/partners"
+              className="group font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-transparent text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)] hover:text-black hover:cyber-glow transition-all duration-300 px-8 py-3 flex items-center justify-center gap-2"
+            >
+              INITIALIZE_PARTNER_DATA
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </section>
 
@@ -268,7 +335,7 @@ export default function Home() {
         {/* SEO FAQ Section */}
         <section className="mb-48 max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white">
               DATA{" "}
               <span className="text-[var(--color-cyber-accent2)]">QUERIES</span>
             </h2>
@@ -308,6 +375,90 @@ export default function Home() {
                 </p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Typography CTA Section */}
+        <section className="mb-12 border-t border-[var(--color-cyber-border)] pt-32 pb-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-cyber-grid opacity-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cyber-card)] to-transparent pointer-events-none" />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6">
+            <h2 className="text-6xl md:text-8xl lg:text-[130px] font-black uppercase tracking-tighter font-[var(--font-cyber-head)] leading-[0.85] text-white mb-24 max-w-6xl">
+              READY TO <br />
+              <span
+                className="cyber-glitch drop-shadow-[0_0_15px_rgba(0,255,170,0.5)] text-[var(--color-cyber-accent)] mr-4 md:mr-6"
+                data-text="TRANSFORM"
+              >
+                TRANSFORM
+              </span>
+              YOUR WORKFLOW?
+            </h2>
+
+            <div className="max-w-4xl">
+              {isSubscribed ? (
+                <div className="border border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)]/10 p-8 cyber-chamfer inline-block">
+                  <div
+                    className="text-2xl md:text-4xl font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest cyber-glitch"
+                    data-text="SYSTEM_UPDATED: SUBSCRIPTION_ACTIVE"
+                  >
+                    SYSTEM_UPDATED: SUBSCRIPTION_ACTIVE
+                  </div>
+                  <p className="mt-4 text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-sm">
+                    &gt; Transmission lines open. Standby for intelligence
+                    reports.
+                  </p>
+                </div>
+              ) : (
+                <form
+                  className="flex flex-col sm:flex-row items-end gap-8"
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const email = new FormData(form).get("email");
+                    try {
+                      await fetch(
+                        "https://formsubmit.co/ajax/info@mimctechnologies.com",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                          },
+                          body: JSON.stringify({
+                            email: email,
+                            _subject: "New Newsletter Subscriber!",
+                          }),
+                        },
+                      );
+                      setIsSubscribed(true);
+                    } catch (err) {
+                      console.error(err);
+                      setIsSubscribed(true);
+                    }
+                  }}
+                >
+                  <div className="w-full flex-grow relative group">
+                    <label className="block text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-sm mb-2 opacity-80 group-focus-within:opacity-100 transition-opacity">
+                      EMAIL ADDRESS
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-muted-fg)] focus:border-[var(--color-cyber-accent)] focus:shadow-[0_4px_15px_-3px_rgba(0,255,170,0.3)] focus:outline-none text-2xl md:text-4xl font-bold font-[var(--font-cyber-head)] text-white py-2 transition-all placeholder:text-[var(--color-cyber-muted-fg)]/30"
+                      placeholder="ENTER_DATA..."
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="flex-shrink-0 cyber-bracket-link text-2xl md:text-4xl font-bold font-[var(--font-cyber-head)] text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-all uppercase tracking-widest"
+                  >
+                    SUBSCRIBE
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </section>
       </div>

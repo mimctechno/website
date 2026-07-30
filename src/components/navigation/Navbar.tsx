@@ -7,7 +7,6 @@ const NAV = [
   { label: "WhatsApp API", href: "/services/whatsapp-api" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -23,7 +22,7 @@ export default function Navbar() {
           aria-label="Home"
         >
           <img
-            src="/logo.png"
+            src="/logo.webp"
             alt="MIMC Technologies Logo"
             className="w-10 h-10 object-contain"
           />
@@ -48,7 +47,7 @@ export default function Navbar() {
             <Link
               key={n.href}
               to={n.href}
-              className={`transition-all hover:text-[var(--color-cyber-accent)] hover:cyber-glow-text ${location.pathname === n.href ? "text-[var(--color-cyber-accent)]" : ""}`}
+              className={`cyber-bracket-link ${location.pathname === n.href ? "active" : "text-white/70"}`}
             >
               {n.label}
             </Link>
@@ -57,7 +56,7 @@ export default function Navbar() {
             to="/contact"
             className="border border-[var(--color-cyber-accent)] px-4 py-1.5 text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)] hover:text-black transition-all"
           >
-            GET_DEMO
+            CONTACT
           </Link>
         </nav>
 
@@ -86,11 +85,18 @@ export default function Navbar() {
               key={n.href}
               to={n.href}
               onClick={() => setMenuOpen(false)}
-              className="block py-2 hover:text-[var(--color-cyber-accent)] transition-colors"
+              className="block py-2 text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all"
             >
               {n.label}
             </Link>
           ))}
+          <Link
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="block py-2 text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)] hover:text-black transition-all text-center border border-[var(--color-cyber-accent)] mt-2"
+          >
+            CONTACT
+          </Link>
         </nav>
       )}
     </header>

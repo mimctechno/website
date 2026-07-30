@@ -43,7 +43,7 @@ export default function Layout({
     "@type": "Organization",
     name: "MIMC Technologies",
     url: "https://www.mimctechnologies.com",
-    logo: "https://www.mimctechnologies.com/logo.png",
+    logo: "https://www.mimctechnologies.com/logo.webp",
     contactPoint: [
       {
         "@type": "ContactPoint",

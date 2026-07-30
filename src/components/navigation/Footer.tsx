@@ -41,6 +41,7 @@ export default function Footer() {
             </div>
             {[
               ["About Us", "/about"],
+              ["Partners & Backing", "/partners"],
               ["Careers", "/careers"],
               ["Blog", "/blog"],
               ["Contact", "/contact"],
@@ -107,7 +108,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center border-t border-[var(--color-cyber-border)] pt-8 font-[var(--font-cyber-accent)] text-xs text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
           <div className="flex items-center gap-3">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="MIMC Logo"
               className="w-5 h-5 opacity-50"
             />

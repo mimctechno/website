@@ -1,5 +1,4 @@
 import {
-  Globe,
   CheckCircle,
   ChevronRight,
   Zap,
@@ -11,6 +10,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
+import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
 
 const features = [
@@ -171,7 +171,7 @@ export default function WebDevelopment() {
               <span className="text-[var(--color-cyber-accent2)]">
                 &amp; SEO
               </span>
-              <span className="block text-white text-3xl md:text-4xl mt-2">
+              <span className="block text-white text-2xl sm:text-3xl md:text-4xl mt-2">
                 THAT GETS FOUND
               </span>
             </h1>
@@ -202,34 +202,9 @@ export default function WebDevelopment() {
             </div>
           </div>
 
-          {/* Image placeholder */}
-          <div
-            className="relative h-[440px] p-[2px]"
-            style={{
-              background: "linear-gradient(135deg, #ff00ff33, transparent)",
-            }}
-          >
-            <div className="absolute inset-[2px] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-              {/* Fake browser chrome decoration */}
-              <div className="absolute top-0 left-0 right-0 h-8 bg-black/50 border-b border-[var(--color-cyber-border)] flex items-center px-3 gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-                <div className="ml-3 flex-1 bg-[var(--color-cyber-border)] h-4 rounded-sm opacity-40" />
-              </div>
-              <Globe
-                className="w-16 h-16 text-[var(--color-cyber-accent2)] opacity-20"
-                strokeWidth={1}
-              />
-              <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center px-8">
-                [IMAGE PLACEHOLDER]
-                <br />
-                Website design showcase / portfolio
-              </p>
-              <div className="absolute bottom-4 right-4 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent2)] uppercase tracking-widest opacity-60">
-                WEB.UI // PREVIEW
-              </div>
-            </div>
+          {/* Web Design Browser Mockup */}
+          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[#ff00ff]/20 to-transparent group overflow-hidden">
+            <BrowserMockup title="mimc.tech/new-platform" />
           </div>
         </section>
 
@@ -245,7 +220,7 @@ export default function WebDevelopment() {
               key={s.label}
               className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent2)]/5 transition-colors"
             >
-              <div className="text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent2)]">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent2)]">
                 {s.value}
               </div>
               <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
@@ -297,25 +272,9 @@ export default function WebDevelopment() {
           </div>
         </section>
 
-        {/* Image placeholder — portfolio */}
-        <section className="mb-24 h-56 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "linear-gradient(#ff00ff44 1px, transparent 1px), linear-gradient(90deg, #ff00ff44 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
-          />
-          <Code2
-            className="w-10 h-10 text-[var(--color-cyber-accent2)] opacity-30"
-            strokeWidth={1}
-          />
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-            [IMAGE PLACEHOLDER]
-            <br />
-            Portfolio / Case study screenshots
-          </p>
+        {/* Portfolio Mockup */}
+        <section className="mb-24 p-1 group">
+          <BrowserMockup title="mimc.tech/portfolio/e-commerce" />
         </section>
 
         {/* SEO Services Grid */}
@@ -352,9 +311,9 @@ export default function WebDevelopment() {
         </section>
 
         {/* Process */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-16 relative overflow-hidden">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-16 relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--color-cyber-accent2)]/5 blur-[80px]" />
-          <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-16 flex items-center gap-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
             <span className="text-[var(--color-cyber-accent2)]">&gt;&gt;</span>{" "}
             HOW_WE_BUILD
           </h2>
@@ -442,7 +401,7 @@ export default function WebDevelopment() {
         {/* CTA */}
         <section className="text-center border-2 border-[var(--color-cyber-accent2)] p-12 md:p-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-[var(--color-cyber-accent2)]/3" />
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
             YOUR WEBSITE SHOULD
             <br />
             <span className="text-[var(--color-cyber-accent2)]">

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
+import DashboardMockup from "../../components/ui/DashboardMockup";
 import RelatedServices from "../../components/RelatedServices";
 
 const features = [
@@ -171,7 +172,7 @@ export default function ERPCRM() {
               <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
                 ERP & CRM
               </span>
-              <span className="block text-white text-3xl md:text-4xl mt-2">
+              <span className="block text-white text-2xl sm:text-3xl md:text-4xl mt-2">
                 SOLUTIONS
               </span>
             </h1>
@@ -202,30 +203,41 @@ export default function ERPCRM() {
             </div>
           </div>
 
-          {/* Image placeholder */}
-          <div className="relative h-[440px] p-[2px] bg-gradient-to-br from-[var(--color-cyber-accent)]/30 to-[var(--color-cyber-accent2)]/20">
-            <div className="absolute inset-[2px] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-              {/* Decorative fake dashboard grid */}
-              <div className="absolute inset-4 grid grid-cols-2 grid-rows-3 gap-2 opacity-10">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="border border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)]/10"
-                  />
-                ))}
-              </div>
-              <Database
-                className="w-16 h-16 text-[var(--color-cyber-accent)] opacity-20 relative z-10"
-                strokeWidth={1}
-              />
-              <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center px-8 relative z-10">
-                [IMAGE PLACEHOLDER]
-                <br />
-                ERP dashboard screenshot
-              </p>
-              <div className="absolute top-4 left-4 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest opacity-60">
-                ERP.DASH // LIVE
-              </div>
+          {/* ERP Dashboard Mockup */}
+          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-accent)]/50 to-[var(--color-cyber-accent2)]/50 group overflow-hidden">
+            <DashboardMockup
+              title="Enterprise ERP System Overview"
+              stats={[
+                { label: "Q3 Gross Revenue", value: "$4.2M" },
+                { label: "Active Enterprise Deals", value: "84" },
+                { label: "Inventory Fulfillment", value: "98.9%" },
+              ]}
+              tableHeaders={["Deal Name", "Value", "Stage", "Assigned To"]}
+              tableRows={[
+                [
+                  "Global Tech Inc - Phase 1",
+                  "$150,000",
+                  "Negotiation",
+                  "Sarah J.",
+                ],
+                [
+                  "Logistics Corp Fulfillment",
+                  "$420,000",
+                  "Closed Won",
+                  "David M.",
+                ],
+                [
+                  "Retail Supply Chain Upgrade",
+                  "$85,000",
+                  "Discovery",
+                  "Alex K.",
+                ],
+              ]}
+            />
+            <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-[10px] tracking-widest uppercase animate-blink">
+                ERP_DASH_LIVE
+              </span>
             </div>
           </div>
         </section>
@@ -242,7 +254,7 @@ export default function ERPCRM() {
               key={s.label}
               className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent)]/5 transition-colors"
             >
-              <div className="text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent)]">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent)]">
                 {s.value}
               </div>
               <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
@@ -291,25 +303,27 @@ export default function ERPCRM() {
           </div>
         </section>
 
-        {/* Image placeholder — dashboard */}
-        <section className="mb-24 h-56 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "linear-gradient(#00ffaa44 1px, transparent 1px), linear-gradient(90deg, #00ffaa44 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
+        {/* Operations Dashboard Mockup */}
+        <section className="mb-24 relative p-1 cyber-chamfer-reverse bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors duration-500 group overflow-hidden">
+          <DashboardMockup
+            title="Global Operations & HR"
+            stats={[
+              { label: "Total Headcount", value: "1,204" },
+              { label: "Payroll Run", value: "SUCCESS" },
+              { label: "System Uptime", value: "99.99%" },
+            ]}
+            tableHeaders={["Department", "Budget", "Spend", "Status"]}
+            tableRows={[
+              ["Engineering R&D", "$1.2M", "$850K", "On Track"],
+              ["Global Marketing", "$450K", "$410K", "Warning"],
+              ["Customer Success", "$300K", "$120K", "Optimal"],
+            ]}
           />
-          <BarChart3
-            className="w-10 h-10 text-[var(--color-cyber-accent)] opacity-30"
-            strokeWidth={1}
-          />
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-            [IMAGE PLACEHOLDER]
-            <br />
-            Live ERP reporting dashboard screenshot
-          </p>
+          <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-[10px] tracking-widest uppercase animate-blink">
+              OPS_MODULE_ACTIVE
+            </span>
+          </div>
         </section>
 
         {/* Industry Solutions */}
@@ -346,9 +360,9 @@ export default function ERPCRM() {
         </section>
 
         {/* Process */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-16 relative overflow-hidden">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-16 relative overflow-hidden">
           <div className="absolute -top-20 -left-20 w-64 h-64 bg-[var(--color-cyber-accent)]/5 blur-[80px]" />
-          <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-16 flex items-center gap-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
             <span className="text-[var(--color-cyber-accent)]">&gt;&gt;</span>{" "}
             DEPLOYMENT_PROCESS
           </h2>
@@ -425,7 +439,7 @@ export default function ERPCRM() {
         {/* CTA */}
         <section className="text-center border-2 border-[var(--color-cyber-accent)] p-12 md:p-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
             REPLACE YOUR
             <br />
             <span className="text-[var(--color-cyber-accent)]">

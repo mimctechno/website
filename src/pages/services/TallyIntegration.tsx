@@ -1,16 +1,17 @@
 import {
-  Terminal,
   CheckCircle,
   ChevronRight,
-  FileText,
   Zap,
   Clock,
   Shield,
   Database,
-  ArrowRight,
+  FileText,
+  Terminal,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
+import DashboardMockup from "../../components/ui/DashboardMockup";
+import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
 
 const features = [
@@ -186,40 +187,26 @@ export default function TallyIntegration() {
           </div>
 
           {/* Image placeholder */}
-          <div
-            className="relative h-[440px] p-[2px]"
-            style={{
-              background: "linear-gradient(135deg, #00d4ff44, transparent)",
-            }}
-          >
-            <div className="absolute inset-[2px] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-              {/* Fake "flow diagram" decorative lines */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                <div className="w-full h-px bg-[var(--color-cyber-accent3)]" />
-              </div>
-              <div className="relative z-10 flex flex-col items-center gap-4">
-                <div className="flex items-center gap-6">
-                  <div className="border border-[var(--color-cyber-accent3)]/40 px-4 py-3 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-accent3)] opacity-50">
-                    TALLY ERP
-                  </div>
-                  <ArrowRight className="text-[var(--color-cyber-accent3)] opacity-30" />
-                  <div className="border border-[#25D366]/40 px-4 py-3 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[#25D366] opacity-50">
-                    WHATSAPP
-                  </div>
-                </div>
-                <FileText
-                  className="w-16 h-16 text-[var(--color-cyber-accent3)] opacity-20"
-                  strokeWidth={1}
-                />
-                <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center px-8">
-                  [IMAGE PLACEHOLDER]
-                  <br />
-                  Tally → WhatsApp flow diagram
-                </p>
-              </div>
-              <div className="absolute top-4 left-4 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent3)] uppercase tracking-widest opacity-60">
-                TALLY.VIZ // LIVE
-              </div>
+          {/* Tally Dashboard Mockup */}
+          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[#00d4ff]/20 to-transparent group overflow-hidden">
+            <DashboardMockup
+              title="Tally ERP 9 / Prime Sync"
+              stats={[
+                { label: "Invoices Synced", value: "1,204" },
+                { label: "WhatsApp Delivery", value: "99.9%" },
+                { label: "Payments Collected", value: "₹4.2M" },
+              ]}
+              tableHeaders={["Invoice", "Customer", "Amount", "Status"]}
+              tableRows={[
+                ["INV-2026-001", "Acme Corp", "₹45,000", "Paid"],
+                ["INV-2026-002", "Global Tech", "₹12,500", "Sent via WA"],
+                ["INV-2026-003", "Stark Ind", "₹85,000", "Pending"],
+              ]}
+            />
+            <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-[10px] tracking-widest uppercase animate-blink">
+                TALLY_SYNC_ACTIVE
+              </span>
             </div>
           </div>
         </section>
@@ -236,7 +223,7 @@ export default function TallyIntegration() {
               key={s.label}
               className="bg-[var(--color-cyber-card)] p-8 text-center group hover:bg-[var(--color-cyber-accent3)]/5 transition-colors"
             >
-              <div className="text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent3)]">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent3)]">
                 {s.value}
               </div>
               <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
@@ -247,7 +234,7 @@ export default function TallyIntegration() {
         </section>
 
         {/* What gets sent */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-14 relative overflow-hidden group hover:border-[var(--color-cyber-accent3)]/50 transition-colors">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-14 relative overflow-hidden group hover:border-[var(--color-cyber-accent3)]/50 transition-colors">
           <div className="absolute -top-24 -right-24 w-72 h-72 bg-[var(--color-cyber-accent3)]/5 blur-[100px]" />
           <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 flex items-center gap-4">
             <span className="text-[var(--color-cyber-accent3)]">&gt;&gt;</span>{" "}
@@ -346,9 +333,9 @@ export default function TallyIntegration() {
         </section>
 
         {/* Setup Process */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-16 relative overflow-hidden">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-16 relative overflow-hidden">
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[var(--color-cyber-accent3)]/5 blur-[80px]" />
-          <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-16 flex items-center gap-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
             <span className="text-[var(--color-cyber-accent3)]">&gt;&gt;</span>{" "}
             SETUP_PROCESS
           </h2>
@@ -378,25 +365,9 @@ export default function TallyIntegration() {
           </div>
         </section>
 
-        {/* Image placeholder — workflow */}
-        <section className="mb-24 h-56 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "linear-gradient(#00d4ff44 1px, transparent 1px), linear-gradient(90deg, #00d4ff44 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
-          />
-          <Terminal
-            className="w-10 h-10 text-[var(--color-cyber-accent3)] opacity-30"
-            strokeWidth={1}
-          />
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-            [IMAGE PLACEHOLDER]
-            <br />
-            Tally integration architecture diagram
-          </p>
+        {/* Integration Mockup */}
+        <section className="mb-24 p-1 group">
+          <BrowserMockup title="mimc.tech/tally-integration-portal" />
         </section>
 
         {/* FAQ */}
@@ -431,7 +402,7 @@ export default function TallyIntegration() {
         {/* CTA */}
         <section className="text-center p-12 md:p-20 relative overflow-hidden border-2 border-[var(--color-cyber-accent3)]">
           <div className="absolute inset-0 bg-[var(--color-cyber-accent3)]/3" />
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
             STOP SENDING INVOICES
             <br />
             <span className="text-[var(--color-cyber-accent3)]">MANUALLY.</span>

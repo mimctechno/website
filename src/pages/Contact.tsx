@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  MapPin,
   Mail,
   Phone,
   Clock,
@@ -9,6 +8,7 @@ import {
   CheckCircle,
   X,
 } from "lucide-react";
+import CyberRadarMap from "../components/ui/CyberRadarMap";
 import Layout from "../components/Layout";
 
 const contactMethods = [
@@ -179,25 +179,9 @@ export default function Contact() {
               </a>
             </div>
 
-            {/* Map placeholder */}
-            <div className="mt-8 h-48 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-              <div
-                className="absolute inset-0 opacity-5"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(0,255,170,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,170,1) 1px, transparent 1px)",
-                  backgroundSize: "20px 20px",
-                }}
-              />
-              <MapPin
-                className="w-10 h-10 text-[var(--color-cyber-accent)] opacity-50"
-                strokeWidth={1}
-              />
-              <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-                [MAP EMBED PLACEHOLDER]
-                <br />
-                Canada &amp; India
-              </p>
+            {/* Cyber Radar Map */}
+            <div className="mt-8">
+              <CyberRadarMap />
             </div>
           </div>
 
@@ -333,7 +317,7 @@ export default function Contact() {
                 "linear-gradient(135deg, var(--color-cyber-accent), var(--color-cyber-accent2))",
             }}
           >
-            <div className="bg-[var(--color-cyber-bg)] cyber-chamfer p-10 md:p-14 text-center relative overflow-hidden">
+            <div className="bg-[var(--color-cyber-bg)] cyber-chamfer p-6 sm:p-10 md:p-14 text-center relative overflow-hidden">
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--color-cyber-accent)]/10 blur-[80px]" />
               <button
                 onClick={() => setSubmitted(false)}
@@ -349,7 +333,7 @@ export default function Contact() {
               <div className="inline-block border border-[var(--color-cyber-accent)]/40 text-[var(--color-cyber-accent)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest mb-6">
                 TRANSMISSION_RECEIVED
               </div>
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-4">
                 MESSAGE
                 <br />
                 <span className="text-[var(--color-cyber-accent)]">SENT!</span>

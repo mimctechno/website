@@ -7,10 +7,11 @@ import {
   Clock,
   Shield,
   BarChart3,
-  Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
+import DashboardMockup from "../../components/ui/DashboardMockup";
+import SmartphoneMockup from "../../components/ui/SmartphoneMockup";
 import RelatedServices from "../../components/RelatedServices";
 
 const features = [
@@ -219,36 +220,8 @@ export default function WhatsAppAPI() {
             </div>
           </div>
 
-          {/* Image placeholder */}
-          <div
-            className="relative h-[450px] p-[2px]"
-            style={{
-              background: "linear-gradient(135deg, #25D36644, transparent)",
-            }}
-          >
-            <div className="absolute inset-[2px] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4">
-              <MessageSquare
-                className="w-20 h-20 opacity-20"
-                style={{ color: "#25D366" }}
-                strokeWidth={1}
-              />
-              <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center px-8">
-                [IMAGE PLACEHOLDER]
-                <br />
-                WhatsApp API dashboard screenshot
-              </p>
-              {/* Decorative corner labels */}
-              <div
-                className="absolute top-4 left-4 text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest"
-                style={{ color: "#25D366" }}
-              >
-                WA.API // LIVE
-              </div>
-              <div className="absolute bottom-4 right-4 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
-                STATUS: ACTIVE
-              </div>
-            </div>
-          </div>
+          {/* Smartphone Chat Mockup */}
+          <SmartphoneMockup />
         </section>
 
         {/* Key Stats */}
@@ -361,12 +334,12 @@ export default function WhatsAppAPI() {
         </section>
 
         {/* How it works */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-16 relative overflow-hidden">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-6 sm:p-10 md:p-16 relative overflow-hidden">
           <div
             className="absolute -top-20 -right-20 w-64 h-64 rounded-full blur-[80px] opacity-10"
             style={{ background: "#25D366" }}
           />
-          <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-16 flex items-center gap-4">
+          <h2 className="text-2xl sm:text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
             <span style={{ color: "#25D366" }}>&gt;&gt;</span> SETUP_PROCESS
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -419,26 +392,27 @@ export default function WhatsAppAPI() {
           </div>
         </section>
 
-        {/* Image placeholder — Use case visual */}
-        <section className="mb-24 h-64 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "linear-gradient(#25D36644 1px, transparent 1px), linear-gradient(90deg, #25D36644 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
+        {/* Dashboard Mockup Component */}
+        <section className="mb-24 relative overflow-hidden group p-1 cyber-chamfer-reverse bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors duration-500">
+          <DashboardMockup
+            title="WhatsApp Campaign Analytics"
+            stats={[
+              { label: "Total Sent", value: "1,450,200" },
+              { label: "Delivery Rate", value: "99.1%" },
+              { label: "Read Rate", value: "84.5%" },
+            ]}
+            tableHeaders={["Campaign", "Date", "Status", "Delivered"]}
+            tableRows={[
+              ["Enterprise Broadcast", "July 25, 2026", "Completed", "500,000"],
+              ["Q3 Promo Blast", "July 20, 2026", "Completed", "350,000"],
+              ["Weekly Newsletter", "July 18, 2026", "Completed", "125,000"],
+            ]}
           />
-          <Users
-            className="w-12 h-12 opacity-20"
-            style={{ color: "#25D366" }}
-            strokeWidth={1}
-          />
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-            [IMAGE PLACEHOLDER]
-            <br />
-            WhatsApp API workflow diagram / infographic
-          </p>
+          <div className="absolute bottom-6 right-6 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity shadow-[0_0_15px_rgba(0,255,170,0.3)]">
+            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-xs tracking-widest uppercase animate-blink">
+              UI_MODULE_ACTIVE
+            </span>
+          </div>
         </section>
 
         {/* FAQ */}
@@ -479,7 +453,7 @@ export default function WhatsAppAPI() {
             className="absolute inset-0 opacity-5"
             style={{ background: "#25D366" }}
           />
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
             READY TO AUTOMATE
             <br />
             <span style={{ color: "#25D366" }}>WHATSAPP?</span>

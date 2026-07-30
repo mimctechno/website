@@ -1,16 +1,17 @@
 import {
-  BarChart3,
   CheckCircle,
   ChevronRight,
   Target,
-  TrendingUp,
   Search,
   Globe,
   Megaphone,
   Mail,
+  TrendingUp,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
+import DashboardMockup from "../../components/ui/DashboardMockup";
+import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
 
 const features = [
@@ -154,7 +155,7 @@ export default function DigitalMarketing() {
               <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent3)] bg-clip-text text-transparent">
                 MARKETING
               </span>
-              <span className="block text-white text-3xl md:text-4xl mt-2">
+              <span className="block text-white text-2xl sm:text-3xl md:text-4xl mt-2">
                 THAT DRIVES LEADS
               </span>
             </h1>
@@ -183,32 +184,22 @@ export default function DigitalMarketing() {
             </div>
           </div>
 
-          {/* Image placeholder */}
-          <div className="relative h-[440px] p-[2px] bg-gradient-to-br from-[var(--color-cyber-accent)]/20 to-[var(--color-cyber-accent3)]/10">
-            <div className="absolute inset-[2px] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-4 relative overflow-hidden">
-              {/* Fake chart decoration */}
-              <div className="absolute bottom-8 left-8 right-8 flex items-end gap-2 opacity-15">
-                {[40, 55, 35, 70, 60, 85, 75, 90].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 bg-[var(--color-cyber-accent)]"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-              <BarChart3
-                className="w-16 h-16 text-[var(--color-cyber-accent)] opacity-20 relative z-10"
-                strokeWidth={1}
-              />
-              <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center px-8 relative z-10">
-                [IMAGE PLACEHOLDER]
-                <br />
-                Analytics dashboard / campaign results
-              </p>
-              <div className="absolute top-4 left-4 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest opacity-60">
-                ANALYTICS // LIVE
-              </div>
-            </div>
+          {/* Marketing Dashboard Mockup */}
+          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-accent)]/20 to-[var(--color-cyber-accent3)]/10 group overflow-hidden">
+            <DashboardMockup
+              title="Global Campaign Analytics"
+              stats={[
+                { label: "Total Conversions", value: "84,209" },
+                { label: "Avg. CPA", value: "$12.40" },
+                { label: "ROAS", value: "4.8x" },
+              ]}
+              tableHeaders={["Campaign", "Spend", "Conversions", "ROAS"]}
+              tableRows={[
+                ["Q3 Search Intent (B2B)", "$45,000", "3,200", "5.1x"],
+                ["LinkedIn Enterprise Retargeting", "$12,500", "410", "8.2x"],
+                ["Meta Broad Awareness", "$18,000", "12,500", "2.1x"],
+              ]}
+            />
           </div>
         </section>
 
@@ -224,7 +215,7 @@ export default function DigitalMarketing() {
               key={s.label}
               className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent)]/5 transition-colors"
             >
-              <div className="text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent)]">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent)]">
                 {s.value}
               </div>
               <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
@@ -274,7 +265,7 @@ export default function DigitalMarketing() {
         </section>
 
         {/* Channels */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-10 md:p-14 relative overflow-hidden">
+        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-14 relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-72 h-72 bg-[var(--color-cyber-accent)]/5 blur-[100px]" />
           <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 flex items-center gap-4">
             <span className="text-[var(--color-cyber-accent)]">&gt;&gt;</span>{" "}
@@ -300,25 +291,9 @@ export default function DigitalMarketing() {
           </div>
         </section>
 
-        {/* Image placeholder */}
-        <section className="mb-24 h-52 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "linear-gradient(#00ffaa44 1px, transparent 1px), linear-gradient(90deg, #00ffaa44 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
-          />
-          <TrendingUp
-            className="w-10 h-10 text-[var(--color-cyber-accent)] opacity-30"
-            strokeWidth={1}
-          />
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-widest text-center">
-            [IMAGE PLACEHOLDER]
-            <br />
-            Client campaign results / case study graphic
-          </p>
+        {/* Client Campaign Mockup */}
+        <section className="mb-24 p-1 group">
+          <BrowserMockup title="mimc.tech/case-studies/growth" />
         </section>
 
         {/* FAQ */}
@@ -353,7 +328,7 @@ export default function DigitalMarketing() {
         {/* CTA */}
         <section className="text-center border-2 border-[var(--color-cyber-accent)] p-12 md:p-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
             STOP HOPING.
             <br />
             <span className="text-[var(--color-cyber-accent)]">

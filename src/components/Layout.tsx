@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import Navbar from "./navigation/Navbar";
 import Footer from "./navigation/Footer";
+import BreadcrumbNav from "./ui/BreadcrumbNav";
 
 function CyberGrid() {
   return (
@@ -123,6 +124,8 @@ export default function Layout({
 
       {/* Extracted Header Component */}
       <Navbar />
+
+      <BreadcrumbNav />
 
       {/* Page Content */}
       <main className="relative z-10">{children}</main>

@@ -13,6 +13,8 @@ import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
 import SmartphoneMockup from "../../components/ui/SmartphoneMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceSchema from "../../components/seo/ServiceSchema";
+import ServiceBadges from "../../components/ui/ServiceBadges";
 
 const features = [
   {
@@ -113,46 +115,31 @@ const faqs = [
   },
 ];
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "WhatsApp Business API Setup & Management",
-  provider: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-  },
-  description:
-    "Official and unofficial WhatsApp Business API setup, integration, and management for businesses in India, Brazil, South Asia, Southeast Asia, and Latin America.",
-  areaServed: ["IN", "BR", "ID", "PH", "MX", "CO", "BD", "PK", "LK"],
-  url: "https://www.mimctechnologies.com/services/whatsapp-api",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function WhatsAppAPI() {
   return (
     <Layout
       title="WhatsApp Business API — Official Setup & Integration"
       description="Official WhatsApp Business API setup and management for India, Brazil, Southeast Asia, and Latin America. Tally integration, bulk messaging, and automation by MIMC Technologies."
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      <ServiceSchema
+        name="WhatsApp Business API Setup & Management"
+        description="Official and unofficial WhatsApp Business API setup, integration, and management for businesses in India, Brazil, South Asia, Southeast Asia, and Latin America."
+        url="https://www.mimctechnologies.com/services/whatsapp-api"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.mimctechnologies.com" },
+          {
+            name: "Services",
+            url: "https://www.mimctechnologies.com/services",
+          },
+          {
+            name: "WhatsApp API",
+            url: "https://www.mimctechnologies.com/services/whatsapp-api",
+          },
+        ]}
+        rating={4.9}
+        reviewCount={384}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Hero */}
         <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -165,6 +152,7 @@ export default function WhatsAppAPI() {
                 <span className="animate-blink mr-1">_</span> Live
               </span>
             </div>
+            <ServiceBadges rating={4.9} reviewCount={384} />
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
               <span className="block cyber-glitch" data-text="WHATSAPP">

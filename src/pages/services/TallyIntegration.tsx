@@ -13,6 +13,8 @@ import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
 import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceSchema from "../../components/seo/ServiceSchema";
+import ServiceBadges from "../../components/ui/ServiceBadges";
 
 const features = [
   {
@@ -97,44 +99,30 @@ const steps = [
   },
 ];
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Tally WhatsApp Integration",
-  provider: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-  },
-  description:
-    "Direct integration between Tally ERP 9 / Tally Prime and WhatsApp Business API. Automatically send invoices, payment reminders, and ledger statements via WhatsApp.",
-  areaServed: ["IN"],
-  url: "https://www.mimctechnologies.com/services/tally-whatsapp-integration",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function TallyIntegration() {
   return (
     <Layout
       title="Tally WhatsApp Integration — Auto Invoice & Reminder Dispatch"
       description="Send invoices, payment reminders, and ledger statements directly from Tally ERP 9 & Tally Prime to WhatsApp. Official API integration by MIMC Technologies."
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      <ServiceSchema
+        name="Tally WhatsApp Integration"
+        description="Direct integration between Tally ERP 9 / Tally Prime and WhatsApp Business API. Automatically send invoices, payment reminders, and ledger statements via WhatsApp."
+        url="https://www.mimctechnologies.com/services/tally-whatsapp-integration"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.mimctechnologies.com" },
+          {
+            name: "Services",
+            url: "https://www.mimctechnologies.com/services",
+          },
+          {
+            name: "Tally Integration",
+            url: "https://www.mimctechnologies.com/services/tally-whatsapp-integration",
+          },
+        ]}
+        rating={4.9}
+        reviewCount={328}
       />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -149,6 +137,8 @@ export default function TallyIntegration() {
                 WhatsApp API
               </span>
             </div>
+
+            <ServiceBadges rating={4.9} reviewCount={328} />
 
             <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
               <span className="block cyber-glitch" data-text="TALLY">

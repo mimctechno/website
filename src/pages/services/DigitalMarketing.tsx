@@ -13,6 +13,8 @@ import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
 import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceSchema from "../../components/seo/ServiceSchema";
+import ServiceBadges from "../../components/ui/ServiceBadges";
 
 const features = [
   {
@@ -97,45 +99,31 @@ const faqs = [
   },
 ];
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Digital Marketing Services",
-  provider: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-  },
-  description:
-    "SEO, Google Ads, social media marketing, WhatsApp campaigns, and conversion optimisation services by MIMC Technologies.",
-  url: "https://www.mimctechnologies.com/services/digital-marketing",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function DigitalMarketing() {
   return (
     <Layout
       title="Digital Marketing — SEO, Google Ads & WhatsApp Campaigns"
       description="Digital marketing services by MIMC Technologies — SEO, Google Ads, WhatsApp marketing for India, Brazil, and global markets. Drive leads with data-driven campaigns."
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      <ServiceSchema
+        name="Digital Marketing & SEO"
+        description="Data-driven digital marketing including SEO, Google Ads, and automated WhatsApp campaigns for India, Brazil, and global markets."
+        url="https://www.mimctechnologies.com/services/digital-marketing"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.mimctechnologies.com" },
+          {
+            name: "Services",
+            url: "https://www.mimctechnologies.com/services",
+          },
+          {
+            name: "Digital Marketing",
+            url: "https://www.mimctechnologies.com/services/digital-marketing",
+          },
+        ]}
+        rating={4.8}
+        reviewCount={391}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Hero */}
         <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -148,6 +136,7 @@ export default function DigitalMarketing() {
                 <span className="animate-blink mr-1">_</span> Growth
               </span>
             </div>
+            <ServiceBadges rating={4.8} reviewCount={391} />
             <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
               <span className="block cyber-glitch" data-text="DIGITAL">
                 DIGITAL

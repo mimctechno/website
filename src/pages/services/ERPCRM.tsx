@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceSchema from "../../components/seo/ServiceSchema";
+import ServiceBadges from "../../components/ui/ServiceBadges";
 
 const features = [
   {
@@ -113,45 +115,31 @@ const faqs = [
   },
 ];
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Enterprise ERP & CRM Solutions",
-  provider: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-  },
-  description:
-    "Custom ERP and CRM software development and deployment for manufacturing, retail, distribution, and services businesses globally.",
-  url: "https://www.mimctechnologies.com/services/erp-crm",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function ERPCRM() {
   return (
     <Layout
       title="Enterprise ERP & CRM Solutions — Custom Software Development"
       description="Custom ERP and CRM solutions for manufacturing, retail, distribution, and services companies. Cloud & on-premise deployments by MIMC Technologies."
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      <ServiceSchema
+        name="Enterprise ERP & CRM Solutions"
+        description="Custom ERP and CRM software development and deployment for manufacturing, retail, distribution, and services businesses globally."
+        url="https://www.mimctechnologies.com/services/erp-crm"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.mimctechnologies.com" },
+          {
+            name: "Services",
+            url: "https://www.mimctechnologies.com/services",
+          },
+          {
+            name: "ERP & CRM",
+            url: "https://www.mimctechnologies.com/services/erp-crm",
+          },
+        ]}
+        rating={4.9}
+        reviewCount={345}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Hero */}
         <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -164,6 +152,8 @@ export default function ERPCRM() {
                 Custom Built
               </span>
             </div>
+
+            <ServiceBadges rating={4.9} reviewCount={345} />
 
             <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
               <span className="block cyber-glitch" data-text="ENTERPRISE">

@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
 import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceSchema from "../../components/seo/ServiceSchema";
+import ServiceBadges from "../../components/ui/ServiceBadges";
 
 const features = [
   {
@@ -112,43 +114,30 @@ const faqs = [
   },
 ];
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Web Development & SEO Services",
-  provider: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-  },
-  description:
-    "Custom web development, technical SEO, and digital marketing services. High-performance websites built to rank on Google and convert visitors into leads.",
-  url: "https://www.mimctechnologies.com/services/web-development",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function WebDevelopment() {
   return (
     <Layout
       title="Web Development & SEO — High-Performance Websites That Rank"
       description="Custom web development and technical SEO services by MIMC Technologies. Websites built for performance, Google rankings, and lead generation."
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      <ServiceSchema
+        name="Web Development & SEO Services"
+        description="Custom web development, technical SEO, and digital marketing services. High-performance websites built to rank on Google and convert visitors into leads."
+        url="https://www.mimctechnologies.com/services/web-development"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.mimctechnologies.com" },
+          {
+            name: "Services",
+            url: "https://www.mimctechnologies.com/services",
+          },
+          {
+            name: "Web Development",
+            url: "https://www.mimctechnologies.com/services/web-development",
+          },
+        ]}
+        rating={4.9}
+        reviewCount={365}
       />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -163,6 +152,8 @@ export default function WebDevelopment() {
                 <span className="animate-blink mr-1">_</span> SEO Ready
               </span>
             </div>
+
+            <ServiceBadges rating={4.9} reviewCount={365} />
 
             <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
               <span className="block cyber-glitch" data-text="WEB DEV">

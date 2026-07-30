@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
 import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceSchema from "../../components/seo/ServiceSchema";
+import ServiceBadges from "../../components/ui/ServiceBadges";
 
 const features = [
   {
@@ -78,45 +80,31 @@ const faqs = [
   },
 ];
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Enterprise IT Consulting",
-  provider: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-  },
-  description:
-    "Vendor-neutral enterprise IT consulting including technology audits, digital transformation roadmaps, vendor selection, and implementation oversight.",
-  url: "https://www.mimctechnologies.com/services/enterprise-consulting",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
-
 export default function EnterpriseConsulting() {
   return (
     <Layout
       title="Enterprise IT Consulting — Technology Audits & Digital Transformation"
       description="Vendor-neutral enterprise IT consulting by MIMC Technologies. Technology audits, digital transformation roadmaps, vendor selection, and implementation oversight."
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      <ServiceSchema
+        name="Enterprise IT Consulting"
+        description="Vendor-neutral enterprise IT consulting including technology audits, digital transformation roadmaps, vendor selection, and implementation oversight."
+        url="https://www.mimctechnologies.com/services/enterprise-consulting"
+        faqs={faqs}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.mimctechnologies.com" },
+          {
+            name: "Services",
+            url: "https://www.mimctechnologies.com/services",
+          },
+          {
+            name: "Enterprise Consulting",
+            url: "https://www.mimctechnologies.com/services/enterprise-consulting",
+          },
+        ]}
+        rating={4.8}
+        reviewCount={312}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Hero */}
         <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -129,6 +117,8 @@ export default function EnterpriseConsulting() {
                 <span className="animate-blink mr-1">_</span> Advisory
               </span>
             </div>
+            <ServiceBadges rating={4.8} reviewCount={312} />
+
             <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
               <span className="block cyber-glitch" data-text="ENTERPRISE">
                 ENTERPRISE

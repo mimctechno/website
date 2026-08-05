@@ -56,6 +56,7 @@ export default function ServiceSchema({
           url: url,
           hasMerchantReturnPolicy: {
             "@type": "MerchantReturnPolicy",
+            applicableCountry: "US",
             returnPolicyCategory:
               "https://schema.org/MerchantReturnFiniteReturnWindow",
             merchantReturnDays: 14,

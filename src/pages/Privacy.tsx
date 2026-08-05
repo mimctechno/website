@@ -2,8 +2,26 @@ import Layout from "../components/Layout";
 import { Shield } from "lucide-react";
 
 export default function Privacy() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Privacy Policy — MIMC Technologies",
+    description:
+      "MIMC Technologies privacy policy covering data collection, WhatsApp API data handling, security protocols, and GDPR compliance for enterprise clients.",
+    url: "https://www.mimctechnologies.com/privacy",
+    inLanguage: "en",
+    isPartOf: { "@id": "https://www.mimctechnologies.com" },
+  };
+
   return (
-    <Layout title="Privacy Policy — MIMC Technologies">
+    <Layout
+      title="Privacy Policy"
+      description="MIMC Technologies privacy policy covering data collection, WhatsApp API data handling, security protocols, and GDPR compliance for enterprise clients."
+    >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="mb-12 border-b border-[var(--color-cyber-border)] pb-8">
           <div className="flex items-center gap-3 mb-6">

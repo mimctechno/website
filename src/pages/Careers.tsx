@@ -53,37 +53,39 @@ const JOBS = [
   },
 ];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "JobPosting",
-  // Normally you'd output one for each job, we'll output the main one for SEO purposes
-  title: "Senior React / Frontend Developer",
-  description:
-    "We are looking for a pixel-perfect React developer who understands performance, Core Web Vitals, and modern CSS (Tailwind).",
-  datePosted: "2026-07-29",
-  validThrough: "2026-12-31",
-  employmentType: "FULL_TIME",
-  hiringOrganization: {
-    "@type": "Organization",
-    name: "MIMC Technologies",
-    sameAs: "https://www.mimctechnologies.com",
-    logo: "https://www.mimctechnologies.com/logo.webp",
-  },
-  jobLocation: {
-    "@type": "Place",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "IN",
-    },
-  },
-  applicantLocationRequirements: {
-    "@type": "Country",
-    name: "India",
-  },
-  jobLocationType: "TELECOMMUTE",
+const hiringOrg = {
+  "@type": "Organization",
+  name: "MIMC Technologies",
+  sameAs: "https://www.mimctechnologies.com",
+  logo: "https://www.mimctechnologies.com/logo.webp",
 };
 
+function buildJobSchema(job: (typeof JOBS)[number]) {
+  return {
+    "@type": "JobPosting",
+    title: job.title,
+    description: job.desc,
+    datePosted: "2026-07-29",
+    validThrough: "2026-12-31",
+    employmentType: "FULL_TIME",
+    hiringOrganization: hiringOrg,
+    jobLocation: {
+      "@type": "Place",
+      address: { "@type": "PostalAddress", addressCountry: "IN" },
+    },
+    applicantLocationRequirements: { "@type": "Country", name: "India" },
+    jobLocationType: job.location.toLowerCase().includes("remote")
+      ? "TELECOMMUTE"
+      : undefined,
+  };
+}
+
 export default function Careers() {
+  const careersSchema = {
+    "@context": "https://schema.org",
+    "@graph": JOBS.map(buildJobSchema),
+  };
+
   return (
     <Layout
       title="Careers — Join the MIMC Technologies Team"
@@ -91,7 +93,7 @@ export default function Careers() {
     >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(careersSchema) }}
       />
 
       <div className="max-w-7xl mx-auto px-6 py-16">

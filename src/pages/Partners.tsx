@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+
 import {
   Shield,
   Zap,
@@ -13,6 +13,28 @@ import {
 } from "lucide-react";
 
 export default function Partners() {
+  const partnerSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "MIMC Technologies",
+    url: "https://www.mimctechnologies.com",
+    logo: "https://www.mimctechnologies.com/logo.webp",
+    description:
+      "MIMC Technologies partners with world-class technology providers to deliver enterprise software, WhatsApp API, ERP, and CRM solutions globally.",
+    sameAs: [
+      "https://aws.amazon.com",
+      "https://vercel.com",
+      "https://github.com",
+      "https://www.cloudflare.com",
+      "https://openai.com",
+    ],
+    memberOf: {
+      "@type": "Organization",
+      name: "Startup India",
+      url: "https://www.startupindia.gov.in",
+    },
+  };
+
   const partners = [
     {
       name: "Amazon Web Services",
@@ -80,18 +102,14 @@ export default function Partners() {
   ];
 
   return (
-    <Layout>
-      <Helmet>
-        <title>Infrastructure & Technology Partners | MIMC</title>
-        <meta
-          name="description"
-          content="Explore MIMC Technologies' global infrastructure partners including AWS, Vercel, Cloudflare, and OpenAI. We leverage enterprise-grade tech to build secure, scalable solutions."
-        />
-        <meta
-          name="keywords"
-          content="AWS Cloud Infrastructure, Vercel Edge Network, Cloudflare Security, OpenAI Integration, Startup India Recognition, Enterprise IT Partners"
-        />
-      </Helmet>
+    <Layout
+      title="Infrastructure & Technology Partners"
+      description="Explore MIMC Technologies' global infrastructure partners including AWS, Vercel, Cloudflare, and OpenAI. We leverage enterprise-grade tech to build secure, scalable solutions."
+    >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(partnerSchema) }}
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden border-b border-[var(--color-cyber-border)]">

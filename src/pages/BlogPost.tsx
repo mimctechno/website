@@ -18,8 +18,21 @@ export default function BlogPost() {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
+    image: post.image
+      ? `https://www.mimctechnologies.com${post.image}`
+      : "https://www.mimctechnologies.com/logo.webp",
     datePublished: post.date,
     dateModified: post.date,
+    articleSection: post.category,
+    wordCount: post.sections.reduce(
+      (acc, s) => acc + s.body.split(" ").length,
+      0,
+    ),
+    keywords: post.tags.join(", "),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.mimctechnologies.com/blog/${post.slug}`,
+    },
     author: {
       "@type": "Organization",
       name: "MIMC Technologies",
@@ -34,7 +47,31 @@ export default function BlogPost() {
       },
     },
     url: `https://www.mimctechnologies.com/blog/${post.slug}`,
-    keywords: post.tags.join(", "),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.mimctechnologies.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://www.mimctechnologies.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `https://www.mimctechnologies.com/blog/${post.slug}`,
+      },
+    ],
   };
 
   return (
@@ -42,6 +79,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className="max-w-4xl mx-auto px-6 py-16">

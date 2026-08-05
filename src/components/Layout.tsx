@@ -24,10 +24,12 @@ export default function Layout({
   children,
   title,
   description,
+  ogImage,
 }: {
   children: ReactNode;
   title?: string;
   description?: string;
+  ogImage?: string;
 }) {
   const location = useLocation();
   const pageTitle = title
@@ -37,6 +39,8 @@ export default function Layout({
     description ||
     "MIMC Technologies provides enterprise ERP, CRM, official WhatsApp API, and Tally integration solutions globally from Canada and India.";
   const currentUrl = `https://www.mimctechnologies.com${location.pathname}`;
+  const pageImage = ogImage ?? "https://www.mimctechnologies.com/logo.webp";
+  const isHome = location.pathname === "/";
 
   // Organization Schema (JSON-LD)
   const orgSchema = {
@@ -59,7 +63,24 @@ export default function Layout({
         areaServed: "IN",
       },
     ],
-    sameAs: [],
+    sameAs: ["https://www.linkedin.com/company/mimc-technologies"],
+  };
+
+  // WebSite schema with SiteLinksSearchBox — only on homepage
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "MIMC Technologies",
+    url: "https://www.mimctechnologies.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate:
+          "https://www.mimctechnologies.com/blog?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 
   // Generate dynamic Breadcrumbs schema based on current route
@@ -99,15 +120,23 @@ export default function Layout({
         <title>{pageTitle}</title>
         <meta name="description" content={pageDesc} />
         <link rel="canonical" href={currentUrl} />
+        <meta name="robots" content="index, follow" />
 
         {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
         <meta property="og:url" content={currentUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="MIMC Technologies" />
+        <meta property="og:image" content={pageImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDesc} />
+        <meta name="twitter:image" content={pageImage} />
       </Helmet>
 
       {/* JSON-LD Scripts (Rendered statically outside of Helmet for guaranteed crawling) */}
@@ -119,6 +148,12 @@ export default function Layout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {isHome && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+        />
+      )}
 
       <CyberGrid />
 

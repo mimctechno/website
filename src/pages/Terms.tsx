@@ -2,8 +2,26 @@ import Layout from "../components/Layout";
 import { Terminal } from "lucide-react";
 
 export default function Terms() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Terms of Service — MIMC Technologies",
+    description:
+      "MIMC Technologies terms of service for enterprise software, WhatsApp API integrations, Tally solutions, and SLA agreements. Governed by Ontario, Canada and Delhi, India law.",
+    url: "https://www.mimctechnologies.com/terms",
+    inLanguage: "en",
+    isPartOf: { "@id": "https://www.mimctechnologies.com" },
+  };
+
   return (
-    <Layout title="Terms of Service — MIMC Technologies">
+    <Layout
+      title="Terms of Service"
+      description="MIMC Technologies terms of service for enterprise software, WhatsApp API integrations, Tally solutions, and SLA agreements."
+    >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="mb-12 border-b border-[var(--color-cyber-border)] pb-8">
           <div className="flex items-center gap-3 mb-6">

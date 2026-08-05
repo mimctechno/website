@@ -42,11 +42,43 @@ const values = [
 export default function About() {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
-    name: "About MIMC Technologies",
-    description:
-      "MIMC Technologies is an enterprise software and WhatsApp API company headquartered in Canada with offices in India.",
-    url: "https://www.mimctechnologies.com/about",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://www.mimctechnologies.com/about#webpage",
+        name: "About MIMC Technologies",
+        description:
+          "MIMC Technologies is an enterprise software and WhatsApp API company headquartered in Canada with offices in India.",
+        url: "https://www.mimctechnologies.com/about",
+        isPartOf: { "@id": "https://www.mimctechnologies.com" },
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.mimctechnologies.com/#organization",
+        name: "MIMC Technologies",
+        url: "https://www.mimctechnologies.com",
+        logo: "https://www.mimctechnologies.com/logo.webp",
+        foundingDate: "2014",
+        numberOfEmployees: { "@type": "QuantitativeValue", value: "50" },
+        areaServed: ["IN", "CA", "US", "GB", "AU", "AE", "SG"],
+        knowsAbout: [
+          "ERP Software",
+          "CRM Systems",
+          "WhatsApp Business API",
+          "Tally WhatsApp Integration",
+          "Enterprise Software Development",
+          "Digital Marketing",
+        ],
+        address: [
+          {
+            "@type": "PostalAddress",
+            addressCountry: "CA",
+            addressRegion: "Ontario",
+          },
+          { "@type": "PostalAddress", addressCountry: "IN" },
+        ],
+      },
+    ],
   };
 
   return (

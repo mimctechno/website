@@ -63,18 +63,44 @@ export default function Contact() {
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "LocalBusiness"],
     name: "MIMC Technologies",
     url: "https://www.mimctechnologies.com",
+    logo: "https://www.mimctechnologies.com/logo.webp",
     email: "info@mimctechnologies.com",
     telephone: ["+14168578831", "+919259418994"],
+    openingHours: "Mo-Fr 09:00-18:00",
+    priceRange: "$$",
+    currenciesAccepted: "USD, CAD, INR",
+    paymentAccepted: "Credit Card, Bank Transfer, UPI",
     address: [
       {
         "@type": "PostalAddress",
         addressCountry: "CA",
         addressRegion: "Ontario",
+        addressLocality: "Toronto",
       },
-      { "@type": "PostalAddress", addressCountry: "IN" },
+      {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+        addressRegion: "Delhi",
+      },
+    ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+14168578831",
+        contactType: "sales",
+        areaServed: "CA",
+        availableLanguage: "English",
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: "+919259418994",
+        contactType: "sales",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
     ],
   };
 

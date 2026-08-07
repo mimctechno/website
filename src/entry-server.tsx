@@ -16,6 +16,8 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Services from "./pages/Services";
 import WhatsAppAPI from "./pages/services/WhatsAppAPI";
+import WhatsAppLocation from "./pages/services/WhatsAppLocation";
+import whatsappLocations from "./data/whatsappLocations.json";
 import TallyIntegration from "./pages/services/TallyIntegration";
 import ERPCRM from "./pages/services/ERPCRM";
 import WebDevelopment from "./pages/services/WebDevelopment";
@@ -26,7 +28,7 @@ import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 export function render(url: string) {
-  const helmetContext: { helmet?: HelmetServerState } = {};
+  const helmetContext: { helmet?: HelmetServerState } = {}; // context populated via HelmetProvider
 
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
@@ -41,6 +43,13 @@ export function render(url: string) {
           <Route path="/terms" element={<Terms />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/whatsapp-api" element={<WhatsAppAPI />} />
+          {whatsappLocations.map((loc) => (
+            <Route
+              key={loc.slug}
+              path={`/services/${loc.slug}`}
+              element={<WhatsAppLocation data={loc} />}
+            />
+          ))}
           <Route
             path="/services/tally-whatsapp-integration"
             element={<TallyIntegration />}
@@ -66,6 +75,5 @@ export function render(url: string) {
     </HelmetProvider>,
   );
 
-  const { helmet } = helmetContext;
-  return { html, helmet };
+  return { html };
 }

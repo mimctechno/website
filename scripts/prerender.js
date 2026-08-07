@@ -9,7 +9,7 @@
 
 import { build } from "vite";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
-import { resolve, dirname } from "path";
+import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -30,11 +30,18 @@ const routes = [
   "/services/web-development",
   "/services/digital-marketing",
   "/services/enterprise-consulting",
+  "/blog/what-is-erp-software-guide",
   "/blog",
   "/blog/whatsapp-tally-integration-guide",
   "/blog/official-vs-unofficial-whatsapp-api",
-  "/blog/what-is-erp-software-guide",
 ];
+
+const locationsData = JSON.parse(
+  readFileSync(join(root, "src/data/whatsappLocations.json"), "utf8"),
+);
+locationsData.forEach((loc) => {
+  routes.push(`/services/${loc.slug}`);
+});
 
 // Step 1: Build the SSR bundle
 console.log("🔧 Building SSR bundle...");
@@ -57,27 +64,30 @@ const { render } = await import(resolve(root, "dist-ssr/entry-server.js"));
 // Step 3: Read the client HTML shell
 const template = readFileSync(resolve(root, "dist/index.html"), "utf-8");
 
+// HEAD_TAG_RE: hoists only title/meta/link tags from the rendered body into <head>.
+// JSON-LD <script> tags are valid in <body> (spec-compliant) so we leave them there.
+// react-helmet-async with renderToString emits title/meta/link inline in the app HTML.
+// ponytail: hoisting via regex is simpler than the streaming API or a custom renderer.
+const HEAD_TAG_RE =
+  /<(title|link|meta)([^>]*)(?:\/>|>((?:(?!<\/\1>).)*)<\/\1>)/gs;
+
 // Step 4: Render each route and write to dist/
 let count = 0;
 for (const url of routes) {
-  const { html: appHtml, helmet } = render(url);
+  const { html: appHtml } = render(url);
 
-  // Build head tags from Helmet
-  const headTags = [
-    helmet?.title?.toString() ?? "",
-    helmet?.meta?.toString() ?? "",
-    helmet?.link?.toString() ?? "",
-    helmet?.script?.toString() ?? "",
-  ].join("\n    ");
+  // Extract head-bound tags from the rendered app HTML and hoist them into <head>.
+  // These are emitted inline by react-helmet-async's renderToString path.
+  const headTags = [];
+  const bodyHtml = appHtml.replace(HEAD_TAG_RE, (match) => {
+    headTags.push(match);
+    return "";
+  });
 
-  // Inject rendered HTML into the template
   const fullHtml = template
-    // Replace closing </head> with helmet tags + closing tag
-    .replace("</head>", `  ${headTags}\n  </head>`)
-    // Inject rendered React app into the root div
-    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+    .replace("</head>", `  ${headTags.join("\n  ")}\n  </head>`)
+    .replace('<div id="root"></div>', `<div id="root">${bodyHtml}</div>`);
 
-  // Write to the correct output path
   const outputDir =
     url === "/"
       ? resolve(root, "dist")

@@ -6,12 +6,17 @@ import { lazy, Suspense } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import CyberCursor from "./components/CyberCursor";
 
+import whatsappLocations from "./data/whatsappLocations.json";
+
 // Lazy loading all route components for code splitting
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Services = lazy(() => import("./pages/Services"));
 const WhatsAppAPI = lazy(() => import("./pages/services/WhatsAppAPI"));
+const WhatsAppLocation = lazy(
+  () => import("./pages/services/WhatsAppLocation"),
+);
 const TallyIntegration = lazy(
   () => import("./pages/services/TallyIntegration"),
 );
@@ -57,6 +62,13 @@ export default function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/whatsapp-api" element={<WhatsAppAPI />} />
+            {whatsappLocations.map((loc) => (
+              <Route
+                key={loc.slug}
+                path={`/services/${loc.slug}`}
+                element={<WhatsAppLocation data={loc} />}
+              />
+            ))}
             <Route
               path="/services/tally-whatsapp-integration"
               element={<TallyIntegration />}

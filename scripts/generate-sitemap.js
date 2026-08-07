@@ -37,6 +37,23 @@ function generateSitemap() {
     }
   }
 
+  // Read locations data
+  const locationsFilePath = path.join(
+    process.cwd(),
+    "src",
+    "data",
+    "whatsappLocations.json",
+  );
+  let locationSlugs = [];
+  if (fs.existsSync(locationsFilePath)) {
+    const locationsContent = JSON.parse(
+      fs.readFileSync(locationsFilePath, "utf-8"),
+    );
+    locationsContent.forEach((loc) => {
+      locationSlugs.push(loc.slug);
+    });
+  }
+
   // Generate XML
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
@@ -61,13 +78,23 @@ function generateSitemap() {
     xml += `  </url>\n`;
   });
 
+  // Add dynamic location routes
+  locationSlugs.forEach((slug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/${slug}</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>monthly</changefreq>\n`;
+    xml += `    <priority>0.7</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
   xml += `</urlset>`;
 
   // Write to public/sitemap.xml
   const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
   fs.writeFileSync(sitemapPath, xml);
   console.log(
-    `✅ Successfully generated sitemap.xml with ${staticRoutes.length + blogSlugs.length} routes.`,
+    `✅ Successfully generated sitemap.xml with ${staticRoutes.length + blogSlugs.length + locationSlugs.length} routes.`,
   );
 }
 

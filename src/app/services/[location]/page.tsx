@@ -12,24 +12,32 @@ export function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
-  const locationData = whatsappLocations.find((l) => l.slug === params.location);
+  const locationData = whatsappLocations.find(
+    (l) => l.slug === params.location,
+  );
   if (!locationData) return {};
+
+  const title = `WhatsApp Business API Provider in ${locationData.city}, ${locationData.state} | MIMC Technologies`;
+  const description = `Looking for an official WhatsApp Business API provider in ${locationData.city}, ${locationData.state}? We offer secure WhatsApp integration, ERP, and Tally solutions for local businesses.`;
   const url = `https://www.mimctechnologies.com/services/${locationData.slug}/`;
+
   return {
-    title: locationData.metaTitle,
-    description: locationData.metaDescription,
+    title,
+    description,
     alternates: { canonical: url },
     openGraph: {
       url,
-      title: locationData.metaTitle,
-      description: locationData.metaDescription,
+      title,
+      description,
     },
   };
 }
 
 export default async function Page(props: Props) {
   const params = await props.params;
-  const locationData = whatsappLocations.find((l) => l.slug === params.location);
+  const locationData = whatsappLocations.find(
+    (l) => l.slug === params.location,
+  );
   if (!locationData) notFound();
-  return <WhatsAppLocation locationData={locationData} />;
+  return <WhatsAppLocation data={locationData} />;
 }

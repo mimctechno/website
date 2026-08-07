@@ -61,7 +61,7 @@ function generateSitemap() {
   // Add static routes
   staticRoutes.forEach((route) => {
     xml += `  <url>\n`;
-    xml += `    <loc>${domain}${route === "/" ? "" : route}</loc>\n`;
+    xml += `    <loc>${domain}${route === "/" ? "" : route}/</loc>\n`;
     xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>${route === "/" ? "weekly" : "monthly"}</changefreq>\n`;
     xml += `    <priority>${route === "/" ? "1.0" : "0.8"}</priority>\n`;
@@ -71,7 +71,7 @@ function generateSitemap() {
   // Add dynamic blog routes
   blogSlugs.forEach((slug) => {
     xml += `  <url>\n`;
-    xml += `    <loc>${domain}/blog/${slug}</loc>\n`;
+    xml += `    <loc>${domain}/blog/${slug}/</loc>\n`;
     xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>monthly</changefreq>\n`;
     xml += `    <priority>0.7</priority>\n`;
@@ -81,7 +81,7 @@ function generateSitemap() {
   // Add dynamic location routes
   locationSlugs.forEach((slug) => {
     xml += `  <url>\n`;
-    xml += `    <loc>${domain}/services/${slug}</loc>\n`;
+    xml += `    <loc>${domain}/services/${slug}/</loc>\n`;
     xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>monthly</changefreq>\n`;
     xml += `    <priority>0.7</priority>\n`;

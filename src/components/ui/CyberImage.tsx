@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { Image as ImageIcon } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";

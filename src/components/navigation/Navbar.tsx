@@ -1,5 +1,7 @@
+"use client";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const NAV = [
@@ -10,14 +12,14 @@ const NAV = [
 ];
 
 export default function Navbar() {
-  const location = useLocation();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)]/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link
-          to="/"
+          href="/"
           className="flex items-center gap-3 group"
           aria-label="Home"
         >
@@ -46,14 +48,14 @@ export default function Navbar() {
           {NAV.map((n) => (
             <Link
               key={n.href}
-              to={n.href}
-              className={`cyber-bracket-link ${location.pathname === n.href ? "active" : "text-white/70"}`}
+              href={n.href}
+              className={`cyber-bracket-link ${pathname === n.href ? "active" : "text-white/70"}`}
             >
               {n.label}
             </Link>
           ))}
           <Link
-            to="/contact"
+            href="/contact"
             className="border border-[var(--color-cyber-accent)] px-4 py-1.5 text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)] hover:text-black transition-all"
           >
             CONTACT
@@ -83,7 +85,7 @@ export default function Navbar() {
           {NAV.map((n) => (
             <Link
               key={n.href}
-              to={n.href}
+              href={n.href}
               onClick={() => setMenuOpen(false)}
               className="block py-2 text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all"
             >
@@ -91,7 +93,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            to="/contact"
+            href="/contact"
             onClick={() => setMenuOpen(false)}
             className="block py-2 text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)] hover:text-black transition-all text-center border border-[var(--color-cyber-accent)] mt-2"
           >

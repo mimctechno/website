@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { Send, CheckCheck, MoreVertical, Phone, Video } from "lucide-react";
 

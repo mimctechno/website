@@ -1,11 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronRight, Home } from "lucide-react";
 
 export default function BreadcrumbNav() {
-  const location = useLocation();
-  if (location.pathname === "/") return null;
+  const pathname = usePathname();
+  if (!pathname || pathname === "/") return null;
 
-  const pathParts = location.pathname.split("/").filter(Boolean);
+  const pathParts = pathname.split("/").filter(Boolean);
 
   return (
     <nav className="border-b border-[var(--color-cyber-border)] bg-[#050508]/80 backdrop-blur-md sticky top-16 md:top-20 z-40">
@@ -13,7 +15,7 @@ export default function BreadcrumbNav() {
         <ol className="flex items-center space-x-2 text-[10px] md:text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
           <li>
             <Link
-              to="/"
+              href="/"
               className="flex items-center hover:text-[var(--color-cyber-accent)] transition-colors"
             >
               <Home className="w-3 h-3 mr-1" />
@@ -38,7 +40,7 @@ export default function BreadcrumbNav() {
                   </span>
                 ) : (
                   <Link
-                    to={url}
+                    href={url}
                     className="hover:text-[var(--color-cyber-accent)] transition-colors"
                   >
                     {name}

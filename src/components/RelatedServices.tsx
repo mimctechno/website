@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 const allServices = [
@@ -55,7 +55,7 @@ export default function RelatedServices({ currentId }: { currentId: string }) {
         {related.map((service) => (
           <Link
             key={service.id}
-            to={service.path}
+            href={service.path}
             className="group p-[2px] cyber-chamfer bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors duration-300 block"
             style={{ "--hover-color": service.color } as React.CSSProperties}
           >

@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 
 // Persist mouse position across page navigations (since Layout remounts)

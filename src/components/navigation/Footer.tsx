@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Terminal, Shield, MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -27,7 +27,7 @@ export default function Footer() {
             ].map(([label, href]) => (
               <Link
                 key={href as string}
-                to={href as string}
+                href={href as string}
                 className="block text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-all"
               >
                 {label}
@@ -48,7 +48,7 @@ export default function Footer() {
             ].map(([label, href]) => (
               <Link
                 key={href as string}
-                to={href as string}
+                href={href as string}
                 className="block text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-all"
               >
                 {label}
@@ -91,13 +91,13 @@ export default function Footer() {
               <Shield className="w-4 h-4" aria-hidden="true" /> LEGAL
             </div>
             <Link
-              to="/privacy"
+              href="/privacy"
               className="block text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-all"
             >
               Privacy Policy
             </Link>
             <Link
-              to="/terms"
+              href="/terms"
               className="block text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-all"
             >
               Terms of Service

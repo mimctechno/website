@@ -31,8 +31,9 @@ export default function ServiceSchema({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Product",
-        "@id": `${url}#product`,
+        "@type": "SoftwareApplication",
+        "@id": `${url}#software`,
+        applicationCategory: "BusinessApplication",
         name: name,
         description: description,
         image: "https://www.mimctechnologies.com/logo.webp",

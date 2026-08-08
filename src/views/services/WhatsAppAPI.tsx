@@ -482,6 +482,47 @@ export default function WhatsAppAPI() {
           </div>
         </section>
 
+        {/* ── Deployed in Top Regions ── */}
+        <section className="mb-32">
+          <div className="flex flex-col items-center justify-center text-center mb-12">
+            <h2 className="text-3xl font-black font-[var(--font-cyber-head)] text-white uppercase tracking-widest mb-4">
+              [ DEPLOYED_IN_TOP_REGIONS ]
+            </h2>
+            <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] tracking-widest uppercase text-sm max-w-xl">
+              Our enterprise WhatsApp infrastructure is actively serving top
+              metropolitan areas globally.
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            {[
+              { name: "Mumbai", slug: "whatsapp-api-mumbai" },
+              { name: "Delhi", slug: "whatsapp-api-delhi" },
+              { name: "Bengaluru", slug: "whatsapp-api-bengaluru" },
+              { name: "Dubai", slug: "whatsapp-api-dubai" },
+              { name: "Toronto", slug: "whatsapp-api-toronto" },
+            ].map((city) => (
+              <Link
+                key={city.slug}
+                href={`/services/${city.slug}/`}
+                className="group flex items-center gap-2 border border-[var(--color-cyber-border)] hover:border-[var(--color-cyber-accent)] bg-[#050508] px-6 py-3 cyber-chamfer transition-all"
+              >
+                <span className="w-2 h-2 rounded-full bg-[var(--color-cyber-accent)] animate-pulse" />
+                <span className="font-[var(--font-cyber-accent)] text-sm font-bold tracking-widest uppercase text-white group-hover:text-[var(--color-cyber-accent)] transition-colors">
+                  {city.name}
+                </span>
+              </Link>
+            ))}
+            <Link
+              href="/locations/"
+              className="group flex items-center gap-2 border border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)]/10 px-6 py-3 cyber-chamfer transition-all hover:bg-[var(--color-cyber-accent)]"
+            >
+              <span className="font-[var(--font-cyber-accent)] text-sm font-bold tracking-widest uppercase text-[var(--color-cyber-accent)] group-hover:text-black transition-colors">
+                VIEW_ALL_REGIONS
+              </span>
+            </Link>
+          </div>
+        </section>
+
         <RelatedServices currentId="whatsapp-api" />
       </div>
     </Layout>

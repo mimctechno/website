@@ -45,6 +45,7 @@ export default function Footer() {
               ["Careers", "/careers"],
               ["Blog", "/blog"],
               ["Contact", "/contact"],
+              ["Global Infrastructure", "/locations"],
             ].map(([label, href]) => (
               <Link
                 key={href as string}

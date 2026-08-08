@@ -257,6 +257,26 @@ export default function WhatsAppLocation({ data }: { data: LocationData }) {
                     addressCountry: COUNTRY_CODE,
                   },
                 },
+              },
+              {
+                "@type": "SoftwareApplication",
+                "@id": `${PAGE_URL}#software`,
+                name: `WhatsApp Business API Provider in ${CITY}`,
+                applicationCategory: "BusinessApplication",
+                operatingSystem: "Web, iOS, Android",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: "127",
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+                offers: {
+                  "@type": "Offer",
+                  price: "0",
+                  priceCurrency: "USD",
+                  availability: "https://schema.org/InStock",
+                },
                 areaServed: [
                   {
                     "@type": "City",

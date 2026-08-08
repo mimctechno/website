@@ -17,8 +17,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   );
   if (!locationData) return {};
 
-  const title = `WhatsApp Business API Provider in ${locationData.city}, ${locationData.state} | MIMC Technologies`;
-  const description = `Looking for an official WhatsApp Business API provider in ${locationData.city}, ${locationData.state}? We offer secure WhatsApp integration, ERP, and Tally solutions for local businesses.`;
+  const title = `WhatsApp API Provider in ${locationData.city} | MIMC Technologies`;
+  const description = `Official WhatsApp Business API integration in ${locationData.city}. Secure ERP & Tally solutions for local enterprises by MIMC Technologies.`;
   const url = `https://www.mimctechnologies.com/services/${locationData.slug}/`;
 
   return {
@@ -29,6 +29,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       url,
       title,
       description,
+      type: "website",
+      siteName: "MIMC Technologies",
+      images: [{ url: "/logo.webp", width: 1200, height: 630 }],
     },
   };
 }

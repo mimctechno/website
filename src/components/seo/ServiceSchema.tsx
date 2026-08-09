@@ -34,6 +34,7 @@ export default function ServiceSchema({
         "@type": "SoftwareApplication",
         "@id": `${url}#software`,
         applicationCategory: "BusinessApplication",
+        operatingSystem: "Any",
         name: name,
         description: description,
         image: "https://www.mimctechnologies.com/logo.webp",

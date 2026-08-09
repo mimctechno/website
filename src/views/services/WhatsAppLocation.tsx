@@ -251,6 +251,7 @@ export default function WhatsAppLocation({ data }: { data: LocationData }) {
                   name: "MIMC Technologies",
                   url: BASE_URL,
                   logo: `${BASE_URL}/logo.webp`,
+                  image: `${BASE_URL}/logo.webp`,
                   telephone: PHONE_IN,
                   address: {
                     "@type": "PostalAddress",
@@ -264,13 +265,6 @@ export default function WhatsAppLocation({ data }: { data: LocationData }) {
                 name: `WhatsApp Business API Provider in ${CITY}`,
                 applicationCategory: "BusinessApplication",
                 operatingSystem: "Web, iOS, Android",
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: "4.9",
-                  reviewCount: "127",
-                  bestRating: "5",
-                  worstRating: "1",
-                },
                 offers: {
                   "@type": "Offer",
                   price: "0",
@@ -347,7 +341,7 @@ export default function WhatsAppLocation({ data }: { data: LocationData }) {
               {
                 "@type": "Review",
                 "@id": `${PAGE_URL}#review-1`,
-                itemReviewed: { "@id": `${PAGE_URL}#service` },
+                itemReviewed: { "@id": `${PAGE_URL}#software` },
                 reviewRating: {
                   "@type": "Rating",
                   ratingValue: "5",
@@ -360,7 +354,7 @@ export default function WhatsAppLocation({ data }: { data: LocationData }) {
               {
                 "@type": "Review",
                 "@id": `${PAGE_URL}#review-2`,
-                itemReviewed: { "@id": `${PAGE_URL}#service` },
+                itemReviewed: { "@id": `${PAGE_URL}#software` },
                 reviewRating: {
                   "@type": "Rating",
                   ratingValue: "5",

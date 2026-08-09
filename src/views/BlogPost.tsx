@@ -22,8 +22,8 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
     image: post.image
       ? `https://www.mimctechnologies.com${post.image}`
       : "https://www.mimctechnologies.com/logo.webp",
-    datePublished: post.date,
-    dateModified: post.date,
+    datePublished: `${post.date}T00:00:00+00:00`,
+    dateModified: `${post.date}T00:00:00+00:00`,
     articleSection: post.category,
     wordCount: post.sections.reduce(
       (acc, s) => acc + s.body.split(" ").length,

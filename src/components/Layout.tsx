@@ -43,7 +43,12 @@ export default function Layout({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.mimctechnologies.com" },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.mimctechnologies.com",
+      },
       ...pathParts.map((part, index) => ({
         "@type": "ListItem",
         position: index + 2,
@@ -60,33 +65,59 @@ export default function Layout({
     name: "MIMC Technologies",
     url: "https://www.mimctechnologies.com",
     logo: "https://www.mimctechnologies.com/logo.webp",
+    image: "https://www.mimctechnologies.com/logo.webp",
     contactPoint: [
-      { "@type": "ContactPoint", telephone: "+1-416-857-8831", contactType: "customer service", areaServed: "CA" },
-      { "@type": "ContactPoint", telephone: "+91-9259418994", contactType: "customer service", areaServed: "IN" },
+      {
+        "@type": "ContactPoint",
+        telephone: "+1-416-857-8831",
+        contactType: "customer service",
+        areaServed: "CA",
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: "+91-9259418994",
+        contactType: "customer service",
+        areaServed: "IN",
+      },
     ],
     sameAs: ["https://www.linkedin.com/company/mimc-technologies"],
   };
 
   // WebSite schema — homepage only
-  const webSiteSchema = isHome ? {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "MIMC Technologies",
-    url: "https://www.mimctechnologies.com",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: "https://www.mimctechnologies.com/blog?q={search_term_string}" },
-      "query-input": "required name=search_term_string",
-    },
-  } : null;
+  const webSiteSchema = isHome
+    ? {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "MIMC Technologies",
+        url: "https://www.mimctechnologies.com",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate:
+              "https://www.mimctechnologies.com/blog?q={search_term_string}",
+          },
+          "query-input": "required name=search_term_string",
+        },
+      }
+    : null;
 
   return (
     <div className="min-h-screen bg-[var(--color-cyber-bg)] text-[var(--color-cyber-fg)] font-[var(--font-cyber-body)] overflow-x-hidden selection:bg-[var(--color-cyber-accent)] selection:text-black md:cursor-none [&_*]:md:cursor-none">
       {/* JSON-LD: breadcrumbs + org on every page, website schema on home only */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {webSiteSchema && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+        />
       )}
 
       <CyberGrid />

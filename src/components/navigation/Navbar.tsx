@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
@@ -16,7 +17,13 @@ import {
   Shield,
   MapPin,
   Sparkles,
-  Layers,
+  Phone,
+  MessageSquare,
+  Mail,
+  Briefcase,
+  BookOpen,
+  Building2,
+  ChevronRight,
 } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 
@@ -27,6 +34,7 @@ const SERVICES_MENU = [
     href: "/services/erp-crm",
     icon: Database,
     tag: "ERP/CRM",
+    accent: "from-blue-500/10 to-indigo-500/10 text-blue-700",
   },
   {
     title: "Official Meta WhatsApp API",
@@ -34,6 +42,7 @@ const SERVICES_MENU = [
     href: "/services/whatsapp-api",
     icon: Zap,
     tag: "OFFICIAL API",
+    accent: "from-emerald-500/10 to-teal-500/10 text-emerald-700",
   },
   {
     title: "Tally Prime WhatsApp Invoicing",
@@ -41,6 +50,7 @@ const SERVICES_MENU = [
     href: "/services/tally-whatsapp-integration",
     icon: Terminal,
     tag: "TALLY SYNC",
+    accent: "from-teal-500/10 to-cyan-500/10 text-teal-700",
   },
   {
     title: "Next.js Web & Technical SEO",
@@ -48,6 +58,7 @@ const SERVICES_MENU = [
     href: "/services/web-development",
     icon: Globe,
     tag: "WEB / CLOUD",
+    accent: "from-purple-500/10 to-pink-500/10 text-purple-700",
   },
   {
     title: "Technical Marketing & Growth",
@@ -55,6 +66,7 @@ const SERVICES_MENU = [
     href: "/services/digital-marketing",
     icon: BarChart3,
     tag: "GROWTH",
+    accent: "from-amber-500/10 to-orange-500/10 text-amber-700",
   },
   {
     title: "Enterprise Architecture Advisory",
@@ -62,6 +74,38 @@ const SERVICES_MENU = [
     href: "/services/enterprise-consulting",
     icon: Shield,
     tag: "CONSULTING",
+    accent: "from-slate-500/10 to-neutral-500/10 text-slate-700",
+  },
+];
+
+const QUICK_NAV = [
+  {
+    label: "Global Hubs",
+    href: "/locations",
+    icon: MapPin,
+    badge: "100+ Cities",
+  },
+  {
+    label: "Partners & Cloud",
+    href: "/partners",
+    icon: Sparkles,
+  },
+  {
+    label: "Careers",
+    href: "/careers",
+    icon: Briefcase,
+    badge: "HIRING",
+    badgeColor: "bg-emerald-100/80 text-emerald-800",
+  },
+  {
+    label: "Insights & Guides",
+    href: "/blog",
+    icon: BookOpen,
+  },
+  {
+    label: "About Company",
+    href: "/about",
+    icon: Building2,
   },
 ];
 
@@ -69,7 +113,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -102,6 +146,18 @@ export default function Navbar() {
     };
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   // Close dropdown on route change (React recommended state adjustment pattern)
   const [prevPathname, setPrevPathname] = useState(pathname);
   if (prevPathname !== pathname) {
@@ -113,14 +169,14 @@ export default function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || menuOpen
           ? "bg-[#FAFAF8]/95 backdrop-blur-md border-b border-[#E8E8E2] shadow-xs"
           : "bg-[#FAFAF8]/80 backdrop-blur-xs border-b border-transparent"
       }`}
     >
       {/* Scroll progress bar indicator */}
       <div
-        className="absolute top-0 left-0 h-[2px] bg-teal-600 transition-all duration-75 z-50"
+        className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-teal-500 via-teal-600 to-emerald-500 transition-all duration-75 z-50"
         style={{ width: `${scrollProgress}%` }}
         role="progressbar"
         aria-valuenow={Math.round(scrollProgress)}
@@ -128,12 +184,13 @@ export default function Navbar() {
         aria-valuemax={100}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 py-3 sm:py-3.5 flex justify-between items-center">
         {/* Brand Logo */}
         <Link
           href="/"
-          className="group transition-transform active:scale-95"
+          className="group transition-transform active:scale-95 flex items-center"
           aria-label="MIMC Technologies Home"
+          onClick={() => setMenuOpen(false)}
         >
           <Logo variant="light" />
         </Link>
@@ -209,7 +266,7 @@ export default function Navbar() {
                       className="text-neutral-500 hover:text-neutral-900 inline-flex items-center gap-1"
                     >
                       <MapPin className="w-3 h-3 text-teal-600" />
-                      <span>30+ Global Hubs</span>
+                      <span>100+ Global Hubs</span>
                     </Link>
                   </div>
                 </div>
@@ -287,119 +344,241 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu trigger */}
+        {/* Mobile Animated Hamburger Button */}
         <button
-          className="lg:hidden p-2 text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-xl transition-colors"
+          className={`lg:hidden relative p-2.5 rounded-2xl border transition-all duration-200 cursor-pointer ${
+            menuOpen
+              ? "bg-[#111111] text-white border-[#111111] shadow-sm"
+              : "bg-white text-neutral-800 border-[#E8E8E2] hover:border-teal-500 shadow-2xs"
+          } active:scale-90`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
-          {menuOpen ? (
-            <X className="w-6 h-6" aria-hidden="true" />
-          ) : (
-            <Menu className="w-6 h-6" aria-hidden="true" />
-          )}
+          <div className="w-5 h-5 flex flex-col justify-center items-center relative">
+            <span
+              className={`h-0.5 w-4.5 bg-current rounded-full transition-all duration-300 ${
+                menuOpen ? "rotate-45 translate-y-0.5" : "-translate-y-1"
+              }`}
+            />
+            <span
+              className={`h-0.5 w-4.5 bg-current rounded-full transition-all duration-200 ${
+                menuOpen ? "opacity-0 scale-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`h-0.5 w-4.5 bg-current rounded-full transition-all duration-300 ${
+                menuOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-1"
+              }`}
+            />
+          </div>
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {menuOpen && (
-        <nav
-          aria-label="Mobile Navigation"
-          className="lg:hidden border-t border-[#E8E8E2] bg-[#FAFAF8] px-6 py-5 space-y-4 shadow-lg max-h-[85vh] overflow-y-auto"
-        >
-          {/* Mobile Services Accordion */}
-          <div>
-            <button
-              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-              className="flex items-center justify-between w-full py-2 text-base font-semibold text-[#171717]"
+      {/* Mobile Drawer Overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 top-[57px] sm:top-[61px] z-40 bg-black/30 backdrop-blur-xs lg:hidden flex flex-col justify-start"
+            onClick={() => setMenuOpen(false)}
+          >
+            {/* Drawer Content Card */}
+            <motion.nav
+              initial={{ y: -20, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -20, opacity: 0, scale: 0.98 }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
+              aria-label="Mobile Navigation"
+              className="bg-[#FAFAF8] border-b border-[#E8E8E2] px-5 pt-4 pb-6 shadow-2xl overflow-y-auto max-h-[85vh] divide-y divide-[#E8E8E2] space-y-4"
+              onClick={(e) => e.stopPropagation()}
             >
-              <span>Solutions & Architectures</span>
-              <ChevronDown
-                className={`w-4 h-4 transition-transform ${
-                  mobileServicesOpen ? "rotate-180 text-teal-700" : ""
-                }`}
-              />
-            </button>
-
-            {mobileServicesOpen && (
-              <div className="pl-3 py-2 space-y-2 border-l-2 border-teal-600 mt-1">
-                {SERVICES_MENU.map((item, idx) => (
-                  <Link
-                    key={idx}
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block py-1.5 text-xs text-neutral-600 hover:text-teal-800 font-medium"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-                <Link
-                  href="/services"
-                  onClick={() => setMenuOpen(false)}
-                  className="block pt-2 text-xs font-bold text-teal-700 uppercase font-mono"
+              {/* Section 1: Enterprise Solutions Accordion / Cards */}
+              <div className="pt-1">
+                <button
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className="flex items-center justify-between w-full py-1.5 text-xs font-mono font-bold uppercase tracking-wider text-teal-800 cursor-pointer"
                 >
-                  › View All Capabilities
+                  <span className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+                    <span>Solutions & Architectures</span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-teal-700 transition-transform duration-200 ${
+                      mobileServicesOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {mobileServicesOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-1 gap-2 pt-2.5 pb-1">
+                        {SERVICES_MENU.map((item, idx) => {
+                          const isActive = pathname === item.href;
+                          return (
+                            <Link
+                              key={idx}
+                              href={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`p-2.5 rounded-xl border transition-all flex items-start gap-2.5 active:scale-[0.99] ${
+                                isActive
+                                  ? "bg-teal-50/80 border-teal-300 shadow-2xs"
+                                  : "bg-white border-[#E8E8E2] hover:border-teal-200 hover:bg-[#F4F4F0]"
+                              }`}
+                            >
+                              <div
+                                className={`p-2 rounded-lg bg-[#FAFAF8] border border-[#E8E8E2] shrink-0 text-teal-700`}
+                              >
+                                <item.icon className="w-4 h-4" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between gap-1.5 mb-0.5">
+                                  <span className="text-xs font-bold text-[#171717] font-heading truncate">
+                                    {item.title}
+                                  </span>
+                                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-1.5 py-0.2 rounded border border-teal-200/50 shrink-0">
+                                    {item.tag}
+                                  </span>
+                                </div>
+                                <p className="text-[11px] text-neutral-500 line-clamp-1 leading-tight">
+                                  {item.desc}
+                                </p>
+                              </div>
+                              <ChevronRight className="w-3.5 h-3.5 text-neutral-400 shrink-0 self-center" />
+                            </Link>
+                          );
+                        })}
+
+                        <Link
+                          href="/services"
+                          onClick={() => setMenuOpen(false)}
+                          className="mt-1 py-2 px-3 rounded-lg bg-teal-50 border border-teal-200/60 text-teal-900 flex items-center justify-between text-xs font-bold font-mono uppercase tracking-wide hover:bg-teal-100/70 transition-colors"
+                        >
+                          <span>Explore All 6 Architectures</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-teal-700" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Section 2: Core Directory Links */}
+              <div className="pt-3 space-y-1">
+                <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1 px-1">
+                  Navigation
+                </div>
+
+                {QUICK_NAV.map((nav, idx) => {
+                  const isActive =
+                    nav.href === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(nav.href);
+                  return (
+                    <Link
+                      key={idx}
+                      href={nav.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between px-3 py-2.5 rounded-xl transition-all font-medium text-sm active:scale-[0.99] ${
+                        isActive
+                          ? "bg-[#111111] text-white font-semibold shadow-xs"
+                          : "text-neutral-800 hover:bg-white border border-transparent hover:border-[#E8E8E2]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <nav.icon
+                          className={`w-4 h-4 ${
+                            isActive ? "text-teal-400" : "text-neutral-500"
+                          }`}
+                        />
+                        <span>{nav.label}</span>
+                      </div>
+                      {nav.badge && (
+                        <span
+                          className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                            isActive
+                              ? "bg-teal-800 text-teal-100"
+                              : nav.badgeColor ||
+                                "bg-neutral-200/70 text-neutral-700"
+                          }`}
+                        >
+                          {nav.badge}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Section 3: Direct Actions & Contact Strip */}
+              <div className="pt-3.5 space-y-3">
+                <div className="grid grid-cols-3 gap-2">
+                  <a
+                    href="https://wa.me/14168578831"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-emerald-400 hover:bg-emerald-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
+                  >
+                    <MessageSquare className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
+                    <span className="text-[11px] font-bold text-neutral-800">
+                      WhatsApp
+                    </span>
+                    <span className="text-[9px] font-mono text-emerald-700 font-bold uppercase">
+                      24/7 Live
+                    </span>
+                  </a>
+
+                  <a
+                    href="tel:+14168578831"
+                    className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-teal-400 hover:bg-teal-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
+                  >
+                    <Phone className="w-4 h-4 text-teal-700 group-hover:scale-110 transition-transform" />
+                    <span className="text-[11px] font-bold text-neutral-800">
+                      Call Hub
+                    </span>
+                    <span className="text-[9px] font-mono text-neutral-400">
+                      Direct CA/IN
+                    </span>
+                  </a>
+
+                  <a
+                    href="mailto:info@mimctechnologies.com"
+                    className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-teal-400 hover:bg-teal-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
+                  >
+                    <Mail className="w-4 h-4 text-teal-700 group-hover:scale-110 transition-transform" />
+                    <span className="text-[11px] font-bold text-neutral-800">
+                      Email
+                    </span>
+                    <span className="text-[9px] font-mono text-neutral-400">
+                      &lt;2h SLA
+                    </span>
+                  </a>
+                </div>
+
+                {/* Primary CTA */}
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-xs uppercase tracking-wider text-center shadow-md active:scale-[0.98] transition-all"
+                >
+                  <span>Schedule Architecture Review</span>
+                  <ArrowRight className="w-4 h-4 text-teal-400" />
                 </Link>
               </div>
-            )}
-          </div>
-
-          <Link
-            href="/locations"
-            onClick={() => setMenuOpen(false)}
-            className="block py-2 text-sm font-semibold text-[#171717]"
-          >
-            Global Locations (30+)
-          </Link>
-
-          <Link
-            href="/partners"
-            onClick={() => setMenuOpen(false)}
-            className="block py-2 text-sm font-semibold text-[#171717]"
-          >
-            Cloud Partners & Ecosystem
-          </Link>
-
-          <Link
-            href="/careers"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center justify-between py-2 text-sm font-semibold text-[#171717]"
-          >
-            <span>Careers</span>
-            <span className="text-[10px] font-mono font-bold uppercase text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
-              WE&apos;RE HIRING
-            </span>
-          </Link>
-
-          <Link
-            href="/blog"
-            onClick={() => setMenuOpen(false)}
-            className="block py-2 text-sm font-semibold text-[#171717]"
-          >
-            Engineering Insights Blog
-          </Link>
-
-          <Link
-            href="/about"
-            onClick={() => setMenuOpen(false)}
-            className="block py-2 text-sm font-semibold text-[#171717]"
-          >
-            About Company
-          </Link>
-
-          <div className="pt-3 border-t border-[#E8E8E2]">
-            <Link
-              href="/contact"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-xs uppercase tracking-wider text-center shadow-xs"
-            >
-              <span>Schedule Architecture Review</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </nav>
-      )}
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -10,6 +10,9 @@ export default function HeroCanvas() {
     const container = containerRef.current;
     if (!container) return;
 
+    // Skip Three.js on touch-only devices (mobile) — decorative only, not worth the battery/jank
+    if (window.matchMedia("(hover: none)").matches) return;
+
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(

@@ -276,23 +276,28 @@ export default function Locations() {
         <section className="mb-10 space-y-4 border-y border-[#E8E8E2] py-5">
           <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
             {/* Continent Filter Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide pb-1">
-              {CONTINENTS.map((c) => {
-                const isActive = selectedRegion === c.id;
-                return (
-                  <button
-                    key={c.id}
-                    onClick={() => setSelectedRegion(c.id)}
-                    className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                      isActive
-                        ? "bg-[#111111] text-white shadow-xs"
-                        : "bg-white text-neutral-600 hover:text-neutral-900 border border-[#E8E8E2]"
-                    }`}
-                  >
-                    <span>{c.label}</span>
-                  </button>
-                );
-              })}
+            {/* Scroll fade hint on mobile */}
+            <div className="relative">
+              <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                {CONTINENTS.map((c) => {
+                  const isActive = selectedRegion === c.id;
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() => setSelectedRegion(c.id)}
+                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer shrink-0 ${
+                        isActive
+                          ? "bg-[#111111] text-white shadow-xs"
+                          : "bg-white text-neutral-600 hover:text-neutral-900 border border-[#E8E8E2]"
+                      }`}
+                    >
+                      <span>{c.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              {/* Right fade hint — hidden on xl where full tabs are always visible */}
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-[#FAFAF8] to-transparent xl:hidden" />
             </div>
 
             {/* Search Input */}

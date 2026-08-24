@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import {
-  CheckCircle,
+  CheckCircle2,
   ChevronRight,
   Target,
   Search,
@@ -7,11 +10,16 @@ import {
   Megaphone,
   Mail,
   TrendingUp,
+  ArrowRight,
+  Plus,
+  Minus,
+  BarChart3,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
-import BrowserMockup from "../../components/ui/BrowserMockup";
 import RelatedServices from "../../components/RelatedServices";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
@@ -19,95 +27,93 @@ import ServiceBadges from "../../components/ui/ServiceBadges";
 const features = [
   {
     icon: Search,
-    title: "Search Engine Marketing",
-    desc: "Google Ads campaigns engineered for maximum ROI. Keyword targeting, ad copy, bid strategy, and landing page optimisation.",
+    title: "Programmatic Search Architecture",
+    desc: "Scale organic rankings across thousands of long-tail enterprise keywords with automated structured schema, dynamic landing routes, and edge-rendered indexing.",
   },
   {
     icon: TrendingUp,
-    title: "SEO & Organic Growth",
-    desc: "Long-term organic traffic growth through technical SEO, content strategy, link building, and keyword domination.",
+    title: "High-Intent Google Ads & SEM",
+    desc: "B2B search campaigns engineered for maximum pipeline ROI. Granular negative keyword trees, exact match bidding, and conversion-optimized landing pages.",
   },
   {
     icon: Globe,
-    title: "Local SEO",
-    desc: 'Dominate "near me" searches. Google Business Profile, local citations, and region-specific landing pages for your target cities.',
+    title: "Multi-Region International SEO",
+    desc: "Dominate search queries across Canada, India, UAE, and US markets with proper hreflang clustering, regional schema, and localized content strategies.",
   },
   {
     icon: Megaphone,
-    title: "Social Media Marketing",
-    desc: "LinkedIn, Instagram, and Facebook campaigns targeting your exact buyer persona — with creative content that converts.",
+    title: "B2B LinkedIn & Account Targeting",
+    desc: "Target high-value decision-makers by company revenue, job titles, and software tech stacks to fill sales pipelines with qualified enterprise demos.",
   },
   {
     icon: Mail,
-    title: "Email & WhatsApp Marketing",
-    desc: "Automated nurture sequences via email and WhatsApp. Keep leads warm, re-engage past clients, and drive repeat business.",
+    title: "WhatsApp & Email Lead Nurturing",
+    desc: "Automated broadcast workflows and drip cadences achieving 98% message open rates, re-engaging past clients and accelerating deal velocity.",
   },
   {
     icon: Target,
-    title: "Conversion Rate Optimisation",
-    desc: "A/B testing, heatmaps, and funnel analysis to squeeze more leads out of your existing traffic — without increasing ad spend.",
+    title: "Conversion Rate Optimization (CRO)",
+    desc: "Heatmap session analysis, form friction reduction, and multivariate layout testing to maximize qualified lead volume without expanding ad budgets.",
   },
 ];
 
 const channels = [
   {
-    name: "Google Search Ads",
-    desc: "Capture high-intent buyers at the exact moment they search for your service.",
+    name: "High-Intent Google Search Ads",
+    desc: "Capture active decision-makers at the exact second they search for enterprise ERP, CRM, and WhatsApp API software.",
   },
   {
-    name: "Google SEO",
-    desc: "Build a permanent source of organic leads that doesn't cost per click.",
+    name: "Organic Technical SEO & Core Web Vitals",
+    desc: "Build an enduring organic search pipeline that delivers continuous high-ticket inbound leads without per-click fees.",
   },
   {
-    name: "LinkedIn Ads",
-    desc: "B2B targeting by job title, company size, and industry for enterprise deals.",
+    name: "LinkedIn B2B Account-Based Marketing",
+    desc: "Precision targeting for CTOs, CFOs, and operations directors filtered by company headcount and industry.",
   },
   {
-    name: "Meta (Facebook/Instagram)",
-    desc: "Brand awareness and retargeting campaigns for B2C and SME audiences.",
+    name: "Official WhatsApp Broadcast Engines",
+    desc: "Direct-to-mobile communications delivering 98% open rates for instant promotion and re-engagement campaigns.",
   },
   {
-    name: "WhatsApp Campaigns",
-    desc: "Direct outreach via WhatsApp API — 98% open rates vs 22% for email.",
+    name: "Multi-Region Local Citation SEO",
+    desc: "Localized Google Business optimization and city-specific landing pages across major international commercial hubs.",
   },
   {
-    name: "Content Marketing",
-    desc: "Blog posts, case studies, and guides that rank on Google and build authority.",
+    name: "Authoritative Technical Content",
+    desc: "Deep-dive case studies, architecture whitepapers, and integration guides that rank top of page on Google.",
   },
 ];
 
 const faqs = [
   {
-    q: "How long does SEO take to show results?",
-    a: "SEO is a long-term investment. Most clients see measurable improvements in rankings within 3–6 months, and significant organic traffic growth within 6–12 months. The timeline depends on competition in your niche, your current domain authority, and the quality of content we produce. We provide monthly reports so you can track progress.",
+    q: "How does MIMC's technical SEO strategy differ from standard marketing agencies?",
+    a: "Standard agencies focus purely on basic blog posts and low-quality backlinks. We approach SEO from an engineering standpoint: sub-second Core Web Vitals, programmatic Schema.org JSON-LD architectures, crawl budget optimization, and conversion-first landing page funnels.",
   },
   {
-    q: "What is the minimum budget for Google Ads?",
-    a: "We recommend a minimum ad spend of $500–$1,000/month to gather meaningful data and optimise effectively. Our management fee is separate. Lower budgets are possible for highly targeted local campaigns, but scale limits results. We'll advise the right budget for your goals on a discovery call.",
+    q: "How long does it take to achieve Page 1 Google rankings?",
+    a: "For programmatic and technical SEO overhauls, indexation and ranking velocity improvements typically begin within 4–8 weeks. High-difficulty enterprise keywords reach dominant Page 1 positions within 4–6 months with continuous domain authority compounding.",
   },
   {
-    q: "Do you handle WhatsApp marketing for businesses in India and Brazil?",
-    a: "Yes — this is one of our specialisations. We combine WhatsApp Business API with targeted campaign strategies for Indian and Brazilian markets, where WhatsApp is the primary communication channel. This includes broadcast campaigns, automated follow-up sequences, and chatbot-based lead qualification.",
+    q: "Can you manage WhatsApp marketing campaigns alongside Google Ads?",
+    a: "Yes. Combining Google Ads with instant WhatsApp conversational lead capture creates an ultra-high converting funnel, reducing lead drop-off by up to 60% compared to traditional lengthy web forms.",
   },
   {
-    q: "How do you measure marketing performance?",
-    a: "We track the metrics that matter to your business: leads generated, cost per lead, keyword rankings, organic traffic growth, and conversion rate. You receive a comprehensive monthly report with clear data and our interpretation of what it means for your growth.",
-  },
-  {
-    q: "Can you help with local SEO for multiple cities?",
-    a: "Yes. We create city-specific landing pages, localise your Google Business Profile, build local citations, and develop region-specific content. This is especially effective for businesses targeting multiple cities in India, Brazil, or other high-growth markets.",
+    q: "How do you report attribution and pipeline revenue?",
+    a: "We deploy server-side tracking, Google Search Console API telemetry, and CRM pipeline attribution so you can trace every closed deal directly back to its originating search query or campaign channel.",
   },
 ];
 
 export default function DigitalMarketing() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <Layout
-      title="Digital Marketing — SEO, Google Ads & WhatsApp Campaigns"
-      description="Digital marketing services by MIMC Technologies — SEO, Google Ads, WhatsApp marketing for India, Brazil, and global markets. Drive leads with data-driven campaigns."
+      title="Digital Marketing & Technical SEO Services | MIMC Technologies"
+      description="Data-driven technical SEO, Google Ads, and automated WhatsApp campaigns for high-growth enterprises in Canada, India, and global markets."
     >
       <ServiceSchema
         name="Digital Marketing & SEO"
-        description="Data-driven digital marketing including SEO, Google Ads, and automated WhatsApp campaigns for India, Brazil, and global markets."
+        description="Data-driven digital marketing including SEO, Google Ads, and automated WhatsApp campaigns for India, Canada, and global markets."
         url="https://www.mimctechnologies.com/services/digital-marketing"
         faqs={faqs}
         breadcrumbs={[
@@ -124,127 +130,122 @@ export default function DigitalMarketing() {
         rating={4.8}
         reviewCount={391}
       />
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Hero */}
-        <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="flex gap-3 flex-wrap">
-              <span className="border border-[var(--color-cyber-accent)]/40 text-[var(--color-cyber-accent)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10">
-                Data Driven
-              </span>
-              <span className="border border-[var(--color-cyber-accent3)]/40 text-[var(--color-cyber-accent3)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent3)]/10">
-                <span className="animate-blink mr-1">_</span> Growth
-              </span>
-            </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 space-y-6">
             <ServiceBadges rating={4.8} reviewCount={391} />
-            <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
-              <span className="block cyber-glitch" data-text="DIGITAL">
-                DIGITAL
-              </span>
-              <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent3)] bg-clip-text text-transparent">
-                MARKETING
-              </span>
-              <span className="block text-white text-2xl sm:text-3xl md:text-4xl mt-2">
-                THAT DRIVES LEADS
-              </span>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] font-heading">
+              Technical SEO & B2B <br />
+              <span className="text-teal-700">Programmatic Search Growth.</span>
             </h1>
-            <p className="border-l-2 border-[var(--color-cyber-accent)] pl-4 font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider text-sm">
-              &gt; SEO, Google Ads, and WhatsApp campaigns.
-              <br />
-              &gt; Targeting India, Brazil, SEA &amp; LATAM markets.
-              <br />
-              &gt; Every rupee and dollar tracked and justified.
-              <span className="inline-block w-2 h-4 bg-[var(--color-cyber-accent)] animate-blink ml-1 align-middle" />
+
+            <p className="text-neutral-600 text-base sm:text-lg leading-relaxed font-normal">
+              Dominate organic search rankings for high-intent commercial
+              keywords, scale qualified inbound lead funnels, and optimize for
+              Google AI Overviews with programmatic technical SEO.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-8 py-4 font-bold"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm shadow-xs transition-all active:scale-95"
               >
-                GET FREE AUDIT{" "}
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span>Request Growth Audit</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/services"
-                className="group inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent2)] text-[var(--color-cyber-accent2)] hover:bg-[var(--color-cyber-accent2)] hover:text-black transition-all duration-300 px-8 py-4"
+                href="/services/web-development"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-semibold text-sm border border-[#E8E8E2] transition-all"
               >
-                ALL SERVICES
+                <span>Web Development Services</span>
+                <ChevronRight className="w-4 h-4 text-neutral-400" />
               </Link>
             </div>
           </div>
 
-          {/* Marketing Dashboard Mockup */}
-          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-accent)]/20 to-[var(--color-cyber-accent3)]/10 group overflow-hidden">
+          {/* Console Mockup */}
+          <div className="lg:col-span-6">
             <DashboardMockup
-              title="Global Campaign Analytics"
+              title="Global Enterprise Lead Pipeline Analytics"
               stats={[
-                { label: "Total Conversions", value: "84,209" },
-                { label: "Avg. CPA", value: "$12.40" },
-                { label: "ROAS", value: "4.8x" },
+                { label: "Total Inbound Leads", value: "8,490" },
+                { label: "Average CPA", value: "$14.20" },
+                { label: "Search Pipeline ROAS", value: "6.4x" },
               ]}
-              tableHeaders={["Campaign", "Spend", "Conversions", "ROAS"]}
+              tableHeaders={[
+                "Campaign / Channel",
+                "Spend",
+                "Qualified Inquiries",
+                "Pipeline Value",
+              ]}
               tableRows={[
-                ["Q3 Search Intent (B2B)", "$45,000", "3,200", "5.1x"],
-                ["LinkedIn Enterprise Retargeting", "$12,500", "410", "8.2x"],
-                ["Meta Broad Awareness", "$18,000", "12,500", "2.1x"],
+                [
+                  "High-Intent Google Search (B2B)",
+                  "$45,000",
+                  "3,400",
+                  "$890,000",
+                ],
+                ["LinkedIn Enterprise ABM", "$18,500", "480", "$520,000"],
+                [
+                  "Programmatic Organic SEO",
+                  "$0 (Organic)",
+                  "4,610",
+                  "$1,450,000",
+                ],
               ]}
             />
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="mb-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-cyber-border)]">
-          {[
-            { value: "98%", label: "WhatsApp Open Rate" },
-            { value: "3x", label: "Avg. ROI on Ad Spend" },
-            { value: "20+", label: "Markets Served" },
-            { value: "P.1", label: "Target: Google Page 1" },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent)]/5 transition-colors"
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent)]">
-                {s.value}
+        {/* ===================== METRICS STRIP ===================== */}
+        <section className="mb-16 rounded-2xl bg-white border border-[#E8E8E2] p-6 sm:p-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-[#E8E8E2]">
+            {[
+              { val: "6.4x", label: "Average Campaign ROAS" },
+              { val: "98%", label: "WhatsApp Open Rate" },
+              { val: "Top 3", label: "Target Organic Ranking" },
+              { val: "100%", label: "Attribution Transparency" },
+            ].map((stat, sIdx) => (
+              <div key={sIdx} className="pt-4 md:pt-0 px-4">
+                <div className="font-heading font-extrabold text-2xl sm:text-3xl text-teal-700 mb-1">
+                  {stat.val}
+                </div>
+                <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                {s.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </section>
 
-        {/* Feature Grid */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; SERVICE_MODULES
+        {/* ===================== FEATURES GRID ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ CAPABILITIES ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Engineered for Scalable Customer Acquisition
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {features.map((f) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f, idx) => (
               <div
-                key={f.title}
-                className="group p-[2px] cyber-chamfer bg-gradient-to-br from-[var(--color-cyber-accent)]/20 to-transparent"
+                key={idx}
+                className="precision-card rounded-2xl p-6 flex flex-col justify-between"
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-8 h-full relative overflow-hidden group-hover:bg-[#0a0a0f] transition-colors">
-                  <div
-                    className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{
-                      background:
-                        "linear-gradient(to right, transparent, var(--color-cyber-accent), transparent)",
-                    }}
-                  />
-                  <div className="w-12 h-12 border border-[var(--color-cyber-accent)]/30 flex items-center justify-center mb-6 bg-black">
-                    <f.icon
-                      className="w-6 h-6 text-[var(--color-cyber-accent)]"
-                      strokeWidth={1.5}
-                    />
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700 mb-4">
+                    <f.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-[var(--font-cyber-head)] text-base font-bold uppercase tracking-widest text-white mb-3 group-hover:text-[var(--color-cyber-accent)] transition-colors">
+                  <h3 className="font-heading font-bold text-lg text-[#171717] mb-2">
                     {f.title}
                   </h3>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider">
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
                     {f.desc}
                   </p>
                 </div>
@@ -253,26 +254,28 @@ export default function DigitalMarketing() {
           </div>
         </section>
 
-        {/* Channels */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-14 relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-72 h-72 bg-[var(--color-cyber-accent)]/5 blur-[100px]" />
-          <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 flex items-center gap-4">
-            <span className="text-[var(--color-cyber-accent)]">&gt;&gt;</span>{" "}
-            CHANNELS_WE_OPERATE
-          </h2>
+        {/* ===================== CHANNELS MATRIX ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ CHANNELS ]
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Growth Channels We Optimize & Operate
+            </h2>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {channels.map((c) => (
+            {channels.map((c, cIdx) => (
               <div
-                key={c.name}
-                className="border border-[var(--color-cyber-border)] p-6 hover:border-[var(--color-cyber-accent)]/50 transition-colors group"
+                key={cIdx}
+                className="p-6 rounded-2xl bg-white border border-[#E8E8E2]"
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle className="w-4 h-4 text-[var(--color-cyber-accent)] flex-shrink-0" />
-                  <h3 className="font-[var(--font-cyber-head)] text-sm font-bold uppercase tracking-widest text-white group-hover:text-[var(--color-cyber-accent)] transition-colors">
-                    {c.name}
-                  </h3>
-                </div>
-                <p className="text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-wider leading-relaxed">
+                <h3 className="font-heading font-bold text-base text-teal-800 mb-2 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-teal-600" />
+                  <span>{c.name}</span>
+                </h3>
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   {c.desc}
                 </p>
               </div>
@@ -280,63 +283,60 @@ export default function DigitalMarketing() {
           </div>
         </section>
 
-        {/* Client Campaign Mockup */}
-        <section className="mb-24 p-1 group">
-          <BrowserMockup title="mimc.tech/case-studies/growth" />
-        </section>
-
-        {/* FAQ */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; FAQ // RICH_SNIPPETS
+        {/* ===================== FAQ ACCORDION ===================== */}
+        <section className="mb-16 max-w-4xl">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ FAQ ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Digital Marketing & SEO Specifications
+            </h2>
           </div>
-          <div className="space-y-4 max-w-4xl">
-            {faqs.map((f, i) => (
-              <details
-                key={i}
-                className="group border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] hover:border-[var(--color-cyber-accent)]/50 transition-colors cyber-chamfer"
-              >
-                <summary className="flex justify-between items-center p-6 cursor-pointer list-none">
-                  <h3 className="text-sm md:text-base font-bold tracking-widest uppercase font-[var(--font-cyber-head)] text-white group-hover:text-[var(--color-cyber-accent)] transition-colors pr-4">
-                    {f.q}
-                  </h3>
-                  <span className="text-[var(--color-cyber-accent)] text-xl flex-shrink-0 group-open:rotate-45 transition-transform">
-                    +
-                  </span>
-                </summary>
-                <p className="px-6 pb-6 text-sm text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider border-t border-[var(--color-cyber-border)] pt-4">
-                  {f.a}
-                </p>
-              </details>
-            ))}
+
+          <div className="divide-y divide-[#E8E8E2] border-y border-[#E8E8E2]">
+            {faqs.map((faq, fIdx) => {
+              const isOpen = openFaq === fIdx;
+              return (
+                <div key={fIdx} className="py-4">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : fIdx)}
+                    className="w-full text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none group"
+                  >
+                    <span className="text-base font-bold text-[#171717] group-hover:text-teal-800 transition-colors">
+                      {faq.q}
+                    </span>
+                    <span className="w-7 h-7 rounded-full border border-[#E8E8E2] flex items-center justify-center text-neutral-500 shrink-0 group-hover:border-teal-600 transition-colors">
+                      {isOpen ? (
+                        <Minus className="w-3.5 h-3.5 text-teal-700" />
+                      ) : (
+                        <Plus className="w-3.5 h-3.5" />
+                      )}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="text-center border-2 border-[var(--color-cyber-accent)] p-12 md:p-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
-            STOP HOPING.
-            <br />
-            <span className="text-[var(--color-cyber-accent)]">
-              START RANKING.
-            </span>
-          </h2>
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest text-sm mb-10 relative z-10">
-            Free 30-minute marketing audit. We'll show you exactly where your
-            leads are going.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-3 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-10 py-5 text-base font-bold relative z-10"
-          >
-            BOOK FREE AUDIT{" "}
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </section>
-
+        {/* Related Services Navigation */}
         <RelatedServices currentId="digital-marketing" />
       </div>
     </Layout>

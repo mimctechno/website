@@ -1,6 +1,14 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { Send, CheckCheck, MoreVertical, Phone, Video } from "lucide-react";
+import {
+  Send,
+  CheckCheck,
+  MoreVertical,
+  Phone,
+  Video,
+  ShieldCheck,
+} from "lucide-react";
 
 interface Message {
   id: number;
@@ -12,25 +20,25 @@ interface Message {
 const CHAT_SEQUENCE: Message[] = [
   {
     id: 1,
-    text: "Hi! I'd like to know the status of my enterprise order #8839.",
+    text: "Hi! Can you send me the Q3 Ledger and Invoice #INV-8492?",
     sender: "user",
     time: "10:01 AM",
   },
   {
     id: 2,
-    text: "Hello! Let me check that for you right away.",
+    text: "Hello Sarah! Fetching your encrypted invoice from Tally Prime...",
     sender: "bot",
     time: "10:01 AM",
   },
   {
     id: 3,
-    text: "Your order #8839 has been dispatched and is out for delivery today. Track it live here: mimc.co/trk8839",
+    text: "📄 Invoice_INV-8492.pdf (142 KB)\nTotal: $14,250 · Due in 14 days\n\nInstant Pay: pay.mimc.tech/8492",
     sender: "bot",
     time: "10:02 AM",
   },
   {
     id: 4,
-    text: "That was fast, thank you!",
+    text: "Received and paid via UPI. Thank you!",
     sender: "user",
     time: "10:03 AM",
   },
@@ -48,73 +56,79 @@ export default function SmartphoneMockup() {
         clearInterval(interval);
         return prev;
       });
-    }, 1800);
+    }, 1600);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-[450px] p-4 bg-gradient-to-br from-[var(--color-cyber-accent)]/5 to-transparent relative overflow-hidden group">
-      {/* Decorative Grid Background */}
-      <div className="absolute inset-0 bg-cyber-grid opacity-10 pointer-events-none" />
+    <div className="flex justify-center items-center py-4 w-full">
+      {/* Smartphone Outer Bezel */}
+      <div className="relative w-[300px] h-[520px] bg-[#111111] border-4 border-neutral-800 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col ring-1 ring-black/5">
+        {/* Dynamic Island / Notch */}
+        <div className="absolute top-2 inset-x-0 h-4 bg-black rounded-full w-24 mx-auto z-30" />
 
-      {/* Phone Frame */}
-      <div className="relative w-full max-w-[260px] h-[400px] bg-black border-4 border-gray-800 rounded-[2rem] shadow-[0_0_40px_rgba(0,255,170,0.15)] group-hover:shadow-[0_0_60px_rgba(0,255,170,0.25)] transition-shadow duration-500 overflow-hidden flex flex-col z-10">
-        {/* Notch */}
-        <div className="absolute top-0 inset-x-0 h-5 bg-gray-800 rounded-b-xl w-24 mx-auto z-20" />
-
-        {/* Chat Header */}
-        <div className="bg-[#0b141a] border-b border-gray-800 px-3 pt-6 pb-2 flex items-center justify-between z-10 relative">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-[var(--color-cyber-accent)] flex items-center justify-center text-black font-bold text-xs">
+        {/* WhatsApp App Header */}
+        <div className="bg-[#075E54] px-4 pt-7 pb-3 flex items-center justify-between text-white z-20">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#075E54] font-extrabold text-xs">
               M
             </div>
             <div>
-              <div className="text-white text-xs font-semibold leading-tight">
-                MIMC Support
+              <div className="flex items-center gap-1">
+                <span className="text-xs font-bold leading-tight">
+                  MIMC Enterprise
+                </span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block" />
               </div>
-              <div className="text-[var(--color-cyber-accent)] text-[8px] tracking-widest uppercase">
-                Online
+              <div className="text-[10px] text-emerald-100/80 font-mono">
+                Official Business API
               </div>
             </div>
           </div>
-          <div className="flex gap-2 text-gray-400">
-            <Video className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-3 text-white/80">
             <Phone className="w-3.5 h-3.5" />
             <MoreVertical className="w-3.5 h-3.5" />
           </div>
         </div>
 
-        {/* Chat Body */}
+        {/* WhatsApp Message Body */}
         <div
-          className="bg-[#0b141a] flex-1 p-3 overflow-y-auto flex flex-col gap-3 relative"
+          className="bg-[#EFEAE2] flex-1 p-3.5 overflow-y-auto flex flex-col gap-2.5 relative"
           style={{
-            backgroundImage: "radial-gradient(#ffffff05 1px, transparent 1px)",
-            backgroundSize: "10px 10px",
+            backgroundImage: "radial-gradient(#00000008 1px, transparent 1px)",
+            backgroundSize: "12px 12px",
           }}
         >
-          <div className="text-center text-[9px] text-gray-500 my-1 bg-gray-900/50 rounded px-2 py-0.5 mx-auto w-fit">
-            Today
+          <div className="text-center text-[9px] text-neutral-500 bg-white/70 backdrop-blur-xs rounded-full px-2.5 py-0.5 mx-auto shadow-2xs font-mono font-medium">
+            TODAY · END-TO-END ENCRYPTED
           </div>
 
           {messages.map((msg, index) => {
             if (!msg) return null;
+            const isUser = msg.sender === "user";
             return (
               <div
                 key={msg.id || index}
-                className={`flex flex-col max-w-[85%] ${msg.sender === "user" ? "self-end" : "self-start"} animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                className={`flex flex-col max-w-[88%] ${
+                  isUser ? "self-end" : "self-start"
+                }`}
               >
                 <div
-                  className={`p-2 rounded-lg text-[11px] leading-relaxed shadow-sm ${msg.sender === "user" ? "bg-[#005c4b] text-white rounded-tr-none" : "bg-[#202c33] text-gray-100 rounded-tl-none"}`}
+                  className={`p-2.5 rounded-xl text-xs leading-relaxed shadow-xs whitespace-pre-line ${
+                    isUser
+                      ? "bg-[#D9FDD3] text-[#111111] rounded-tr-xs"
+                      : "bg-white text-[#111111] rounded-tl-xs border border-neutral-200/40"
+                  }`}
                 >
                   {msg.text}
                 </div>
                 <div
-                  className={`text-[8px] text-gray-500 mt-1 flex items-center gap-1 ${msg.sender === "user" ? "self-end" : "self-start"}`}
+                  className={`text-[9px] text-neutral-500 mt-0.5 flex items-center gap-1 font-mono ${
+                    isUser ? "self-end" : "self-start"
+                  }`}
                 >
-                  {msg.time}{" "}
-                  {msg.sender === "user" && (
-                    <CheckCheck className="w-3 h-3 text-blue-400" />
-                  )}
+                  {msg.time}
+                  {isUser && <CheckCheck className="w-3 h-3 text-sky-500" />}
                 </div>
               </div>
             );
@@ -124,36 +138,29 @@ export default function SmartphoneMockup() {
           {messages.length > 0 &&
             messages.length < CHAT_SEQUENCE.length &&
             CHAT_SEQUENCE[messages.length]?.sender === "bot" && (
-              <div className="self-start bg-[#202c33] p-2 rounded-lg rounded-tl-none flex gap-1 items-center animate-in fade-in duration-200">
-                <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" />
+              <div className="self-start bg-white p-2 rounded-xl rounded-tl-xs flex gap-1 items-center shadow-xs border border-neutral-200/40">
+                <div className="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" />
                 <div
-                  className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                  className="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"
                   style={{ animationDelay: "150ms" }}
                 />
                 <div
-                  className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                  className="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"
                   style={{ animationDelay: "300ms" }}
                 />
               </div>
             )}
         </div>
 
-        {/* Chat Input */}
-        <div className="bg-[#202c33] p-2 flex items-center gap-2 border-t border-gray-800">
-          <div className="flex-1 bg-[#2a3942] rounded-full h-7 px-3 flex items-center text-[10px] text-gray-400">
-            Type a message...
+        {/* Input Bar */}
+        <div className="bg-[#F0F2F5] p-2 flex items-center gap-2 border-t border-neutral-200">
+          <div className="flex-1 bg-white rounded-full h-8 px-3.5 flex items-center text-[11px] text-neutral-400 shadow-2xs">
+            Message...
           </div>
-          <div className="w-7 h-7 rounded-full bg-[var(--color-cyber-accent)] flex items-center justify-center text-black">
+          <div className="w-8 h-8 rounded-full bg-[#075E54] flex items-center justify-center text-white shadow-xs">
             <Send className="w-3.5 h-3.5 ml-0.5" />
           </div>
         </div>
-      </div>
-
-      {/* Sales Label */}
-      <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-[10px] tracking-widest uppercase animate-blink">
-          AUTOMATION_ACTIVE
-        </span>
       </div>
     </div>
   );

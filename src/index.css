@@ -1,29 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-cyber-head: "Space Mono", monospace;
-  --font-cyber-body: "Space Mono", monospace;
-  --font-cyber-accent: "Share Tech Mono", monospace;
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-  --font-kinetic-main: "Space Grotesk", sans-serif;
+  --font-cyber-head: "Bricolage Grotesque", sans-serif;
+  --font-cyber-body: "DM Sans", sans-serif;
+  --font-cyber-accent: "Bricolage Grotesque", sans-serif;
+  --font-kinetic-main: "Bricolage Grotesque", sans-serif;
 
-  --color-cyber-bg: #050505;
-  --color-cyber-fg: #e0e0e0;
-  --color-cyber-card: #0a0a0f;
-  --color-cyber-muted: #1c1c2e;
-  --color-cyber-muted-fg: #6b7280;
-  --color-cyber-accent: #00ffaa;
-  --color-cyber-accent2: #ff00ff;
-  --color-cyber-accent3: #00d4ff;
-  --color-cyber-border: #1a1a2e;
-
-  --color-kinetic-bg: #09090b;
-  --color-kinetic-fg: #fafafa;
-  --color-kinetic-muted: #27272a;
-  --color-kinetic-muted-fg: #a1a1aa;
-  --color-kinetic-accent: #dfe104;
-  --color-kinetic-border: #3f3f46;
+  --color-warm-bg: #fafaf8;
+  --color-warm-surface: #ffffff;
+  --color-warm-subtle: #f4f4f0;
+  --color-warm-border: #e8e8e2;
+  --color-warm-dark: #111111;
+  --color-warm-text: #171717;
+  --color-warm-muted: #525252;
+  --color-teal-brand: #0d9488;
+  --color-teal-dark: #0f766e;
+  --color-teal-light: #f0fdfa;
 }
 
 @layer utilities {
@@ -197,68 +195,69 @@
     }
   }
 
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  .commercial-glass {
+    background: rgba(250, 250, 248, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(232, 232, 226, 0.9);
   }
 
-  .animate-marquee {
-    animation: marquee 25s linear infinite;
+  .precision-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e2;
+    box-shadow:
+      0 1px 3px 0 rgba(0, 0, 0, 0.02),
+      0 1px 2px -1px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-}
+  .precision-card:hover {
+    border-color: #0d9488;
+    box-shadow:
+      0 12px 28px -6px rgba(13, 148, 136, 0.08),
+      0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    transform: translateY(-2px);
+  }
 
-@keyframes glitch-anim2 {
-  0% {
-    clip-path: inset(20% 0 60% 0);
+  .service-row {
+    border-bottom: 1px solid #e8e8e2;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  20% {
-    clip-path: inset(50% 0 30% 0);
+  .service-row:hover {
+    background: #f4f4f0;
   }
-  40% {
-    clip-path: inset(10% 0 80% 0);
-  }
-  60% {
-    clip-path: inset(75% 0 15% 0);
-  }
-  80% {
-    clip-path: inset(40% 0 50% 0);
-  }
-  100% {
-    clip-path: inset(85% 0 10% 0);
-  }
-}
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
+  .warm-border {
+    border-color: #e8e8e2;
   }
-  50% {
-    opacity: 0;
-  }
-}
-.animate-blink {
-  animation: blink 1s step-end infinite;
-}
 
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
+  .warm-grid-bg {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(232, 232, 226, 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(232, 232, 226, 0.5) 1px, transparent 1px);
   }
-  100% {
-    transform: translateY(100%);
-  }
-}
-.animate-scanline {
-  animation: scanline 2s linear infinite;
 }
 
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family:
+    var(--font-sans),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #171717;
+  background-color: #fafaf8;
+  letter-spacing: -0.01em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.03em;
 }

@@ -3,15 +3,20 @@ import type { Metadata } from "next";
 import Home from "@/views/Home";
 
 export const metadata: Metadata = {
-  title: "Enterprise Software & WhatsApp API | MIMC Technologies",
+  title:
+    "WhatsApp Business API Setup & Custom ERP Software | MIMC Technologies",
   description:
-    "MIMC Technologies delivers ERP, CRM, official WhatsApp API, and Tally integration solutions globally from Canada and India.",
+    "Get Meta's official WhatsApp Business API live in 48 hours. Custom ERP, CRM & Tally Prime integration for enterprises across India, Canada, UAE & 100+ cities. Free consultation.",
   alternates: { canonical: "https://www.mimctechnologies.com/" },
   openGraph: {
-    title: "Enterprise Software & WhatsApp API | MIMC Technologies",
+    title:
+      "WhatsApp Business API Setup & Custom ERP Software | MIMC Technologies",
     description:
-      "MIMC Technologies delivers ERP, CRM, official WhatsApp API, and Tally integration solutions globally from Canada and India.",
+      "Get Meta's official WhatsApp Business API live in 48 hours. Custom ERP, CRM & Tally Prime integration for enterprises across India, Canada, UAE & 100+ cities. Free consultation.",
     url: "https://www.mimctechnologies.com/",
+    type: "website",
+    siteName: "MIMC Technologies",
+    images: [{ url: "/logo.webp", width: 1200, height: 630 }],
   },
 };
 

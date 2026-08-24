@@ -19,6 +19,7 @@ const staticRoutes = [
   "/services/web-development",
   "/services/digital-marketing",
   "/services/enterprise-consulting",
+  "/locations",
   "/blog",
 ];
 
@@ -29,11 +30,22 @@ function generateSitemap() {
 
   if (fs.existsSync(postsFilePath)) {
     const postsContent = fs.readFileSync(postsFilePath, "utf-8");
-    // Simple regex to extract slug values
     const regex = /slug:\s*['"]([^'"]+)['"]/g;
     let match;
     while ((match = regex.exec(postsContent)) !== null) {
       blogSlugs.push(match[1]);
+    }
+  }
+
+  // Read jobs data
+  const jobsFilePath = path.join(process.cwd(), "src", "data", "jobs.ts");
+  let jobSlugs = [];
+  if (fs.existsSync(jobsFilePath)) {
+    const jobsContent = fs.readFileSync(jobsFilePath, "utf-8");
+    const regex = /slug:\s*['"]([^'"]+)['"]/g;
+    let match;
+    while ((match = regex.exec(jobsContent)) !== null) {
+      jobSlugs.push(match[1]);
     }
   }
 
@@ -65,6 +77,16 @@ function generateSitemap() {
     xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>${route === "/" ? "weekly" : "monthly"}</changefreq>\n`;
     xml += `    <priority>${route === "/" ? "1.0" : "0.8"}</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Add dynamic career routes
+  jobSlugs.forEach((slug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/careers/${slug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.7</priority>\n`;
     xml += `  </url>\n`;
   });
 

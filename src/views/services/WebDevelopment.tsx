@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import {
-  CheckCircle,
+  CheckCircle2,
   ChevronRight,
   Zap,
   BarChart3,
@@ -7,10 +10,16 @@ import {
   Search,
   Smartphone,
   Code2,
+  ArrowRight,
+  Plus,
+  Minus,
+  Globe,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../../components/Layout";
-import BrowserMockup from "../../components/ui/BrowserMockup";
+import DashboardMockup from "../../components/ui/DashboardMockup";
 import RelatedServices from "../../components/RelatedServices";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
@@ -18,107 +27,101 @@ import ServiceBadges from "../../components/ui/ServiceBadges";
 const features = [
   {
     icon: Code2,
-    title: "Custom UI/UX Design",
-    desc: "Bespoke, visually stunning websites built to your brand identity. No templates. No page builders. Pixel-perfect execution.",
+    title: "Next.js App Router Architecture",
+    desc: "Sub-second serverless rendering, edge caching, and streaming SSR. Zero bloat, zero brittle third-party plugins, and clean modular code.",
   },
   {
     icon: Search,
-    title: "Technical SEO",
-    desc: "Schema markup, Core Web Vitals, crawl optimisation, XML sitemaps, and structured data — all built-in from day one.",
+    title: "Programmatic Technical SEO",
+    desc: "Complete JSON-LD schema graphs, structured breadcrumbs, crawl budget optimization, and automated sitemap generators built into every route.",
   },
   {
     icon: Smartphone,
-    title: "Fully Responsive",
-    desc: "Every site we build is flawless on mobile, tablet, and desktop. Performance-tested across all major devices and browsers.",
+    title: "Adaptive Responsive Layouts",
+    desc: "Engineered for high readability and fast conversion across mobile viewports, tablet formats, ultra-wide screens, and retina displays.",
   },
   {
     icon: Zap,
-    title: "Core Web Vitals Optimised",
-    desc: "LCP under 2.5s, zero CLS, and FID under 100ms. Google's page experience signals are not an afterthought — they're our baseline.",
+    title: "100 / 100 Core Web Vitals",
+    desc: "LCP under 1.2s, zero Cumulative Layout Shift (CLS), and sub-50ms Interaction to Next Paint (INP) to guarantee top Google ranking signals.",
   },
   {
     icon: BarChart3,
-    title: "Conversion Optimised",
-    desc: "We design with one goal: turn visitors into enquiries. Clear CTAs, trust signals, and lead funnels built into every page.",
+    title: "Enterprise Conversion Funnels",
+    desc: "Strategic UI friction reduction, high-intent consultation triggers, and multi-channel attribution tracking for enterprise sales pipelines.",
   },
   {
     icon: Shield,
-    title: "Secure & Maintained",
-    desc: "SSL, security headers, regular updates, and uptime monitoring included. Your site stays fast, safe, and live.",
+    title: "Bank-Grade Security Headers",
+    desc: "Strict CSP policies, automated DDoS mitigation, automated daily backups, and SOC2-compliant edge deployment pipelines.",
   },
 ];
 
 const seoServices = [
   {
-    title: "On-Page SEO",
+    title: "On-Page Semantic Optimization",
     items: [
-      "Keyword research & mapping",
-      "Title tags & meta descriptions",
-      "Header hierarchy (H1–H6)",
-      "Internal linking strategy",
+      "High-intent keyword hierarchy mapping",
+      "Semantic HTML5 heading structure (H1–H6)",
+      "Dynamic OpenGraph & Twitter cards",
+      "Internal authority linking graph",
     ],
   },
   {
-    title: "Technical SEO",
+    title: "Technical Infrastructure SEO",
     items: [
-      "Core Web Vitals optimisation",
-      "Structured data / JSON-LD",
-      "XML sitemap & robots.txt",
-      "Crawl error resolution",
+      "Sub-second Core Web Vitals optimization",
+      "Rich snippet Schema.org JSON-LD markup",
+      "Multi-region hreflang localization",
+      "Automated edge canonicalization",
     ],
   },
   {
-    title: "Local SEO",
+    title: "Conversion Architecture (CRO)",
     items: [
-      "Google Business Profile setup",
-      "Local citations & NAP consistency",
-      "Local keyword targeting",
-      "Region-specific landing pages",
+      "Friction-free consultation booking flows",
+      "Interactive technical calculators & tools",
+      "Proof blocks & customer outcome cards",
+      "A/B multivariate landing variants",
     ],
   },
   {
-    title: "Content Strategy",
+    title: "Analytics & Lead Attribution",
     items: [
-      "Keyword-driven blog articles",
-      "Landing page copywriting",
-      "FAQ & rich snippet content",
-      "Competitor gap analysis",
+      "Custom server-side conversion tracking",
+      "Google Search Console API telemetry",
+      "Heatmap & user session analysis",
+      "Multi-touch pipeline revenue attribution",
     ],
   },
 ];
 
 const faqs = [
   {
-    q: "How long does it take to build a website?",
-    a: "A standard business website (5–10 pages) typically takes 3–6 weeks from kickoff to launch. More complex projects with custom functionality may take 8–12 weeks. We always agree on a timeline before starting and stick to it.",
+    q: "How does Next.js 15 App Router improve SEO and conversion?",
+    a: "Next.js App Router renders pages on the edge server with React Server Components (RSC). Googlebot receives pure semantic HTML instantly without executing heavy client-side JavaScript, resulting in higher crawl indexation, sub-second LCP scores, and significantly higher organic search rankings.",
   },
   {
-    q: "Do you build websites that rank on Google?",
-    a: "Yes. SEO is built into every website we deliver — not added as an afterthought. This includes technical SEO (Core Web Vitals, structured data, sitemaps), on-page optimisation (title tags, meta descriptions, heading hierarchy), and content strategy. We don't build websites that are invisible to search engines.",
+    q: "What is your typical delivery timeline for an enterprise web platform?",
+    a: "Standard business platforms (8–15 custom routes) are delivered in 3–4 weeks. Complex web applications with dynamic customer portals, client dashboards, or API integrations take 6–8 weeks with weekly staging demos.",
   },
   {
-    q: "What technology stack do you use?",
-    a: "We build with modern, performance-focused stacks: React / Next.js for web apps, static site generators for content sites, and WordPress for clients who need easy self-management. The choice depends on your specific needs, budget, and team capabilities.",
+    q: "Who owns the code repository and cloud hosting accounts?",
+    a: "You retain 100% intellectual property and code ownership. We set up automated CI/CD deployment pipelines connected directly to your GitHub repository and cloud provider (Vercel or AWS).",
   },
   {
-    q: "Can you improve my existing website's SEO?",
-    a: "Yes. We conduct a full technical SEO audit of your current site, identify the issues hurting your rankings, and implement fixes in order of impact. This typically includes Core Web Vitals improvements, structured data, crawl error resolution, and on-page optimisation.",
-  },
-  {
-    q: "Do you provide ongoing SEO management?",
-    a: "Yes. One-time SEO work gets you to the starting line. Ongoing monthly SEO management keeps you ahead of competitors and Google algorithm changes. We offer retainer packages that include content creation, link building, and monthly reporting.",
-  },
-  {
-    q: "Can you build in multiple languages for international SEO?",
-    a: "Yes. We build multi-language websites with proper hreflang tags, language-specific URLs, and localised content strategies. This is especially effective for our clients targeting WhatsApp API markets in Brazil (Portuguese), Latin America (Spanish), and South/Southeast Asia.",
+    q: "Can you optimize and re-engineer our existing slow website?",
+    a: "Yes. We conduct complete technical audits to identify slow database queries, render-blocking scripts, and layout shift bottlenecks, migrating legacy sites onto modern edge infrastructure with zero downtime.",
   },
 ];
 
 export default function WebDevelopment() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <Layout
-      title="Web Development & SEO — High-Performance Websites That Rank"
-      description="Custom web development and technical SEO services by MIMC Technologies. Websites built for performance, Google rankings, and lead generation."
+      title="Web Development & Technical SEO Services | MIMC Technologies"
+      description="Custom Next.js web development and technical SEO engineering. Sub-second Core Web Vitals, conversion architecture, and high Google rankings."
     >
       <ServiceSchema
         name="Web Development & SEO Services"
@@ -140,121 +143,116 @@ export default function WebDevelopment() {
         reviewCount={365}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Hero */}
-        <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="flex gap-3 flex-wrap">
-              <span className="border border-[var(--color-cyber-accent2)]/40 text-[var(--color-cyber-accent2)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent2)]/10">
-                Full Stack
-              </span>
-              <span className="border border-[var(--color-cyber-accent)]/40 text-[var(--color-cyber-accent)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10">
-                <span className="animate-blink mr-1">_</span> SEO Ready
-              </span>
-            </div>
-
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 space-y-6">
             <ServiceBadges rating={4.9} reviewCount={365} />
 
-            <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
-              <span className="block cyber-glitch" data-text="WEB DEV">
-                WEB DEV
-              </span>
-              <span className="text-[var(--color-cyber-accent2)]">
-                &amp; SEO
-              </span>
-              <span className="block text-white text-2xl sm:text-3xl md:text-4xl mt-2">
-                THAT GETS FOUND
-              </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] font-heading">
+              Next.js Web Development <br />
+              <span className="text-teal-700">& Technical SEO Platforms.</span>
             </h1>
 
-            <p className="border-l-2 border-[var(--color-cyber-accent2)] pl-4 font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider text-sm">
-              &gt; Beautiful design that stops the scroll.
-              <br />
-              &gt; Technical SEO that ranks on Google.
-              <br />
-              &gt; Conversion architecture that generates leads.
-              <span className="inline-block w-2 h-4 bg-[var(--color-cyber-accent2)] animate-blink ml-1 align-middle" />
+            <p className="text-neutral-600 text-base sm:text-lg leading-relaxed font-normal">
+              Sub-second web platforms engineered with Next.js App Router for
+              100/100 Core Web Vitals, edge serverless architecture, and organic
+              search ranking domination.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent2)] bg-[var(--color-cyber-accent2)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent2)] transition-all duration-300 px-8 py-4 font-bold"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm shadow-xs transition-all active:scale-95"
               >
-                GET A QUOTE{" "}
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span>Request Platform Scope</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/services"
-                className="group inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)] hover:text-black transition-all duration-300 px-8 py-4"
+                href="/services/digital-marketing"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-semibold text-sm border border-[#E8E8E2] transition-all"
               >
-                ALL SERVICES
+                <span>Technical SEO Details</span>
+                <ChevronRight className="w-4 h-4 text-neutral-400" />
               </Link>
             </div>
           </div>
 
-          {/* Web Design Browser Mockup */}
-          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[#ff00ff]/20 to-transparent group overflow-hidden">
-            <BrowserMockup title="mimc.tech/new-platform" />
+          {/* Console Mockup */}
+          <div className="lg:col-span-6">
+            <DashboardMockup
+              title="Next.js Edge Performance Telemetry"
+              stats={[
+                { label: "Lighthouse Score", value: "100 / 100" },
+                { label: "Core Web Vitals", value: "PASSED (0.8s)" },
+                { label: "Organic Search", value: "+142% MoM" },
+              ]}
+              tableHeaders={[
+                "Route",
+                "Rendering Engine",
+                "Edge Latency",
+                "Core Web Vitals",
+              ]}
+              tableRows={[
+                ["/services/erp-crm", "Edge Serverless", "28ms", "100 Green"],
+                ["/services/whatsapp-api", "Static + ISR", "14ms", "100 Green"],
+                [
+                  "/blog/enterprise-architecture",
+                  "Edge Static",
+                  "18ms",
+                  "100 Green",
+                ],
+              ]}
+            />
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="mb-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-cyber-border)]">
-          {[
-            { value: "< 2.5s", label: "LCP Target (Core Web Vitals)" },
-            { value: "100", label: "Lighthouse Score Target" },
-            { value: "3–6wk", label: "Avg. Delivery Time" },
-            { value: "P.1", label: "Google Page 1 Goal" },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent2)]/5 transition-colors"
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent2)]">
-                {s.value}
+        {/* ===================== METRICS STRIP ===================== */}
+        <section className="mb-16 rounded-2xl bg-white border border-[#E8E8E2] p-6 sm:p-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-[#E8E8E2]">
+            {[
+              { val: "< 1.2s", label: "LCP Target (Speed)" },
+              { val: "100", label: "Lighthouse Score Baseline" },
+              { val: "3–4 Wks", label: "Average Delivery Time" },
+              { val: "Top 3", label: "Google Rank Target" },
+            ].map((stat, sIdx) => (
+              <div key={sIdx} className="pt-4 md:pt-0 px-4">
+                <div className="font-heading font-extrabold text-2xl sm:text-3xl text-teal-700 mb-1">
+                  {stat.val}
+                </div>
+                <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                {s.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </section>
 
-        {/* Feature Grid */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent2)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; WHAT_WE_BUILD
+        {/* ===================== FEATURES GRID ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ ARCHITECTURE ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Engineering Standards Built Into Every Line of Code
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {features.map((f) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f, idx) => (
               <div
-                key={f.title}
-                className="group p-[2px] cyber-chamfer"
-                style={{
-                  background: "linear-gradient(135deg, #ff00ff33, transparent)",
-                }}
+                key={idx}
+                className="precision-card rounded-2xl p-6 flex flex-col justify-between"
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-8 h-full relative overflow-hidden group-hover:bg-[#0a0a0f] transition-colors">
-                  <div
-                    className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{
-                      background:
-                        "linear-gradient(to right, transparent, var(--color-cyber-accent2), transparent)",
-                    }}
-                  />
-                  <div className="w-12 h-12 border border-[var(--color-cyber-accent2)]/30 flex items-center justify-center mb-6 bg-black">
-                    <f.icon
-                      className="w-6 h-6 text-[var(--color-cyber-accent2)]"
-                      strokeWidth={1.5}
-                    />
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700 mb-4">
+                    <f.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-[var(--font-cyber-head)] text-base font-bold uppercase tracking-widest text-white mb-3 group-hover:text-[var(--color-cyber-accent2)] transition-colors">
+                  <h3 className="font-heading font-bold text-lg text-[#171717] mb-2">
                     {f.title}
                   </h3>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider">
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
                     {f.desc}
                   </p>
                 </div>
@@ -263,36 +261,35 @@ export default function WebDevelopment() {
           </div>
         </section>
 
-        {/* Portfolio Mockup */}
-        <section className="mb-24 p-1 group">
-          <BrowserMockup title="mimc.tech/portfolio/e-commerce" />
-        </section>
-
-        {/* SEO Services Grid */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; SEO_SERVICES
+        {/* ===================== SEO SERVICES MATRIX ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ TECHNICAL SEO ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Organic Search & Conversion Architecture Matrix
+            </h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {seoServices.map((s) => (
+            {seoServices.map((s, sIdx) => (
               <div
-                key={s.title}
-                className="border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] p-8 hover:border-[var(--color-cyber-accent2)]/50 transition-colors group"
+                key={sIdx}
+                className="p-6 rounded-2xl bg-white border border-[#E8E8E2]"
               >
-                <h3 className="font-[var(--font-cyber-head)] text-lg font-bold uppercase tracking-widest text-white mb-6 group-hover:text-[var(--color-cyber-accent2)] transition-colors flex items-center gap-3">
-                  <Search className="w-5 h-5 text-[var(--color-cyber-accent2)]" />{" "}
-                  {s.title}
+                <h3 className="font-heading font-bold text-lg text-teal-800 mb-4 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-teal-600" />
+                  <span>{s.title}</span>
                 </h3>
-                <ul className="space-y-3">
-                  {s.items.map((item) => (
+                <ul className="space-y-2.5">
+                  {s.items.map((item, itemIdx) => (
                     <li
-                      key={item}
-                      className="flex items-center gap-3 text-sm font-[var(--font-cyber-accent)] uppercase tracking-wider text-[var(--color-cyber-muted-fg)]"
+                      key={itemIdx}
+                      className="flex items-center gap-2 text-xs text-neutral-600 font-medium"
                     >
-                      <CheckCircle className="w-4 h-4 flex-shrink-0 text-[var(--color-cyber-accent2)]" />
-                      {item}
+                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -301,117 +298,60 @@ export default function WebDevelopment() {
           </div>
         </section>
 
-        {/* Process */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-16 relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--color-cyber-accent2)]/5 blur-[80px]" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
-            <span className="text-[var(--color-cyber-accent2)]">&gt;&gt;</span>{" "}
-            HOW_WE_BUILD
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-            {[
-              {
-                n: "01",
-                title: "Discovery",
-                desc: "Goals, audience, competitors, keyword targets.",
-              },
-              {
-                n: "02",
-                title: "Design",
-                desc: "Wireframes → high-fidelity mockups → your approval.",
-              },
-              {
-                n: "03",
-                title: "Build",
-                desc: "Development with SEO architecture baked in from line one.",
-              },
-              {
-                n: "04",
-                title: "Optimise",
-                desc: "Performance audit, Lighthouse score, Core Web Vitals pass.",
-              },
-              {
-                n: "05",
-                title: "Launch & Grow",
-                desc: "Go live, submit to Google Search Console, begin ranking.",
-              },
-            ].map((p, i) => (
-              <div key={p.n} className="relative">
-                {i < 4 && (
-                  <div
-                    className="hidden md:block absolute top-5 left-full w-full h-px z-10"
-                    style={{
-                      background:
-                        "linear-gradient(to right, var(--color-cyber-accent2), transparent)",
-                    }}
-                  />
-                )}
-                <div className="font-[var(--font-cyber-head)] text-4xl font-black mb-3 text-[var(--color-cyber-accent2)] opacity-20">
-                  {p.n}
+        {/* ===================== FAQ ACCORDION ===================== */}
+        <section className="mb-16 max-w-4xl">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ FAQ ]
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Web Development & SEO Specifications
+            </h2>
+          </div>
+
+          <div className="divide-y divide-[#E8E8E2] border-y border-[#E8E8E2]">
+            {faqs.map((faq, fIdx) => {
+              const isOpen = openFaq === fIdx;
+              return (
+                <div key={fIdx} className="py-4">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : fIdx)}
+                    className="w-full text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none group"
+                  >
+                    <span className="text-base font-bold text-[#171717] group-hover:text-teal-800 transition-colors">
+                      {faq.q}
+                    </span>
+                    <span className="w-7 h-7 rounded-full border border-[#E8E8E2] flex items-center justify-center text-neutral-500 shrink-0 group-hover:border-teal-600 transition-colors">
+                      {isOpen ? (
+                        <Minus className="w-3.5 h-3.5 text-teal-700" />
+                      ) : (
+                        <Plus className="w-3.5 h-3.5" />
+                      )}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <h3 className="font-[var(--font-cyber-head)] text-sm font-bold uppercase tracking-widest text-white mb-2">
-                  {p.title}
-                </h3>
-                <p className="text-[var(--color-cyber-muted-fg)] text-xs uppercase tracking-wider leading-relaxed">
-                  {p.desc}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; FAQ // RICH_SNIPPETS
-            </span>
-          </div>
-          <div className="space-y-4 max-w-4xl">
-            {faqs.map((f, i) => (
-              <details
-                key={i}
-                className="group border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] hover:border-[var(--color-cyber-accent2)]/50 transition-colors cyber-chamfer"
-              >
-                <summary className="flex justify-between items-center p-6 cursor-pointer list-none">
-                  <h3 className="text-sm md:text-base font-bold tracking-widest uppercase font-[var(--font-cyber-head)] text-white group-hover:text-[var(--color-cyber-accent2)] transition-colors pr-4">
-                    {f.q}
-                  </h3>
-                  <span className="text-[var(--color-cyber-accent2)] text-xl flex-shrink-0 group-open:rotate-45 transition-transform">
-                    +
-                  </span>
-                </summary>
-                <p className="px-6 pb-6 text-sm text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider border-t border-[var(--color-cyber-border)] pt-4">
-                  {f.a}
-                </p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="text-center border-2 border-[var(--color-cyber-accent2)] p-12 md:p-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent2)]/3" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
-            YOUR WEBSITE SHOULD
-            <br />
-            <span className="text-[var(--color-cyber-accent2)]">
-              WORK HARDER.
-            </span>
-          </h2>
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest text-sm mb-10 relative z-10">
-            Free audit of your current site. We'll show you exactly what's
-            costing you rankings.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-3 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent2)] bg-[var(--color-cyber-accent2)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent2)] transition-all duration-300 px-10 py-5 text-base font-bold relative z-10"
-          >
-            GET FREE AUDIT{" "}
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </section>
-
+        {/* Related Services Navigation */}
         <RelatedServices currentId="web-development" />
       </div>
     </Layout>

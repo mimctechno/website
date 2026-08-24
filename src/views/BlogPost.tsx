@@ -1,4 +1,16 @@
-import { Clock, Tag, ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
+"use client";
+
+import {
+  Clock,
+  Tag,
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Share2,
+  CheckCircle2,
+  User,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Layout from "../components/Layout";
@@ -36,7 +48,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
     },
     author: {
       "@type": "Organization",
-      name: "MIMC Technologies",
+      name: "MIMC Technologies Architecture Team",
       url: "https://www.mimctechnologies.com",
     },
     publisher: {
@@ -50,169 +62,195 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
     url: `https://www.mimctechnologies.com/blog/${post.slug}`,
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.mimctechnologies.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: "https://www.mimctechnologies.com/blog",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.title,
-        item: `https://www.mimctechnologies.com/blog/${post.slug}`,
-      },
-    ],
-  };
-
   return (
-    <Layout title={post.title} description={post.description}>
+    <Layout
+      title={`${post.title} | MIMC Insights`}
+      description={post.description}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
 
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        {/* Back link */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Back Link */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-colors mb-12"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-teal-800 transition-colors mb-8 group"
         >
-          <ArrowLeft className="w-4 h-4" /> BACK TO BLOG
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span>Back to All Blueprints</span>
         </Link>
 
-        {/* Article header */}
-        <header className="mb-16">
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
-            <span className="border border-[var(--color-cyber-accent)]/40 text-[var(--color-cyber-accent)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10">
+        {/* ===================== ARTICLE HEADER ===================== */}
+        <header className="mb-10 max-w-4xl">
+          <div className="flex items-center gap-3 mb-4 flex-wrap">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200/50">
               {post.category}
             </span>
-            <span className="flex items-center gap-1 text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
-              <Clock className="w-3 h-3" /> {post.readTime}
+            <span className="text-xs font-mono text-neutral-400 flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5" />
+              {post.readTime}
             </span>
-            <span className="text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
-              {new Date(post.date).toLocaleDateString("en-GB", {
-                day: "numeric",
+            <span className="text-xs font-mono text-neutral-400">
+              {new Date(post.date).toLocaleDateString("en-US", {
                 month: "long",
+                day: "numeric",
                 year: "numeric",
               })}
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-tight text-white mb-8">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#171717] leading-[1.15] mb-6 font-heading">
             {post.title}
           </h1>
 
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] text-base uppercase tracking-wider leading-relaxed border-l-2 border-[var(--color-cyber-accent)] pl-4">
+          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed border-l-2 border-teal-600 pl-4">
             {post.description}
           </p>
         </header>
 
-        {/* Cover image */}
-        <div className="w-full h-64 md:h-96 border-b border-[var(--color-cyber-border)] bg-[#050508] relative overflow-hidden flex items-center justify-center mb-16">
+        {/* ===================== COVER IMAGE ===================== */}
+        <div className="w-full aspect-[21/9] max-h-[440px] rounded-3xl overflow-hidden bg-neutral-100 border border-[#E8E8E2] mb-12 shadow-sm relative">
           <img
             src={post.image}
             alt={post.title}
-            className="w-full h-full object-cover opacity-60"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030303]/50 to-[#030303]" />
-          <div className="absolute top-3 left-3 text-[10px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] uppercase tracking-widest opacity-50 bg-black/50 px-2 py-1 border border-[var(--color-cyber-accent)]/30 backdrop-blur-sm">
-            ARTICLE.IMG // LOADED
+        </div>
+
+        {/* ===================== MAIN BODY + SIDEBAR ===================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Main Article Body */}
+          <div className="lg:col-span-8 space-y-10">
+            <article className="space-y-10">
+              {post.sections.map((section, i) => (
+                <section
+                  key={i}
+                  className="p-6 sm:p-8 rounded-2xl bg-white border border-[#E8E8E2] shadow-2xs"
+                >
+                  <h2 className="text-xl sm:text-2xl font-bold font-heading text-[#171717] mb-4 flex items-baseline gap-3">
+                    <span className="font-mono text-teal-700 text-base sm:text-lg font-bold">
+                      {String(i + 1).padStart(2, "0")}.
+                    </span>
+                    <span>{section.heading}</span>
+                  </h2>
+                  <p className="text-neutral-700 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                    {section.body}
+                  </p>
+                </section>
+              ))}
+            </article>
+
+            {/* Tags Strip */}
+            <div className="flex flex-wrap items-center gap-2 pt-6 border-t border-[#E8E8E2]">
+              <Tag className="w-4 h-4 text-teal-700 mr-1" />
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs font-mono bg-[#FAFAF8] border border-[#E8E8E2] px-2.5 py-1 rounded-md text-neutral-600"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            {/* In-Article CTA Card */}
+            <div className="p-8 rounded-3xl bg-[#111111] text-white shadow-xl space-y-4">
+              <div className="flex items-center gap-2 text-teal-400 font-mono text-xs font-bold uppercase tracking-wider">
+                <ShieldCheck className="w-4 h-4" />
+                <span>EXPERT IMPLEMENTATION SERVICE</span>
+              </div>
+              <h3 className="text-2xl font-bold font-heading text-white">
+                Need Help Deploying This Architecture?
+              </h3>
+              <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed">
+                Our senior software architects handle complete end-to-end
+                implementation — from custom ERP development to Meta WhatsApp
+                API and Tally bridges.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs uppercase tracking-wider transition-all"
+              >
+                <span>Schedule Free Architecture Review</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-4 space-y-6">
+            {/* Table of Contents */}
+            <div className="p-6 rounded-2xl bg-white border border-[#E8E8E2] sticky top-28 space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-teal-800 pb-2 border-b border-[#E8E8E2]">
+                <BookOpen className="w-4 h-4" />
+                <span>CHAPTER OUTLINE</span>
+              </div>
+              <ul className="space-y-2.5 text-xs">
+                {post.sections.map((s, sIdx) => (
+                  <li
+                    key={sIdx}
+                    className="flex items-start gap-2 text-neutral-600"
+                  >
+                    <span className="font-mono text-teal-700 font-bold shrink-0">
+                      {String(sIdx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="leading-snug">{s.heading}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Author Card */}
+              <div className="pt-4 border-t border-[#E8E8E2]">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-800 font-bold text-xs font-heading">
+                    MIMC
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-[#171717]">
+                      Architecture Team
+                    </div>
+                    <div className="text-[11px] text-neutral-400 font-mono">
+                      MIMC Technologies
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Article body */}
-        <article className="space-y-12 mb-20">
-          {post.sections.map((section, i) => (
-            <section key={i}>
-              <h2 className="text-xl md:text-2xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-5 flex items-center gap-3">
-                <span className="text-[var(--color-cyber-accent)] text-sm">
-                  {String(i + 1).padStart(2, "0")}.
-                </span>
-                {section.heading}
-              </h2>
-              <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] text-sm md:text-base leading-loose uppercase tracking-wider">
-                {section.body}
-              </p>
-            </section>
-          ))}
-        </article>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-3 mb-16 pt-8 border-t border-[var(--color-cyber-border)]">
-          <Tag className="w-4 h-4 text-[var(--color-cyber-accent)] flex-shrink-0 mt-0.5" />
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="border border-[var(--color-cyber-border)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA banner */}
-        <div className="mb-16 border-2 border-[var(--color-cyber-accent)] p-8 md:p-12 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/5" />
-          <h3 className="text-2xl md:text-3xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-3 relative z-10">
-            READY TO IMPLEMENT THIS?
-          </h3>
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-xs mb-6 relative z-10">
-            Our team sets this up for you. Free discovery call, no commitment.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-6 py-3 text-sm relative z-10"
-          >
-            BOOK FREE CALL <ChevronRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* Prev / Next navigation */}
-        <nav className="grid grid-cols-2 gap-4">
+        {/* ===================== NEXT / PREV NAVIGATION ===================== */}
+        <nav className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-16 pt-10 border-t border-[#E8E8E2]">
           {next ? (
             <Link
               href={`/blog/${next.slug}`}
-              className="group p-[2px] cyber-chamfer bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors"
+              className="precision-card rounded-2xl p-5 block group"
             >
-              <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-5 h-full">
-                <div className="flex items-center gap-2 text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest mb-2">
-                  <ArrowLeft className="w-3 h-3" /> NEWER
-                </div>
-                <div className="text-xs font-[var(--font-cyber-head)] text-white uppercase tracking-wide leading-snug group-hover:text-[var(--color-cyber-accent)] transition-colors line-clamp-2">
-                  {next.title}
-                </div>
+              <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1.5">
+                <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
+                <span>NEWER ARTICLE</span>
+              </div>
+              <div className="font-heading font-bold text-sm text-[#171717] group-hover:text-teal-800 transition-colors line-clamp-2">
+                {next.title}
               </div>
             </Link>
           ) : (
             <div />
           )}
+
           {prev ? (
             <Link
               href={`/blog/${prev.slug}`}
-              className="group p-[2px] cyber-chamfer bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors text-right"
+              className="precision-card rounded-2xl p-5 block group text-right"
             >
-              <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-5 h-full">
-                <div className="flex items-center justify-end gap-2 text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest mb-2">
-                  OLDER <ArrowRight className="w-3 h-3" />
-                </div>
-                <div className="text-xs font-[var(--font-cyber-head)] text-white uppercase tracking-wide leading-snug group-hover:text-[var(--color-cyber-accent)] transition-colors line-clamp-2">
-                  {prev.title}
-                </div>
+              <div className="flex items-center justify-end gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1.5">
+                <span>OLDER ARTICLE</span>
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </div>
+              <div className="font-heading font-bold text-sm text-[#171717] group-hover:text-teal-800 transition-colors line-clamp-2">
+                {prev.title}
               </div>
             </Link>
           ) : (

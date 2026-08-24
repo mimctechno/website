@@ -5,18 +5,9 @@ import Navbar from "./navigation/Navbar";
 import Footer from "./navigation/Footer";
 import BreadcrumbNav from "./ui/BreadcrumbNav";
 
-function CyberGrid() {
+function CommercialGrid() {
   return (
-    <div
-      className="fixed inset-0 pointer-events-none opacity-10 z-0"
-      style={{
-        backgroundImage: `
-          linear-gradient(rgba(0, 255, 170, 0.5) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 255, 170, 0.5) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
-      }}
-    />
+    <div className="fixed inset-0 pointer-events-none opacity-40 z-0 warm-grid-bg" />
   );
 }
 
@@ -103,7 +94,7 @@ export default function Layout({
     : null;
 
   return (
-    <div className="min-h-screen bg-[var(--color-cyber-bg)] text-[var(--color-cyber-fg)] font-[var(--font-cyber-body)] overflow-x-hidden selection:bg-[var(--color-cyber-accent)] selection:text-black md:cursor-none [&_*]:md:cursor-none">
+    <div className="min-h-screen bg-[#FAFAF8] text-[#171717] font-sans overflow-x-hidden selection:bg-teal-600 selection:text-white">
       {/* JSON-LD: breadcrumbs + org on every page, website schema on home only */}
       <script
         type="application/ld+json"
@@ -120,7 +111,7 @@ export default function Layout({
         />
       )}
 
-      <CyberGrid />
+      <CommercialGrid />
 
       {/* Extracted Header Component */}
       <Navbar />

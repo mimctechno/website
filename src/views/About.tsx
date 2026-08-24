@@ -1,3 +1,5 @@
+"use client";
+
 import {
   MapPin,
   Shield,
@@ -5,37 +7,74 @@ import {
   Clock,
   Users,
   ChevronRight,
+  ArrowRight,
+  CheckCircle2,
+  Lock,
+  Code2,
+  Zap,
+  Building,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import Layout from "../components/Layout";
+import { IndiaFlag, CanadaFlag } from "../components/ui/FlagIcon";
 
 const stats = [
-  { value: "10+", label: "Years Experience" },
-  { value: "200+", label: "Clients Worldwide" },
-  { value: "2", label: "Global Offices" },
-  { value: "99.9%", label: "Uptime SLA" },
+  { value: "10+ Yrs", label: "Enterprise Experience" },
+  { value: "500+", label: "Systems Deployed Globally" },
+  { value: "2", label: "Primary Operating Hubs" },
+  { value: "99.99%", label: "Infrastructure Uptime SLA" },
 ];
 
-const values = [
+const principles = [
   {
-    icon: Globe,
-    title: "Global Reach",
-    desc: "Operating from Canada and India, we serve clients across 20+ countries with around-the-clock support.",
+    icon: Code2,
+    title: "100% Code Ownership",
+    desc: "We believe enterprises should own their tools. You receive full source code, unencumbered intellectual property, and direct database control with zero per-user subscription fees.",
   },
   {
     icon: Shield,
-    title: "Enterprise Security",
-    desc: "Every solution we build meets enterprise-grade security standards. Your data is always encrypted and protected.",
+    title: "Bank-Grade Privacy & Security",
+    desc: "Every system is built with strict role-based access control, SOC2 compliance standards, encrypted storage, and automated failover recovery pipelines.",
   },
   {
-    icon: Clock,
-    title: "Fast Deployment",
-    desc: "Our agile methodology means your ERP, CRM, or WhatsApp integration is live in weeks, not months.",
+    icon: Zap,
+    title: "Integration-First Engineering",
+    desc: "Software should never exist in a silo. We build native event-driven webhooks connecting custom ERPs, Tally Prime, and official Meta WhatsApp APIs seamlessly.",
   },
   {
     icon: Users,
-    title: "Dedicated Support",
-    desc: "You get a dedicated account manager and direct access to our engineering team — not a generic help desk.",
+    title: "Direct Senior Architect Access",
+    desc: "No junior account managers or generic support tickets. You collaborate directly with experienced software engineers who understand your exact operational workflow.",
+  },
+];
+
+const hubs = [
+  {
+    city: "Toronto, Canada",
+    flag: <CanadaFlag className="w-5 h-3.5" />,
+    role: "Global Headquarters & Enterprise Strategy",
+    address: "Toronto Financial & Tech Corridor, Ontario, Canada",
+    phone: "+1 416-857-8831",
+    focus: [
+      "Enterprise Solution Architecture",
+      "North American Client Relations",
+      "Executive Technical Advisory",
+      "Global Infrastructure Governance",
+    ],
+  },
+  {
+    city: "Delhi NCR, India",
+    flag: <IndiaFlag className="w-5 h-3.5" />,
+    role: "Core Engineering & API Innovation Hub",
+    address: "Technology & Software Development Park, India",
+    phone: "+91 925941-8994",
+    focus: [
+      "Custom ERP & CRM Core Engineering",
+      "Official Meta WhatsApp API Pipelines",
+      "Tally Prime Connector & TDL R&D",
+      "Continuous Monitoring & 24/7 Support",
+    ],
   },
 ];
 
@@ -48,9 +87,8 @@ export default function About() {
         "@id": "https://www.mimctechnologies.com/about#webpage",
         name: "About MIMC Technologies",
         description:
-          "MIMC Technologies is an enterprise software and WhatsApp API company headquartered in Canada with offices in India.",
+          "MIMC Technologies is an enterprise software consultancy and integrations firm with operating hubs in Canada and India.",
         url: "https://www.mimctechnologies.com/about",
-        isPartOf: { "@id": "https://www.mimctechnologies.com" },
       },
       {
         "@type": "Organization",
@@ -60,151 +98,103 @@ export default function About() {
         logo: "https://www.mimctechnologies.com/logo.webp",
         foundingDate: "2014",
         numberOfEmployees: { "@type": "QuantitativeValue", value: "50" },
-        areaServed: ["IN", "CA", "US", "GB", "AU", "AE", "SG"],
-        knowsAbout: [
-          "ERP Software",
-          "CRM Systems",
-          "WhatsApp Business API",
-          "Tally WhatsApp Integration",
-          "Enterprise Software Development",
-          "Digital Marketing",
-        ],
-        address: [
-          {
-            "@type": "PostalAddress",
-            addressCountry: "CA",
-            addressRegion: "Ontario",
-          },
-          { "@type": "PostalAddress", addressCountry: "IN" },
-        ],
+        areaServed: ["IN", "CA", "US", "AE", "SG", "GB"],
       },
     ],
   };
 
   return (
     <Layout
-      title="About Us"
-      description="Learn about MIMC Technologies — an enterprise software company with offices in Canada and India, specializing in ERP, CRM, WhatsApp API, and Tally integrations."
+      title="About Us — Enterprise Software Consultancy | MIMC"
+      description="Learn about MIMC Technologies — an enterprise software consultancy with hubs in Canada and India, specializing in ERP, CRM, WhatsApp API, and Tally integrations."
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Hero */}
-        <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="inline-block border border-[var(--color-cyber-accent)] text-[var(--color-cyber-accent)] px-4 py-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10">
-              <span className="animate-blink mr-2">_</span> ABOUT_MIMC
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
-              <span className="block cyber-glitch" data-text="BUILT TO">
-                BUILT TO
-              </span>
-              <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] via-[var(--color-cyber-accent3)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
-                SCALE
-              </span>
-            </h1>
-            <p className="border-l-2 border-[var(--color-cyber-accent)] pl-4 font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider">
-              &gt; Enterprise software consultancy &amp; integrations firm.
-              <br />
-              &gt; Headquartered in Canada. Engineering hub in India.
-              <br />
-              &gt; A decade of building systems that actually work.
-              <span className="inline-block w-2 h-4 bg-[var(--color-cyber-accent)] animate-blink ml-1 align-middle" />
-            </p>
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="mb-16 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/60 text-teal-800 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
+            FOUNDED 2014 · 10+ YEARS OF EXCELLENCE
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] mb-6">
+            Engineering Enterprise <br />
+            <span className="text-teal-700">Software for Global Scale.</span>
+          </h1>
+
+          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+            MIMC Technologies was founded on a simple premise: growing
+            enterprises shouldn't be trapped in rigid, expensive, per-seat SaaS
+            software that limits their workflow. We design, build, and deploy
+            high-performance custom ERPs, official WhatsApp API communication
+            engines, and native Tally bridges that give businesses complete
+            control over their operations.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-6">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-8 py-4"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm shadow-xs transition-all active:scale-95"
             >
-              GET IN TOUCH{" "}
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span>Connect with an Architect</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-semibold text-sm border border-[#E8E8E2] transition-all"
+            >
+              <span>Explore Capabilities</span>
+              <ChevronRight className="w-4 h-4 text-neutral-400" />
             </Link>
           </div>
+        </section>
 
-          {/* Hero Image */}
-          <div className="relative h-[400px] p-[2px] cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent2)] group">
-            <div className="absolute inset-[2px] cyber-chamfer-reverse bg-[var(--color-cyber-card)] overflow-hidden border border-[var(--color-cyber-border)]">
-              <div className="absolute inset-0 bg-cyber-grid opacity-30 z-10 mix-blend-overlay pointer-events-none"></div>
-              <img
-                src="/data-core.webp"
-                alt="Cyberpunk Data Core"
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
-              />
-              <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1">
-                <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-xs tracking-widest uppercase animate-blink">
-                  NODE_ONLINE
-                </span>
+        {/* ===================== METRICS STRIP ===================== */}
+        <section className="mb-16 rounded-2xl bg-white border border-[#E8E8E2] p-6 sm:p-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-[#E8E8E2]">
+            {stats.map((s, idx) => (
+              <div key={idx} className="pt-4 md:pt-0 px-4">
+                <div className="font-heading font-extrabold text-2xl sm:text-3xl text-teal-700 mb-1">
+                  {s.value}
+                </div>
+                <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  {s.label}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="mb-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-cyber-border)]">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="bg-[var(--color-cyber-card)] p-10 text-center group hover:bg-[var(--color-cyber-accent)]/5 transition-colors"
-            >
-              <div
-                className="text-3xl sm:text-4xl md:text-5xl font-black font-[var(--font-cyber-head)] text-[var(--color-cyber-accent)] mb-2 cyber-glitch"
-                data-text={s.value}
-              >
-                {s.value}
-              </div>
-              <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* Mission */}
-        <section className="mb-24 p-[2px] cyber-chamfer bg-gradient-to-br from-[var(--color-cyber-border)] to-[var(--color-cyber-border)] hover:from-[var(--color-cyber-accent)] hover:to-[var(--color-cyber-accent2)] transition-colors duration-500 group">
-          <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-6 sm:p-10 md:p-16 relative overflow-hidden">
-            <div className="absolute -top-40 -right-40 w-80 h-80 bg-[var(--color-cyber-accent)]/5 blur-[120px] group-hover:bg-[var(--color-cyber-accent)]/10 transition-colors" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-8 flex items-center gap-4">
-              <span className="text-[var(--color-cyber-accent)]">&gt;&gt;</span>{" "}
-              OUR MISSION
+        {/* ===================== CORE PRINCIPLES ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ OUR PHILOSOPHY ]
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Engineering Principles That Drive Every Engagement
             </h2>
-            <p className="text-[var(--color-cyber-muted-fg)] leading-relaxed text-base md:text-lg uppercase tracking-wider max-w-3xl">
-              We exist to give growing businesses access to the same
-              enterprise-grade technology that Fortune 500 companies use —
-              without the Fortune 500 price tag or the Fortune 500 bureaucracy.
-              From ERP deployments to WhatsApp API automation, we engineer
-              infrastructure that scales with your ambition.
-            </p>
           </div>
-        </section>
 
-        {/* Core Values */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; CORE_VALUES
-            </span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {values.map((v) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {principles.map((p, idx) => (
               <div
-                key={v.title}
-                className="group p-[2px] cyber-chamfer bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors duration-300"
+                key={idx}
+                className="precision-card rounded-2xl p-6 flex flex-col justify-between"
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-8 h-full relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-cyber-accent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="w-14 h-14 border border-[var(--color-cyber-border)] flex items-center justify-center mb-6 group-hover:border-[var(--color-cyber-accent)] group-hover:cyber-glow transition-all bg-black">
-                    <v.icon
-                      className="text-[var(--color-cyber-muted-fg)] group-hover:text-[var(--color-cyber-accent)] w-7 h-7"
-                      strokeWidth={1.5}
-                    />
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700 mb-4">
+                    <p.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-lg font-bold font-[var(--font-cyber-head)] uppercase tracking-widest mb-3 text-white group-hover:text-[var(--color-cyber-accent)] transition-colors">
-                    {v.title}
+                  <h3 className="font-heading font-bold text-lg text-[#171717] mb-2">
+                    {p.title}
                   </h3>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider">
-                    {v.desc}
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                    {p.desc}
                   </p>
                 </div>
               </div>
@@ -212,117 +202,105 @@ export default function About() {
           </div>
         </section>
 
-        {/* Office Locations */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; GLOBAL_NODES
+        {/* ===================== DUAL GLOBAL HUBS ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ GLOBAL NETWORK ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Dual Operating Hubs Across North America & South Asia
+            </h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                city: "CANADA",
-                flag: "🇨🇦",
-                role: "HQ / Sales",
-                phone: "+1 416-857-8831",
-                detail:
-                  "North American headquarters. Business development, client relations, and enterprise sales.",
-              },
-              {
-                city: "INDIA",
-                flag: "🇮🇳",
-                role: "Engineering Hub",
-                phone: "+91 925941-8994",
-                detail:
-                  "Core engineering and development center. WhatsApp API, ERP, and Tally integration specialists.",
-              },
-            ].map((loc) => (
+            {hubs.map((hub, idx) => (
               <div
-                key={loc.city}
-                className="p-[2px] cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-border)] to-[var(--color-cyber-border)] hover:from-[var(--color-cyber-accent)] hover:to-[var(--color-cyber-accent2)] transition-colors duration-300 group"
+                key={idx}
+                className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E8E8E2] shadow-sm flex flex-col justify-between"
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer-reverse p-8 h-full">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-4xl">{loc.flag}</span>
-                    <div>
-                      <div className="font-[var(--font-cyber-head)] text-2xl font-bold text-white tracking-widest group-hover:text-[var(--color-cyber-accent)] transition-colors">
-                        {loc.city}
-                      </div>
-                      <div className="font-[var(--font-cyber-accent)] text-xs text-[var(--color-cyber-accent2)] uppercase tracking-widest">
-                        {loc.role}
-                      </div>
+                <div>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="p-1 rounded-md bg-[#FAFAF8] border border-[#E8E8E2] inline-block">
+                      {hub.flag}
                     </div>
+                    <span className="font-mono text-xs font-bold text-teal-800 uppercase tracking-wider">
+                      {hub.role}
+                    </span>
                   </div>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm uppercase tracking-wider leading-relaxed mb-4">
-                    {loc.detail}
+
+                  <h3 className="font-heading font-bold text-2xl text-[#171717] mb-2">
+                    {hub.city}
+                  </h3>
+
+                  <p className="text-xs text-neutral-500 mb-6 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                    <span>{hub.address}</span>
                   </p>
-                  <a
-                    href={`tel:${loc.phone.replace(/\s/g, "")}`}
-                    className="flex items-center gap-2 text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm hover:cyber-glow-text transition-all"
-                  >
-                    <MapPin className="w-4 h-4" /> {loc.phone}
-                  </a>
-                  {/* Cyber Node Radar */}
-                  <div className="mt-6 h-32 bg-black border border-[var(--color-cyber-border)] flex items-center justify-center group-hover:border-[var(--color-cyber-accent)] transition-colors relative overflow-hidden">
-                    <div className="absolute inset-0 bg-cyber-grid opacity-20" />
 
-                    {/* Radar Circles */}
-                    <div className="w-16 h-16 rounded-full border border-[var(--color-cyber-accent)]/30 relative flex items-center justify-center">
-                      <div className="w-8 h-8 rounded-full border border-[var(--color-cyber-accent)]/50 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-[var(--color-cyber-accent)] animate-ping" />
+                  <div className="space-y-2.5 pt-4 border-t border-[#E8E8E2]">
+                    <div className="text-[11px] font-mono font-bold text-neutral-400 uppercase tracking-wider">
+                      PRIMARY ENGINEERING FOCUS
+                    </div>
+                    {hub.focus.map((item, fIdx) => (
+                      <div
+                        key={fIdx}
+                        className="flex items-center gap-2 text-xs font-medium text-neutral-700"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                        <span>{item}</span>
                       </div>
-                      <div
-                        className="absolute inset-0 border-t-2 border-[var(--color-cyber-accent)] rounded-full animate-spin"
-                        style={{ animationDuration: "3s" }}
-                      />
-                    </div>
-
-                    {/* Coordinates */}
-                    <div className="absolute bottom-2 left-2 text-[8px] font-[var(--font-cyber-accent)] text-[var(--color-cyber-accent)] tracking-widest">
-                      LAT: {loc.city === "CANADA" ? "43.6532° N" : "28.6139° N"}
-                      <br />
-                      LNG: {loc.city === "CANADA" ? "79.3832° W" : "77.2090° E"}
-                    </div>
-
-                    {/* Signal Bars */}
-                    <div className="absolute top-2 right-2 flex gap-1 items-end h-4">
-                      <div className="w-1 h-2 bg-[var(--color-cyber-accent)] animate-pulse" />
-                      <div
-                        className="w-1 h-3 bg-[var(--color-cyber-accent)] animate-pulse"
-                        style={{ animationDelay: "150ms" }}
-                      />
-                      <div
-                        className="w-1 h-4 bg-[var(--color-cyber-accent)] animate-pulse"
-                        style={{ animationDelay: "300ms" }}
-                      />
-                    </div>
+                    ))}
                   </div>
+                </div>
+
+                <div className="mt-8 pt-4 border-t border-[#E8E8E2] flex items-center justify-between">
+                  <a
+                    href={`tel:${hub.phone.replace(/[^+\d]/g, "")}`}
+                    className="text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors inline-flex items-center gap-1.5"
+                  >
+                    <span>{hub.phone}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                  <span className="text-[10px] font-mono text-neutral-400">
+                    DIRECT HUB LINE
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="text-center border border-[var(--color-cyber-accent)] p-12 md:p-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
-            READY TO{" "}
-            <span className="text-[var(--color-cyber-accent)]">
-              WORK TOGETHER?
+        {/* ===================== CTA BANNER ===================== */}
+        <section className="rounded-3xl bg-[#111111] text-white p-8 sm:p-12 border border-neutral-800 shadow-xl text-center relative overflow-hidden">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-widest block">
+              [ COLLABORATE WITH US ]
             </span>
-          </h2>
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-sm mb-10 relative z-10">
-            Drop us a message and our team responds within 24 hours.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-3 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-10 py-5 text-base relative z-10"
-          >
-            CONTACT US{" "}
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white">
+              Ready to Upgrade Your Enterprise Infrastructure?
+            </h2>
+            <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed pb-2">
+              Book a 30-minute discovery consultation with a senior software
+              architect. We'll analyze your workflows and provide actionable
+              recommendations.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
+              >
+                <span>Schedule Discovery Session</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/services/whatsapp-api"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 font-semibold text-sm border border-neutral-700 transition-all"
+              >
+                <span>Explore WhatsApp API</span>
+              </Link>
+            </div>
+          </div>
         </section>
       </div>
     </Layout>

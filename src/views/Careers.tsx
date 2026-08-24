@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   ArrowRight,
   Briefcase,
@@ -5,224 +8,232 @@ import {
   Code2,
   MessageSquare,
   Target,
+  Sparkles,
+  Users,
+  HeartHandshake,
+  CheckCircle2,
+  DollarSign,
+  Globe,
 } from "lucide-react";
+import Link from "next/link";
 import Layout from "../components/Layout";
+import { JOBS } from "../data/jobs";
 
-const JOBS = [
+const DEPARTMENTS = [
+  "All Departments",
+  "Engineering",
+  "Cloud Infrastructure",
+  "Sales & Growth",
+];
+
+const benefits = [
   {
-    id: "req-091",
-    title: "Senior React / Frontend Developer",
-    location: "Remote (India / Canada)",
-    type: "Full-Time",
-    icon: Code2,
-    desc: "We are looking for a pixel-perfect React developer who understands performance, Core Web Vitals, and modern CSS (Tailwind). You will be building enterprise dashboards and high-converting marketing sites.",
-    reqs: [
-      "4+ years React experience",
-      "Deep understanding of CSR vs SSR",
-      "Experience with Framer Motion or GSAP",
-      "Strong portfolio of live projects",
-    ],
+    title: "Remote-First Architecture",
+    desc: "Work flexibly from anywhere across Canada, India, or globally with asynchronous communication tools.",
   },
   {
-    id: "req-044",
-    title: "WhatsApp API Integration Engineer",
-    location: "Delhi NCR, India (Hybrid)",
-    type: "Full-Time",
-    icon: MessageSquare,
-    desc: "Join our automation team integrating the Official Meta WhatsApp Business API with Tally ERP, custom CRMs, and Node.js backends. You will be building the infrastructure that handles millions of messages.",
-    reqs: [
-      "Node.js & Express expertise",
-      "Previous experience with WhatsApp Cloud API",
-      "Understanding of webhooks and API rate limits",
-      "Database design (PostgreSQL/MongoDB)",
-    ],
+    title: "Competitive Compensation",
+    desc: "Top-of-market compensation packages with uncapped performance bonuses and equity alignment.",
   },
   {
-    id: "req-112",
-    title: "Enterprise Sales Executive",
-    location: "Remote (India)",
-    type: "Full-Time + Commission",
-    icon: Target,
-    desc: "Drive growth for our Tally-to-WhatsApp and ERP solutions across B2B manufacturing and distribution sectors in India. You need to understand enterprise software sales cycles and how to close technical decision-makers.",
-    reqs: [
-      "3+ years B2B software sales",
-      "Existing network in manufacturing/distribution",
-      "Ability to conduct technical product demos",
-      "Aggressive closer with track record",
-    ],
+    title: "Annual Hardware Stipend",
+    desc: "Top-tier MacBook Pro, 4K monitors, ergonomic workspace allowances, and home office setups.",
+  },
+  {
+    title: "Comprehensive Health",
+    desc: "Full medical, dental, vision, and mental wellness coverage for you and your family.",
   },
 ];
 
-const hiringOrg = {
-  "@type": "Organization",
-  name: "MIMC Technologies",
-  sameAs: "https://www.mimctechnologies.com",
-  logo: "https://www.mimctechnologies.com/logo.webp",
-};
-
-function buildJobSchema(job: (typeof JOBS)[number]) {
-  return {
-    "@type": "JobPosting",
-    title: job.title,
-    description: job.desc,
-    datePosted: "2026-07-29",
-    validThrough: "2026-12-31",
-    employmentType: "FULL_TIME",
-    hiringOrganization: hiringOrg,
-    jobLocation: {
-      "@type": "Place",
-      address: { "@type": "PostalAddress", addressCountry: "IN" },
-    },
-    applicantLocationRequirements: { "@type": "Country", name: "India" },
-    jobLocationType: job.location.toLowerCase().includes("remote")
-      ? "TELECOMMUTE"
-      : undefined,
-  };
-}
-
 export default function Careers() {
+  const [selectedDept, setSelectedDept] = useState("All Departments");
+
+  const filteredJobs = JOBS.filter(
+    (job) =>
+      selectedDept === "All Departments" || job.department === selectedDept,
+  );
+
   const careersSchema = {
     "@context": "https://schema.org",
-    "@graph": JOBS.map(buildJobSchema),
+    "@graph": JOBS.map((job) => ({
+      "@type": "JobPosting",
+      title: job.title,
+      description: job.summary,
+      datePosted: "2026-07-29",
+      validThrough: "2026-12-31",
+      employmentType: "FULL_TIME",
+      hiringOrganization: {
+        "@type": "Organization",
+        name: "MIMC Technologies",
+        sameAs: "https://www.mimctechnologies.com",
+        logo: "https://www.mimctechnologies.com/logo.webp",
+      },
+      jobLocationType: job.location.toLowerCase().includes("remote")
+        ? "TELECOMMUTE"
+        : undefined,
+    })),
   };
 
   return (
     <Layout
-      title="Careers — Join the MIMC Technologies Team"
-      description="We are hiring! Join MIMC Technologies to build enterprise software, WhatsApp API integrations, and digital marketing campaigns."
+      title="Careers — Join the Engineering Team | MIMC Technologies"
+      description="Explore open engineering, product, and sales positions at MIMC Technologies. Remote-first flexibility across Canada and India with top-tier compensation."
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(careersSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Header */}
-        <section className="mb-24 text-center max-w-4xl mx-auto">
-          <div className="inline-block border border-[var(--color-cyber-accent2)] text-[var(--color-cyber-accent2)] px-4 py-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent2)]/10 mb-8">
-            <span className="animate-blink mr-2">_</span> JOIN_THE_GRID
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="mb-14 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/60 text-teal-800 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
+            WE ARE HIRING · REMOTE-FIRST CULTURE
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white mb-8">
-            <span className="block text-white">BUILD THE</span>
-            <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
-              FUTURE
-            </span>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] mb-4">
+            Build Mission-Critical <br />
+            <span className="text-teal-700">Enterprise Software.</span>
           </h1>
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-wider text-sm leading-relaxed">
-            We are always looking for exceptional engineers, marketers, and
-            sales professionals to join our remote-first team across Canada and
-            India. We build high-performance software and we need
-            high-performance people.
+
+          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+            We are looking for exceptional software engineers, solutions
+            architects, and enterprise sales directors to engineer
+            high-throughput ERPs and Meta WhatsApp API infrastructure.
           </p>
         </section>
 
-        {/* Job Listings */}
-        <section className="mb-24 space-y-8">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; OPEN_POSITIONS
+        {/* ===================== CULTURE & BENEFITS STRIP ===================== */}
+        <section className="mb-16">
+          <div className="mb-6">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ PERKS & CULTURE ]
             </span>
-            <div className="flex-1 h-px bg-[var(--color-cyber-border)]"></div>
-            <span className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest">
-              {JOBS.length} ROLES AVAILABLE
-            </span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#171717]">
+              Why Senior Engineers Choose MIMC
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
-            {JOBS.map((job) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {benefits.map((b, idx) => (
               <div
-                key={job.id}
-                className="group border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] hover:border-[var(--color-cyber-accent)]/50 transition-colors cyber-chamfer p-8 md:p-10 relative overflow-hidden flex flex-col md:flex-row gap-8 items-start"
+                key={idx}
+                className="p-5 rounded-2xl bg-white border border-[#E8E8E2] shadow-2xs space-y-2"
               >
-                <div
-                  className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{
-                    background:
-                      "linear-gradient(to right, transparent, var(--color-cyber-accent), transparent)",
-                  }}
-                />
-
-                {/* Icon block */}
-                <div className="w-16 h-16 border border-[var(--color-cyber-border)] bg-black flex-shrink-0 flex items-center justify-center group-hover:border-[var(--color-cyber-accent)]/50 transition-colors">
-                  <job.icon
-                    className="w-8 h-8 text-[var(--color-cyber-muted-fg)] group-hover:text-[var(--color-cyber-accent)] transition-colors"
-                    strokeWidth={1}
-                  />
+                <div className="w-8 h-8 rounded-lg bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700 font-bold text-xs">
+                  0{idx + 1}
                 </div>
-
-                {/* Content */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 flex-wrap mb-4">
-                    <span className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest px-2 py-1 bg-[var(--color-cyber-accent)]/10 text-[var(--color-cyber-accent)] border border-[var(--color-cyber-accent)]/30">
-                      {job.id}
-                    </span>
-                    <span className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest flex items-center gap-1 text-[var(--color-cyber-muted-fg)]">
-                      <MapPin className="w-3 h-3" /> {job.location}
-                    </span>
-                    <span className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest flex items-center gap-1 text-[var(--color-cyber-muted-fg)]">
-                      <Briefcase className="w-3 h-3" /> {job.type}
-                    </span>
-                  </div>
-
-                  <h2 className="text-2xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-4 group-hover:text-[var(--color-cyber-accent)] transition-colors">
-                    {job.title}
-                  </h2>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider mb-8 max-w-3xl">
-                    {job.desc}
-                  </p>
-
-                  <div className="space-y-3">
-                    <h3 className="text-xs font-[var(--font-cyber-accent)] text-white uppercase tracking-widest mb-4">
-                      REQUIREMENTS:
-                    </h3>
-                    {job.reqs.map((req, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-3 text-xs font-[var(--font-cyber-accent)] uppercase tracking-wider text-[var(--color-cyber-muted-fg)]"
-                      >
-                        <span className="w-1 h-1 bg-[var(--color-cyber-accent)] rounded-full"></span>
-                        {req}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Apply Button (Desktop Right Aligned, Mobile Bottom) */}
-                <div className="mt-6 md:mt-0 md:ml-auto self-start">
-                  <a
-                    href={`mailto:hr@mimctechnologies.com?subject=Application:%20${job.title}%20(${job.id})`}
-                    className="group/btn inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest border border-[var(--color-cyber-border)] hover:border-[var(--color-cyber-accent)] bg-transparent text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] hover:bg-[var(--color-cyber-accent)]/5 transition-all duration-300 px-6 py-3 text-xs font-bold whitespace-nowrap"
-                  >
-                    APPLY NOW{" "}
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </a>
-                </div>
+                <h3 className="font-heading font-bold text-sm text-[#171717]">
+                  {b.title}
+                </h3>
+                <p className="text-xs text-neutral-500 leading-relaxed">
+                  {b.desc}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* General Application CTA */}
-        <section className="text-center border-2 border-dashed border-[var(--color-cyber-border)] p-12 md:p-20 relative overflow-hidden hover:border-[var(--color-cyber-accent)] transition-colors group">
-          <div className="absolute inset-0 bg-black" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
-            DON'T SEE YOUR{" "}
-            <span className="text-[var(--color-cyber-accent)]">ROLE?</span>
-          </h2>
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest text-sm mb-10 relative z-10 max-w-2xl mx-auto leading-relaxed">
-            If you are a top-tier performer in sales, marketing, or development,
-            we still want to hear from you. Send us your resume and tell us why
-            we need you.
-          </p>
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
-            <span className="font-[var(--font-cyber-accent)] text-xs text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
-              TRANSMIT RESUME TO:
+        {/* ===================== JOB LISTINGS DIRECTORY ===================== */}
+        <section className="mb-16">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8E8E2] mb-8">
+            <div>
+              <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+                [ OPEN ROLES ]
+              </span>
+              <h2 className="text-2xl font-bold tracking-tight text-[#171717]">
+                Available Positions ({filteredJobs.length})
+              </h2>
+            </div>
+
+            {/* Department Filter Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
+              {DEPARTMENTS.map((dept) => (
+                <button
+                  key={dept}
+                  onClick={() => setSelectedDept(dept)}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    selectedDept === dept
+                      ? "bg-[#111111] text-white"
+                      : "bg-white text-neutral-600 hover:text-neutral-900 border border-[#E8E8E2]"
+                  }`}
+                >
+                  {dept}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Job Cards */}
+          <div className="space-y-4">
+            {filteredJobs.map((job) => (
+              <Link
+                key={job.id}
+                href={`/careers/${job.slug}`}
+                className="precision-card rounded-2xl p-6 sm:p-8 block group"
+              >
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                  <div className="space-y-3 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded border border-teal-200/50">
+                        {job.id} · {job.department}
+                      </span>
+                      <span className="text-xs font-mono text-neutral-500 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-neutral-400" />
+                        {job.location}
+                      </span>
+                      <span className="text-xs font-mono text-neutral-500 flex items-center gap-1">
+                        <Briefcase className="w-3 h-3 text-neutral-400" />
+                        {job.type}
+                      </span>
+                    </div>
+
+                    <h3 className="font-heading font-bold text-xl text-[#171717] group-hover:text-teal-800 transition-colors">
+                      {job.title}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed line-clamp-2 max-w-4xl">
+                      {job.summary}
+                    </p>
+
+                    <div className="text-xs font-mono text-neutral-500 pt-1">
+                      <span className="text-neutral-400">Compensation:</span>{" "}
+                      <strong className="text-teal-700 font-semibold">
+                        {job.compensation}
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 flex items-center gap-2 text-xs font-bold text-teal-700 group-hover:text-teal-900 bg-teal-50/50 group-hover:bg-teal-50 px-4 py-2.5 rounded-xl border border-teal-200/40 transition-colors">
+                    <span>View Role & Apply</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ===================== GENERAL APPLICATION CTA ===================== */}
+        <section className="rounded-3xl bg-[#111111] text-white p-8 sm:p-12 border border-neutral-800 shadow-xl text-center relative overflow-hidden">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-widest block">
+              [ SPONTANEOUS INQUIRY ]
             </span>
+            <h2 className="text-3xl font-bold font-heading text-white">
+              Don't See Your Specific Role Listed?
+            </h2>
+            <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed pb-2">
+              If you are a high-caliber engineer, solutions architect, or growth
+              leader, we always make room for top 1% talent.
+            </p>
             <a
-              href="mailto:hr@mimctechnologies.com"
-              className="inline-flex items-center gap-3 font-[var(--font-cyber-head)] uppercase tracking-widest text-xl md:text-2xl font-bold text-[var(--color-cyber-accent)] hover:text-white transition-colors group-hover:scale-105 transform duration-300"
+              href="mailto:hr@mimctechnologies.com?subject=General%20Application%20—%20Engineering%20Talent"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
             >
-              HR@MIMCTECHNOLOGIES.COM
+              <span>Email Your Resume to HR</span>
+              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </section>

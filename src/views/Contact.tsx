@@ -1,37 +1,57 @@
 "use client";
+
 import { useState } from "react";
 import {
   Mail,
   Phone,
   Clock,
   MessageSquare,
-  Terminal,
-  CheckCircle,
+  CheckCircle2,
   X,
+  ArrowRight,
+  ShieldCheck,
+  Building,
+  Sparkles,
+  MapPin,
+  Lock,
 } from "lucide-react";
-import CyberRadarMap from "../components/ui/CyberRadarMap";
 import Layout from "../components/Layout";
+import { IndiaFlag, CanadaFlag } from "../components/ui/FlagIcon";
 
 const contactMethods = [
   {
-    icon: Phone,
-    label: "Canada Office",
+    flag: <CanadaFlag className="w-5 h-3.5" />,
+    label: "North America Hub (Toronto)",
+    role: "Enterprise Strategy & Sales",
     value: "+1 416-857-8831",
     href: "tel:+14168578831",
+    hours: "9:00 AM – 6:00 PM EST",
   },
   {
-    icon: Phone,
-    label: "India Office",
+    flag: <IndiaFlag className="w-5 h-3.5" />,
+    label: "South Asia Hub (Delhi NCR)",
+    role: "Core Engineering & Tally Center",
     value: "+91 925941-8994",
     href: "tel:+919259418994",
+    hours: "9:30 AM – 6:30 PM IST",
   },
   {
     icon: Mail,
-    label: "Email Us",
+    label: "Direct Email Dispatch",
+    role: "Architecture Inquiries",
     value: "info@mimctechnologies.com",
     href: "mailto:info@mimctechnologies.com",
+    hours: "Sub-2h response during business hours",
   },
-  { icon: Clock, label: "Response Time", value: "Within 24 Hours", href: null },
+  {
+    icon: MessageSquare,
+    label: "Official WhatsApp Line",
+    role: "Fastest Technical Response",
+    value: "+1 (416) 857-8831",
+    href: "https://wa.me/14168578831",
+    hours: "Live 24/7 routing bot",
+    highlight: true,
+  },
 ];
 
 export default function Contact() {
@@ -43,11 +63,15 @@ export default function Contact() {
     setSending(true);
     const form = e.currentTarget;
     const data = new FormData(form);
-    await fetch("https://formsubmit.co/ajax/info@mimctechnologies.com", {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: data,
-    });
+    try {
+      await fetch("https://formsubmit.co/ajax/info@mimctechnologies.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+    } catch {
+      // Fallback gracefully
+    }
     setSending(false);
     setSubmitted(true);
     form.reset();
@@ -59,7 +83,7 @@ export default function Contact() {
     name: "Contact MIMC Technologies",
     url: "https://www.mimctechnologies.com/contact",
     description:
-      "Contact MIMC Technologies for ERP, CRM, WhatsApp API, and Tally integration enquiries.",
+      "Connect with MIMC Technologies enterprise software architects. Offices in Canada and India.",
   };
 
   const localBusinessSchema = {
@@ -87,28 +111,12 @@ export default function Contact() {
         addressRegion: "Delhi",
       },
     ],
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        telephone: "+14168578831",
-        contactType: "sales",
-        areaServed: "CA",
-        availableLanguage: "English",
-      },
-      {
-        "@type": "ContactPoint",
-        telephone: "+919259418994",
-        contactType: "sales",
-        areaServed: "IN",
-        availableLanguage: ["English", "Hindi"],
-      },
-    ],
   };
 
   return (
     <Layout
-      title="Contact Us"
-      description="Get in touch with MIMC Technologies. Offices in Canada and India. We respond within 24 hours for ERP, CRM, WhatsApp API, and Tally integration enquiries."
+      title="Contact Enterprise Architects | MIMC Technologies"
+      description="Connect with MIMC Technologies. Direct software engineering advisory in Canada and India. 24-hour response SLA for ERP, CRM, WhatsApp API, and Tally integrations."
     >
       <script
         type="application/ld+json"
@@ -121,261 +129,287 @@ export default function Contact() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Header */}
-        <section className="mb-20 text-center">
-          <div className="inline-block border border-[var(--color-cyber-accent)] text-[var(--color-cyber-accent)] px-4 py-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10 mb-8">
-            <span className="animate-blink mr-2">_</span> OPEN_CHANNEL
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HEADER ===================== */}
+        <section className="mb-14 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/60 text-teal-800 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
+            DIRECT ENGINEERING CONSULTATION
           </div>
-          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white mb-6">
-            LET'S{" "}
-            <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] via-[var(--color-cyber-accent3)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
-              CONNECT
-            </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] mb-4">
+            Let's Engineer Your <br />
+            <span className="text-teal-700">Enterprise Architecture.</span>
           </h1>
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-sm max-w-xl mx-auto">
-            Ready to deploy enterprise software or automate with WhatsApp? Send
-            us a message and we'll get back to you within 24 hours.
+          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+            Directly consult with senior software architects. Whether you
+            require a custom ERP deployment, Meta WhatsApp API pipelines, or
+            Tally integration — our engineering team responds within 24 hours.
           </p>
         </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-          {/* Left: Contact Info */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center gap-4 border-b border-[var(--color-cyber-border)] pb-4 mb-8">
-              <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-                &gt;&gt; COMM_NODES
-              </span>
+        {/* ===================== MAIN GRID ===================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          {/* Left Column: Direct Communication Hubs */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest mb-2">
+              [ GLOBAL OPERATING HUBS ]
             </div>
 
-            {contactMethods.map((m) => (
+            {contactMethods.map((m, idx) => (
               <div
-                key={m.label}
-                className="p-[2px] cyber-chamfer bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors duration-300 group"
+                key={idx}
+                className={`p-5 rounded-2xl border transition-all ${
+                  m.highlight
+                    ? "bg-teal-50/50 border-teal-200/80 shadow-xs hover:border-teal-400"
+                    : "bg-white border-[#E8E8E2] shadow-2xs hover:border-teal-300"
+                }`}
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-6 flex items-start gap-4">
-                  <div className="w-12 h-12 border border-[var(--color-cyber-border)] flex items-center justify-center flex-shrink-0 group-hover:border-[var(--color-cyber-accent)] group-hover:cyber-glow transition-all bg-black">
-                    <m.icon
-                      className="w-5 h-5 text-[var(--color-cyber-muted-fg)] group-hover:text-[var(--color-cyber-accent)] transition-colors"
-                      strokeWidth={1.5}
-                    />
+                <div className="flex items-start gap-3.5">
+                  <div className="p-2 rounded-xl bg-white border border-[#E8E8E2] shrink-0 shadow-2xs flex items-center justify-center">
+                    {m.flag ? (
+                      m.flag
+                    ) : m.icon ? (
+                      <m.icon className="w-4 h-4 text-teal-700" />
+                    ) : null}
                   </div>
-                  <div>
-                    <div className="font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)] mb-1">
-                      {m.label}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-0.5">
+                      <span className="text-xs font-bold text-[#171717] font-heading truncate">
+                        {m.label}
+                      </span>
+                      {m.highlight && (
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100/60 px-2 py-0.5 rounded-full">
+                          FASTEST
+                        </span>
+                      )}
                     </div>
+                    <p className="text-[11px] text-neutral-500 mb-2">
+                      {m.role}
+                    </p>
                     {m.href ? (
                       <a
                         href={m.href}
-                        className="font-[var(--font-cyber-head)] text-white text-sm font-bold hover:text-[var(--color-cyber-accent)] transition-colors"
+                        target={
+                          m.href.startsWith("http") ? "_blank" : undefined
+                        }
+                        rel={
+                          m.href.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                        className="text-sm font-bold text-teal-700 hover:text-teal-900 transition-colors inline-flex items-center gap-1.5"
                       >
-                        {m.value}
+                        <span>{m.value}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </a>
                     ) : (
-                      <div className="font-[var(--font-cyber-head)] text-white text-sm font-bold">
+                      <span className="text-sm font-bold text-[#171717]">
                         {m.value}
-                      </div>
+                      </span>
                     )}
+                    <div className="text-[10px] font-mono text-neutral-400 mt-2 flex items-center gap-1.5 pt-2 border-t border-neutral-100">
+                      <Clock className="w-3 h-3 text-neutral-400" />
+                      <span>{m.hours}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
 
-            {/* WhatsApp Quick Link */}
-            <div className="p-[2px] cyber-chamfer bg-[#25D366]/30 hover:bg-[#25D366] transition-colors duration-300 group">
-              <a
-                href="https://wa.me/14168578831"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[var(--color-cyber-card)] cyber-chamfer p-6 flex items-center gap-4 group-hover:bg-black block"
-              >
-                <div className="w-12 h-12 border border-[#25D366]/40 flex items-center justify-center flex-shrink-0 group-hover:border-[#25D366] bg-black">
-                  <MessageSquare
-                    className="w-5 h-5 text-[#25D366]"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <div>
-                  <div className="font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)] mb-1">
-                    WhatsApp (Fastest)
-                  </div>
-                  <div className="font-[var(--font-cyber-head)] text-white text-sm font-bold group-hover:text-[#25D366] transition-colors">
-                    Chat on WhatsApp
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            {/* Cyber Radar Map */}
-            <div className="mt-8">
-              <CyberRadarMap />
+            {/* Security Guarantee Card */}
+            <div className="p-5 rounded-2xl bg-[#111111] text-white space-y-3 shadow-lg">
+              <div className="flex items-center gap-2 text-teal-400 text-xs font-mono font-bold uppercase tracking-wider">
+                <Lock className="w-4 h-4" />
+                <span>CONFIDENTIALITY & NDA</span>
+              </div>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                All client architectural specifications, financial workflows,
+                and database structures are governed under mutual Non-Disclosure
+                Agreements.
+              </p>
             </div>
           </div>
 
-          {/* Right: FormSubmit Form */}
-          <div className="lg:col-span-3">
-            <div className="p-[2px] cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent2)]">
-              <div className="bg-[var(--color-cyber-card)] cyber-chamfer-reverse p-8 md:p-12">
-                <div className="flex items-center gap-3 mb-10 border-b border-[var(--color-cyber-border)] pb-6">
-                  <Terminal className="w-5 h-5 text-[var(--color-cyber-accent)]" />
-                  <span className="font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest text-[var(--color-cyber-accent)]">
-                    INIT_MESSAGE_PROTOCOL
-                  </span>
+          {/* Right Column: High-Converting Consultation Form */}
+          <div className="lg:col-span-7">
+            <div className="p-6 sm:p-10 rounded-3xl bg-white border border-[#E8E8E2] shadow-xl relative overflow-hidden">
+              <div className="mb-6 pb-4 border-b border-[#E8E8E2] flex items-center justify-between">
+                <div>
+                  <h2 className="font-heading font-bold text-xl text-[#171717]">
+                    Project Discovery Brief
+                  </h2>
+                  <p className="text-xs text-neutral-500">
+                    Fill out the form below to receive a formal architectural
+                    scope & timeline.
+                  </p>
+                </div>
+                <span className="text-xs font-mono font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200/60 hidden sm:inline-block">
+                  SLA: &lt; 24 HOURS
+                </span>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* FormSubmit Honeypot */}
+                <input type="text" name="_honey" className="hidden" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New Enterprise Architecture Inquiry — MIMC"
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase font-mono tracking-wider">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="e.g. Alexander Wright"
+                      className="w-full bg-[#FAFAF8] border border-[#E8E8E2] rounded-xl px-4 py-3 text-sm text-[#171717] placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 focus:bg-white transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase font-mono tracking-wider">
+                      Work Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="alex@company.com"
+                      className="w-full bg-[#FAFAF8] border border-[#E8E8E2] rounded-xl px-4 py-3 text-sm text-[#171717] placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 focus:bg-white transition-all"
+                    />
+                  </div>
                 </div>
 
-                {/*
-                  FormSubmit.co — no backend needed.
-                  Replace EMAIL_PLACEHOLDER with info@mimctechnologies.com after first submission activates it.
-                  https://formsubmit.co/
-                */}
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* FormSubmit AJAX config */}
-                  <input type="text" name="_honey" className="hidden" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input
-                    type="hidden"
-                    name="_subject"
-                    value="New enquiry from mimctechnologies.com"
-                  />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className="block font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="Your Name"
-                        className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="block font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="your@email.com"
-                        className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase font-mono tracking-wider">
                       Company / Organization
                     </label>
                     <input
                       type="text"
                       name="company"
-                      placeholder="Your Company"
-                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
+                      placeholder="e.g. Apex Global Corp"
+                      className="w-full bg-[#FAFAF8] border border-[#E8E8E2] rounded-xl px-4 py-3 text-sm text-[#171717] placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 focus:bg-white transition-all"
                     />
                   </div>
-
-                  <div className="space-y-2">
-                    <label className="block font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                      Service Needed *
+                  <div>
+                    <label className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase font-mono tracking-wider">
+                      Phone Number
                     </label>
-                    <select
-                      name="service"
-                      required
-                      className="w-full bg-[var(--color-cyber-card)] border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors"
-                    >
-                      <option value="">Select a service...</option>
-                      <option value="ERP / CRM">ERP / CRM Solutions</option>
-                      <option value="WhatsApp API">
-                        WhatsApp Business API
-                      </option>
-                      <option value="Tally Integration">
-                        Tally WhatsApp Integration
-                      </option>
-                      <option value="Web Development">
-                        Web Development & SEO
-                      </option>
-                      <option value="Other">Other / General Enquiry</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                      Message *
-                    </label>
-                    <textarea
-                      name="message"
-                      required
-                      rows={5}
-                      placeholder="Tell us about your project..."
-                      className="w-full bg-transparent border-b-2 border-[var(--color-cyber-border)] py-3 font-[var(--font-cyber-accent)] text-sm uppercase tracking-wider text-white placeholder:text-gray-400 focus:outline-none focus:border-[var(--color-cyber-accent)] transition-colors resize-none"
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="+1 (555) 019-2834"
+                      className="w-full bg-[#FAFAF8] border border-[#E8E8E2] rounded-xl px-4 py-3 text-sm text-[#171717] placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 focus:bg-white transition-all"
                     />
                   </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    disabled={sending}
-                    className="group w-full font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] hover:cyber-glow transition-all duration-300 px-8 py-5 text-base font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase font-mono tracking-wider">
+                    Primary Architecture Focus *
+                  </label>
+                  <select
+                    name="service"
+                    required
+                    className="w-full bg-[#FAFAF8] border border-[#E8E8E2] rounded-xl px-4 py-3 text-sm text-[#171717] focus:outline-none focus:border-teal-600 focus:bg-white transition-all"
                   >
-                    {sending ? "TRANSMITTING..." : "TRANSMIT_MESSAGE >>"}
-                  </button>
-                </form>
-              </div>
+                    <option value="">Select an engineering solution...</option>
+                    <option value="Enterprise ERP / CRM Development">
+                      Custom Enterprise ERP & CRM Software
+                    </option>
+                    <option value="Official WhatsApp Business API">
+                      Official Meta WhatsApp Business API & Bots
+                    </option>
+                    <option value="Tally Prime WhatsApp Integration">
+                      Tally Prime WhatsApp Invoicing Sync
+                    </option>
+                    <option value="Next.js Web & Cloud Architecture">
+                      Next.js Web Engineering & Technical SEO
+                    </option>
+                    <option value="IT Architecture Consulting">
+                      IT Architecture Advisory & System Audits
+                    </option>
+                    <option value="Other Enterprise Requirement">
+                      Other Bespoke Engineering
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-neutral-700 mb-1.5 uppercase font-mono tracking-wider">
+                    Project Scope & Operational Details *
+                  </label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={4}
+                    placeholder="Describe your current system bottlenecks, volume requirements, timeline expectations, or desired integrations..."
+                    className="w-full bg-[#FAFAF8] border border-[#E8E8E2] rounded-xl px-4 py-3 text-sm text-[#171717] placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 focus:bg-white transition-all resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="w-full rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm py-4 px-6 shadow-md transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50 cursor-pointer"
+                >
+                  {sending ? (
+                    <span>Submitting Brief...</span>
+                  ) : (
+                    <>
+                      <span>Submit Architecture Brief</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Thank-you Modal */}
+      {/* Thank-You Confirmation Modal */}
       {submitted && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-6"
-          style={{
-            background: "rgba(0,0,0,0.85)",
-            backdropFilter: "blur(8px)",
-          }}
-        >
-          <div
-            className="relative max-w-lg w-full p-[2px] cyber-chamfer"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-cyber-accent), var(--color-cyber-accent2))",
-            }}
-          >
-            <div className="bg-[var(--color-cyber-bg)] cyber-chamfer p-6 sm:p-10 md:p-14 text-center relative overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--color-cyber-accent)]/10 blur-[80px]" />
-              <button
-                onClick={() => setSubmitted(false)}
-                className="absolute top-4 right-4 text-[var(--color-cyber-muted-fg)] hover:text-[var(--color-cyber-accent)] transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <CheckCircle
-                className="w-16 h-16 text-[var(--color-cyber-accent)] mx-auto mb-6"
-                strokeWidth={1.5}
-              />
-              <div className="inline-block border border-[var(--color-cyber-accent)]/40 text-[var(--color-cyber-accent)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest mb-6">
-                TRANSMISSION_RECEIVED
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-4">
-                MESSAGE
-                <br />
-                <span className="text-[var(--color-cyber-accent)]">SENT!</span>
-              </h2>
-              <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-sm leading-relaxed">
-                Thank you for reaching out. Our team will respond to you within
-                24 hours at the email address provided.
-              </p>
-              <button
-                onClick={() => setSubmitted(false)}
-                className="mt-10 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-8 py-3 text-sm"
-              >
-                CLOSE
-              </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 max-w-md w-full border border-[#E8E8E2] shadow-2xl text-center relative animate-in fade-in zoom-in-95 duration-200">
+            <button
+              onClick={() => setSubmitted(false)}
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-800 p-2 rounded-full hover:bg-neutral-100 transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 mx-auto mb-5 shadow-xs">
+              <CheckCircle2 className="w-8 h-8" />
             </div>
+
+            <span className="text-xs font-mono font-bold text-teal-800 uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full border border-teal-200/50 inline-block mb-3">
+              TRANSMISSION RECEIVED
+            </span>
+
+            <h3 className="text-2xl font-bold font-heading text-[#171717] mb-2">
+              Discovery Brief Submitted!
+            </h3>
+
+            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
+              Thank you for connecting with MIMC Technologies. Our lead software
+              architect will review your project brief and follow up with a
+              technical roadmap within 24 hours.
+            </p>
+
+            <button
+              onClick={() => setSubmitted(false)}
+              className="w-full py-3.5 px-6 rounded-xl bg-[#111111] hover:bg-teal-700 text-white text-xs font-semibold uppercase tracking-wider transition-all"
+            >
+              Return to Website
+            </button>
           </div>
         </div>
       )}

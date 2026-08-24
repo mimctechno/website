@@ -1,115 +1,189 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Terminal,
+  Database,
   Zap,
-  Shield,
+  Terminal,
   Globe,
   BarChart3,
-  Database,
-  ChevronRight,
+  Shield,
   ArrowRight,
+  CheckCircle2,
+  Cpu,
+  Layers,
+  Server,
+  Lock,
+  Workflow,
+  Sparkles,
+  ChevronRight,
+  Plus,
+  Minus,
+  Send,
+  ArrowUpRight,
 } from "lucide-react";
-import Link from "next/link";
 import Layout from "../components/Layout";
 
-const services = [
+const allServices = [
   {
     slug: "erp-crm",
+    category: "ERP & CRM",
     icon: Database,
-    badge: "ENTERPRISE",
-    title: "ERP & CRM Solutions",
-    tagline: "Unify your entire business into one powerful system.",
-    desc: "Custom Enterprise Resource Planning and Customer Relationship Management platforms engineered for your exact workflow. From inventory to invoicing — fully automated.",
-    bullets: [
-      "Custom module development",
-      "Legacy system migration",
-      "Cloud & on-premise deployments",
-      "Real-time reporting dashboards",
+    badge: "MISSION CRITICAL",
+    title: "Enterprise ERP & Custom CRM Architectures",
+    tagline:
+      "Unify finance, inventory, and operations with sub-second latency.",
+    desc: "Custom-engineered resource planning and CRM platforms designed for multi-branch wholesale, manufacturing, and logistics enterprises. Built without proprietary recurring seat licensing or rigid SaaS constraints.",
+    techStack: [
+      "PostgreSQL",
+      "Node.js Microservices",
+      "Multi-Tenant Cloud",
+      "Role-Based ACL",
     ],
-    accent: "var(--color-cyber-accent)",
+    bullets: [
+      "Custom Multi-Entity Ledger & Inventory Modules",
+      "Real-Time BI Dashboard with Sub-100ms Query Times",
+      "Full API Connectors to Legacy Databases",
+      "Automated Multi-State Invoicing & Compliance",
+    ],
+    sla: "99.99% Cloud SLA",
+    timeline: "3–4 Weeks MVP",
   },
   {
     slug: "whatsapp-api",
+    category: "WhatsApp & Messaging",
     icon: Zap,
-    badge: "MOST POPULAR",
-    title: "WhatsApp Business API",
-    tagline: "Automate every client conversation at scale.",
-    desc: "Official Meta WhatsApp Business API setup and management. Send invoices, alerts, and support messages automatically. Also available: unofficial high-volume solutions.",
-    bullets: [
-      "Official Meta API partner setup",
-      "Bulk messaging automation",
-      "Chatbot & auto-reply systems",
-      "CRM & ERP integration",
+    badge: "OFFICIAL PARTNER",
+    title: "Official Meta WhatsApp Business API",
+    tagline: "Automate million-message customer communication flows.",
+    desc: "High-volume official Meta WhatsApp Cloud API pipelines. Implement verified Green Checkmark business accounts, bi-directional webhook dispatchers, automated payment alerts, and AI-assisted support bots.",
+    techStack: [
+      "Meta Cloud API",
+      "Webhooks Infrastructure",
+      "Redis Message Queue",
+      "SOC2 Encryption",
     ],
-    accent: "#25D366",
+    bullets: [
+      "Official Meta Green Checkmark Verification Support",
+      "Instant 2-Way Automated Invoicing & PDF Dispatch",
+      "High-Throughput Broadcast Campaigns with Analytics",
+      "Seamless Integration with Custom ERP & CRM Hubs",
+    ],
+    sla: "< 2s API Delivery",
+    timeline: "48h Fast Track",
   },
   {
     slug: "tally-whatsapp-integration",
+    category: "WhatsApp & Messaging",
     icon: Terminal,
-    badge: "SPECIALIST",
-    title: "Tally WhatsApp Integration",
-    tagline: "Send invoices directly from Tally to WhatsApp.",
-    desc: "Deep integration between your Tally accounting software and WhatsApp API. Automatically dispatch invoices, payment reminders, and ledger summaries to clients.",
-    bullets: [
-      "Zero manual data entry",
-      "Instant invoice delivery",
-      "Payment reminder automation",
-      "Tally ERP 9 & Tally Prime",
+    badge: "SPECIALIZED CONNECTOR",
+    title: "Automated Tally ERP WhatsApp Invoicing",
+    tagline: "Direct 3-second voucher dispatch straight from Tally Prime.",
+    desc: "A bi-directional software connector hooking directly into Tally Prime and Tally.ERP 9. When vouchers, ledgers, or payment reminders are generated, it dispatches branded, encrypted PDFs directly to clients' WhatsApp.",
+    techStack: [
+      "Tally XML Connector",
+      "Meta Cloud Gateway",
+      "Automated PDF Engine",
+      "Bank-Grade Encryption",
     ],
-    accent: "var(--color-cyber-accent3)",
+    bullets: [
+      "Zero Manual Export or Accounting Overhead",
+      "Automated Ledger Reconciliation Reminders",
+      "Multi-Company, Multi-GST & Multi-User Support",
+      "Tamper-Proof Digital Watermarked Invoices",
+    ],
+    sla: "Instant Trigger",
+    timeline: "Same-Day Setup",
   },
   {
     slug: "web-development",
+    category: "Web & Cloud",
     icon: Globe,
-    badge: "FULL STACK",
-    title: "Web Development & SEO",
-    tagline: "Your website as a lead generation engine.",
-    desc: "High-performance, visually stunning websites engineered to rank on Google and convert visitors into clients. Technical SEO, Core Web Vitals, and content strategy included.",
-    bullets: [
-      "Custom UI/UX design",
-      "Technical SEO & Core Web Vitals",
-      "Local & international SEO",
-      "Performance optimization",
+    badge: "NEXT.JS & EDGE",
+    title: "Modern Web & Edge Cloud Infrastructure",
+    tagline: "Sub-second web platforms engineered for maximum conversion.",
+    desc: "High-performance enterprise web applications built with Next.js App Router, edge serverless computing, and headless CMS integrations. Designed for high organic search rankings and flawless Core Web Vitals.",
+    techStack: [
+      "Next.js 15 App Router",
+      "Tailwind CSS",
+      "Vercel / AWS Edge",
+      "Headless CMS",
     ],
-    accent: "var(--color-cyber-accent2)",
+    bullets: [
+      "Sub-Second Core Web Vitals & Google Speed Scores",
+      "Mobile-First Responsive Editorial UI/UX",
+      "Enterprise SOC2-Compliant Cloud Deployments",
+      "End-to-End Analytics & Revenue Funnel Tracking",
+    ],
+    sla: "100 / 100 Speed Score",
+    timeline: "2–3 Weeks Delivery",
   },
   {
     slug: "digital-marketing",
+    category: "Growth & SEO",
     icon: BarChart3,
-    badge: "GROWTH",
-    title: "Digital Marketing",
-    tagline: "Dominate search rankings globally.",
-    desc: "Data-driven SEO and digital marketing campaigns that put your business in front of buyers who are actively searching. From Google Ads to content marketing — we cover it all.",
-    bullets: [
-      "Search engine marketing (SEM)",
-      "Content & keyword strategy",
-      "Google Analytics & reporting",
-      "Lead funnel optimization",
+    badge: "REVENUE GROWTH",
+    title: "Technical SEO & Programmatic Search",
+    tagline:
+      "Dominate high-intent search queries in competitive global markets.",
+    desc: "Data-driven organic search architecture and programmatic search engines. We engineer structured data schemas, crawl budgets, and programmatic landing architectures to capture qualified enterprise leads.",
+    techStack: [
+      "Programmatic Schema",
+      "Search Console API",
+      "Ahrefs Auditing",
+      "Revenue Attribution",
     ],
-    accent: "var(--color-cyber-accent)",
+    bullets: [
+      "Comprehensive Technical Code & Speed Auditing",
+      "Programmatic High-Intent Search Architecture",
+      "B2B Conversion Rate Optimization (CRO)",
+      "Multi-Region International Search Indexing",
+    ],
+    sla: "Data-Driven ROI",
+    timeline: "Ongoing Optimization",
   },
   {
     slug: "enterprise-consulting",
+    category: "Consulting",
     icon: Shield,
-    badge: "CONSULTING",
-    title: "Enterprise IT Consulting",
-    tagline: "Strategy before software.",
-    desc: "Not sure which system is right for you? We audit your current stack, map your requirements, and recommend the most efficient path — with zero vendor bias.",
-    bullets: [
-      "Technology stack audits",
-      "Digital transformation roadmaps",
-      "Vendor selection & negotiation",
-      "Implementation oversight",
+    badge: "STRATEGY & ARCHITECTURE",
+    title: "Enterprise Architecture & IT Consulting",
+    tagline: "Technology blueprints before line of code.",
+    desc: "Senior engineering audits of your current tech stack. We identify bottlenecks, evaluate build vs. buy decisions, eliminate software vendor lock-in, and engineer a phased migration roadmap for your enterprise.",
+    techStack: [
+      "Architecture Blueprints",
+      "Security Audits",
+      "Vendor Negotiation",
+      "Cloud Cost Optimization",
     ],
-    accent: "var(--color-cyber-accent2)",
+    bullets: [
+      "Full Stack Infrastructure & Bottleneck Audits",
+      "Cloud Migration & Microservices Roadmaps",
+      "Unbiased Vendor & Technology Selection",
+      "Zero Proprietary Lock-In Guarantees",
+    ],
+    sla: "100% Code Ownership",
+    timeline: "Custom Scope",
   },
+];
+
+const categories = [
+  "All Solutions",
+  "ERP & CRM",
+  "WhatsApp & Messaging",
+  "Web & Cloud",
+  "Growth & SEO",
+  "Consulting",
 ];
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "MIMC Technologies Services",
+  name: "MIMC Technologies Enterprise Services",
   url: "https://www.mimctechnologies.com/services",
-  itemListElement: services.map((s, i) => ({
+  itemListElement: allServices.map((s, i) => ({
     "@type": "ListItem",
     position: i + 1,
     name: s.title,
@@ -118,198 +192,379 @@ const schema = {
 };
 
 export default function Services() {
+  const [selectedCategory, setSelectedCategory] = useState("All Solutions");
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const filteredServices =
+    selectedCategory === "All Solutions"
+      ? allServices
+      : allServices.filter((s) => s.category === selectedCategory);
+
   return (
     <Layout
-      title="Services — ERP, WhatsApp API, Tally Integration & More"
-      description="MIMC Technologies offers enterprise ERP, CRM, official WhatsApp API, Tally WhatsApp integration, web development, and SEO services globally."
+      title="Enterprise Solutions & Architecture Services | MIMC Technologies"
+      description="Explore MIMC Technologies' enterprise software services: Custom ERP & CRM, official Meta WhatsApp API, Tally automation, Next.js web development, and technical SEO."
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Header */}
-        <section className="mb-20">
-          <div className="inline-block border border-[var(--color-cyber-accent)] text-[var(--color-cyber-accent)] px-4 py-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10 mb-8">
-            <span className="animate-blink mr-2">_</span> MODULE_REGISTRY
+      {/* ===================== HERO SECTION ===================== */}
+      <section className="relative px-6 pt-14 pb-12 overflow-hidden border-b border-[#E8E8E2]">
+        <div className="max-w-7xl mx-auto">
+          {/* Overline Badge */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-[#E8E8E2] text-xs font-semibold text-neutral-800 shadow-xs mb-6">
+            <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+            <span className="font-mono text-[11px] text-teal-700 tracking-wide uppercase">
+              CAPABILITIES DIRECTORY
+            </span>
+            <span className="text-neutral-300">|</span>
+            <span className="text-neutral-600 font-normal">
+              Toronto & Delhi Hubs
+            </span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
-              <span className="block cyber-glitch" data-text="OUR">
-                OUR
-              </span>
-              <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] via-[var(--color-cyber-accent3)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
-                SERVICES
-              </span>
-            </h1>
-            <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-wider text-sm leading-relaxed border-l-2 border-[var(--color-cyber-accent)] pl-4">
-              From enterprise ERP deployments to WhatsApp API automation — we
-              engineer the infrastructure that scales your business. Each
-              service is delivered by specialists, not generalists.
-            </p>
-          </div>
-        </section>
 
-        {/* Services Grid */}
-        <section className="mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {services.map((s) => (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8 space-y-4">
+              <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08]">
+                Bespoke Software Engineering <br />
+                <span className="text-teal-700">
+                  For High-Stakes Operations.
+                </span>
+              </h1>
+              <p className="text-neutral-600 text-base sm:text-lg max-w-2xl leading-relaxed font-normal">
+                Every enterprise platform we construct is custom-tailored, fully
+                owned by your company, and backed by rigid 99.99% uptime
+                guarantees.
+              </p>
+            </div>
+
+            <div className="lg:col-span-4 lg:text-right">
               <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="group p-[2px] cyber-chamfer block"
-                style={{
-                  background: `linear-gradient(135deg, ${s.accent}33, transparent)`,
-                }}
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-medium text-sm transition-all shadow-xs active:scale-95"
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-8 h-full flex flex-col relative overflow-hidden transition-all duration-300 group-hover:bg-[#0a0a0f]">
-                  {/* Top accent line */}
-                  <div
-                    className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{
-                      background: `linear-gradient(to right, transparent, ${s.accent}, transparent)`,
-                    }}
-                  />
+                <span>Request Architecture Review</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
 
-                  {/* Badge */}
-                  <div className="mb-6 self-start">
-                    <span
-                      className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-[0.3em] px-3 py-1 border"
-                      style={{
-                        color: s.accent,
-                        borderColor: `${s.accent}44`,
-                        background: `${s.accent}11`,
-                      }}
-                    >
+          {/* Filter Tabs */}
+          <div className="mt-10 pt-6 border-t border-[#E8E8E2]/60 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-lg text-xs font-mono font-medium transition-all whitespace-nowrap cursor-pointer ${
+                  selectedCategory === cat
+                    ? "bg-[#111111] text-white shadow-xs"
+                    : "bg-white border border-[#E8E8E2] text-neutral-600 hover:text-neutral-900 hover:border-neutral-400"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===================== SERVICES GRID ===================== */}
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredServices.map((s, idx) => (
+              <motion.div
+                key={s.slug}
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.25, delay: idx * 0.04 }}
+                className="precision-card rounded-2xl p-7 flex flex-col justify-between group relative overflow-hidden"
+              >
+                <div>
+                  {/* Top Bar: Icon + Badge */}
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="w-11 h-11 rounded-xl bg-teal-50 border border-teal-100/80 flex items-center justify-center text-teal-700 group-hover:bg-teal-700 group-hover:text-white transition-all duration-300">
+                      <s.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-mono font-bold tracking-wider text-teal-700 bg-teal-50/80 px-2.5 py-1 rounded-md border border-teal-200/50 uppercase">
                       {s.badge}
                     </span>
                   </div>
 
-                  {/* Icon */}
-                  <div
-                    className="w-14 h-14 border border-[var(--color-cyber-border)] flex items-center justify-center mb-6 bg-black transition-all group-hover:border-current"
-                    style={{ ["--tw-shadow-color" as string]: s.accent }}
-                  >
-                    <s.icon
-                      className="w-7 h-7 transition-colors"
-                      strokeWidth={1.5}
-                      style={{ color: "var(--color-cyber-muted-fg)" }}
-                    />
-                  </div>
-
-                  <h2
-                    className="text-lg md:text-xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest mb-2 text-white transition-colors"
-                    style={{}}
-                  >
+                  {/* Title & Tagline */}
+                  <h2 className="text-xl font-bold text-[#171717] group-hover:text-teal-800 transition-colors mb-1.5">
                     {s.title}
                   </h2>
-                  <p
-                    className="font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest mb-4"
-                    style={{ color: s.accent }}
-                  >
+                  <p className="text-xs font-medium text-teal-700 mb-3">
                     {s.tagline}
                   </p>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider mb-6 flex-1">
+
+                  <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed mb-5">
                     {s.desc}
                   </p>
 
-                  {/* Bullet list */}
-                  <ul className="space-y-2 mb-8">
-                    {s.bullets.map((b) => (
-                      <li
-                        key={b}
-                        className="flex items-center gap-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-wider text-[var(--color-cyber-muted-fg)]"
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {s.techStack.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[10px] font-mono text-neutral-500 bg-[#F4F4F0] px-2 py-0.5 rounded border border-[#E8E8E2]"
                       >
-                        <span style={{ color: s.accent }}>›</span> {b}
-                      </li>
+                        {tech}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
 
-                  {/* CTA */}
-                  <div
-                    className="flex items-center gap-2 font-[var(--font-cyber-accent)] text-xs uppercase tracking-widest font-bold transition-all"
-                    style={{ color: s.accent }}
-                  >
-                    LEARN MORE{" "}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {/* Bullet Highlights */}
+                  <div className="space-y-2 mb-6 pt-4 border-t border-[#E8E8E2]/60">
+                    {s.bullets.map((b, bIdx) => (
+                      <div
+                        key={bIdx}
+                        className="flex items-start gap-2 text-xs text-neutral-600 font-medium"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0 mt-0.5" />
+                        <span>{b}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        </section>
 
-        {/* Process Section */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-16 relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-[var(--color-cyber-accent)]/5 blur-[80px]" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
-            <span className="text-[var(--color-cyber-accent)]">&gt;&gt;</span>{" "}
-            HOW_WE_WORK
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                {/* Footer of Card: SLA + Action */}
+                <div className="pt-4 border-t border-[#E8E8E2] flex items-center justify-between">
+                  <div className="text-[11px] font-mono text-neutral-500">
+                    SLA:{" "}
+                    <span className="text-teal-700 font-bold">{s.sla}</span>
+                  </div>
+
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#171717] group-hover:text-teal-700 transition-colors"
+                  >
+                    <span>Architecture Docs</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* ===================== ENGINEERING LIFECYCLE (METHODOLOGY) ===================== */}
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <div className="rounded-3xl bg-[#111111] text-white p-8 sm:p-14 border border-neutral-800 shadow-xl relative overflow-hidden">
+          <div className="max-w-3xl mb-12">
+            <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-widest block mb-2">
+              [ METHODOLOGY ]
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+              The Enterprise Engineering Lifecycle
+            </h2>
+            <p className="text-neutral-400 text-sm leading-relaxed mt-2">
+              Predictable, transparent, and structured delivery. Zero guesswork,
+              zero unaccounted delays.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               {
                 step: "01",
-                title: "Discovery",
-                desc: "We audit your current systems and map exact requirements.",
+                title: "Discovery & Audit",
+                desc: "We analyze your existing database schemas, bottlenecks, and workflow friction.",
               },
               {
                 step: "02",
-                title: "Blueprint",
-                desc: "We engineer a detailed solution architecture for your approval.",
+                title: "Custom Blueprint",
+                desc: "We engineer architectural schemas, security models, and API interfaces for sign-off.",
               },
               {
                 step: "03",
-                title: "Deploy",
-                desc: "Our team builds and deploys — fast, clean, with zero disruption.",
+                title: "Staged Deployment",
+                desc: "Iterative rollouts to staging and production with automated failover pipelines.",
               },
               {
                 step: "04",
-                title: "Support",
-                desc: "Ongoing monitoring, updates, and a dedicated account manager.",
+                title: "SLA Governance",
+                desc: "24/7/365 infrastructure monitoring with dedicated architect escalation channels.",
               },
-            ].map((p, i) => (
-              <div key={p.step} className="relative">
-                {i < 3 && (
-                  <div className="hidden md:block absolute top-6 left-full w-full h-px bg-gradient-to-r from-[var(--color-cyber-accent)] to-transparent z-10" />
-                )}
-                <div className="font-[var(--font-cyber-head)] text-5xl font-black text-[var(--color-cyber-accent)]/20 mb-4">
-                  {p.step}
+            ].map((phase, pIdx) => (
+              <div
+                key={pIdx}
+                className="p-6 rounded-2xl bg-neutral-900/90 border border-neutral-800 flex flex-col justify-between"
+              >
+                <div>
+                  <span className="font-mono text-2xl font-bold text-teal-400 block mb-3">
+                    {phase.step}
+                  </span>
+                  <h3 className="text-base font-bold text-white mb-2">
+                    {phase.title}
+                  </h3>
+                  <p className="text-neutral-400 text-xs leading-relaxed">
+                    {phase.desc}
+                  </p>
                 </div>
-                <h3 className="font-[var(--font-cyber-head)] text-lg font-bold uppercase tracking-widest text-white mb-3">
-                  {p.title}
-                </h3>
-                <p className="text-[var(--color-cyber-muted-fg)] text-sm uppercase tracking-wider leading-relaxed">
-                  {p.desc}
-                </p>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section className="text-center border border-[var(--color-cyber-accent)] p-12 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-4xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
-            NOT SURE WHICH{" "}
-            <span className="text-[var(--color-cyber-accent)]">
-              SERVICE YOU NEED?
-            </span>
+      {/* ===================== FAQ ACCORDION ===================== */}
+      <section className="max-w-4xl mx-auto px-6 py-10">
+        <div className="text-center mb-8">
+          <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+            [ CLARITY ]
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#171717]">
+            Frequently Asked Technical Questions
           </h2>
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-sm mb-10 relative z-10">
-            Book a free 30-minute discovery call. No sales pitch. Just honest
-            advice.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-3 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-10 py-5 text-base relative z-10"
-          >
-            BOOK FREE CALL{" "}
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </section>
-      </div>
+        </div>
+
+        <div className="divide-y divide-[#E8E8E2] border-y border-[#E8E8E2]">
+          {[
+            {
+              q: "Can you customize ERP and CRM modules specifically for our business logic?",
+              a: "Yes. Unlike generic off-the-shelf software, our systems are built specifically around your operating procedures. You get dedicated modules for your exact invoicing logic, warehouse dispatch routines, multi-branch tax requirements, and user permission hierarchies.",
+            },
+            {
+              q: "How does the Meta WhatsApp API integrate with existing legacy systems?",
+              a: "We deploy secure webhook listeners and API gateways that interface with your existing SQL databases, REST/GraphQL endpoints, or local desktop software (such as Tally Prime) with sub-second message dispatch times.",
+            },
+            {
+              q: "Who owns the code and intellectual property after deployment?",
+              a: "You retain 100% ownership of all source code, database architecture, and API credentials. We deploy directly into your cloud accounts (AWS, Vercel, or on-premise servers).",
+            },
+            {
+              q: "What level of support is provided after launch?",
+              a: "We provide 24/7 infrastructure monitoring, guaranteed SLA response windows, and dedicated senior software engineers across our Toronto and Delhi hubs.",
+            },
+          ].map((faq, i) => {
+            const isOpen = openFaq === i;
+            return (
+              <div key={i} className="py-4">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none group"
+                  aria-expanded={isOpen}
+                >
+                  <span className="text-base sm:text-lg font-bold text-[#171717] group-hover:text-teal-800 transition-colors">
+                    {faq.q}
+                  </span>
+                  <span className="w-7 h-7 rounded-full border border-[#E8E8E2] flex items-center justify-center text-neutral-500 shrink-0 group-hover:border-teal-600 transition-colors">
+                    {isOpen ? (
+                      <Minus className="w-3.5 h-3.5 text-teal-700" />
+                    ) : (
+                      <Plus className="w-3.5 h-3.5" />
+                    )}
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed max-w-3xl">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ===================== CONVERSION CTA ===================== */}
+      <section className="max-w-7xl mx-auto px-6 py-10">
+        <div className="rounded-3xl bg-[#F4F4F0] border border-[#E8E8E2] p-8 sm:p-12 text-center relative overflow-hidden">
+          <div className="max-w-2xl mx-auto space-y-4 relative z-10">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block">
+              [ GET STARTED ]
+            </span>
+
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#171717] leading-tight">
+              Schedule Your Free Architecture Consultation
+            </h2>
+
+            <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
+              Speak directly with an enterprise software architect. We’ll assess
+              your requirements and deliver a detailed technical roadmap.
+            </p>
+
+            {isSubscribed ? (
+              <div className="p-3.5 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 text-sm font-medium flex items-center justify-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-teal-600" />
+                <span>
+                  Thank you! An architect will reach out within 24 hours.
+                </span>
+              </div>
+            ) : (
+              <form
+                className="flex flex-col sm:flex-row items-stretch justify-center gap-3 max-w-lg mx-auto pt-2"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  const email = new FormData(form).get("email");
+                  try {
+                    await fetch(
+                      "https://formsubmit.co/ajax/info@mimctechnologies.com",
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                          email: email,
+                          _subject:
+                            "Services Consultation Request from MIMC Redesign",
+                        }),
+                      },
+                    );
+                    setIsSubscribed(true);
+                  } catch (err) {
+                    console.error(err);
+                    setIsSubscribed(true);
+                  }
+                }}
+              >
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter corporate email address..."
+                  className="px-5 py-3 rounded-xl bg-white border border-[#E8E8E2] text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 w-full"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 rounded-xl bg-[#111111] hover:bg-teal-700 text-white text-sm font-semibold transition-all shrink-0 active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                >
+                  <span>Request Scope</span>
+                  <Send className="w-3.5 h-3.5" />
+                </button>
+              </form>
+            )}
+
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-neutral-500 pt-2">
+              <span>✓ Direct Architect Review</span>
+              <span>✓ Unbiased Technology Guidance</span>
+              <span>✓ Canada & India Operations</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }

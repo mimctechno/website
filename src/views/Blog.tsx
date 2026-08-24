@@ -1,117 +1,174 @@
-import { ArrowRight, Clock, Tag } from "lucide-react";
+"use client";
+
+import { useState, useMemo } from "react";
+import {
+  ArrowRight,
+  Clock,
+  Tag,
+  Search,
+  Sparkles,
+  BookOpen,
+  ChevronRight,
+} from "lucide-react";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { posts } from "../data/posts";
+import { posts, type Post } from "../data/posts";
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  name: "MIMC Technologies Blog",
+  name: "MIMC Technologies Engineering & Enterprise Blog",
   description:
-    "Insights on ERP, WhatsApp API, Tally integration, and enterprise software from the MIMC Technologies team.",
+    "Technical insights, implementation blueprints, and guides on ERP software, Meta WhatsApp API, and Tally integration.",
   url: "https://www.mimctechnologies.com/blog",
 };
 
-const categoryColors: Record<string, string> = {
-  "WhatsApp API": "#25D366",
-  "ERP & CRM": "var(--color-cyber-accent)",
-  "Web Development": "var(--color-cyber-accent2)",
-  SEO: "var(--color-cyber-accent3)",
-};
+const CATEGORIES = [
+  "All Insights",
+  "WhatsApp API",
+  "Tally Integration",
+  "ERP & CRM",
+  "Web & Cloud",
+  "SEO & Growth",
+  "Advisory",
+];
 
 export default function Blog() {
+  const [selectedCategory, setSelectedCategory] = useState("All Insights");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredPosts = useMemo(() => {
+    return posts.filter((post) => {
+      const matchesCategory =
+        selectedCategory === "All Insights" ||
+        post.category === selectedCategory;
+      const matchesSearch =
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.tags.some((t) =>
+          t.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  const featuredPost = filteredPosts[0];
+  const remainingPosts = filteredPosts.slice(1);
+
   return (
     <Layout
-      title="Blog — ERP, WhatsApp API & Enterprise Software Insights"
-      description="Expert insights on WhatsApp Business API, Tally integration, ERP software, and digital marketing from MIMC Technologies."
+      title="Engineering Insights & Enterprise Software Blog | MIMC Technologies"
+      description="In-depth guides on Meta WhatsApp Business API, Tally ERP automation, custom ERP architecture, and conversion engineering from MIMC architects."
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Header */}
-        <section className="mb-20">
-          <div className="inline-block border border-[var(--color-cyber-accent)] text-[var(--color-cyber-accent)] px-4 py-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10 mb-8">
-            <span className="animate-blink mr-2">_</span> KNOWLEDGE_BASE
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HEADER ===================== */}
+        <section className="mb-12 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/60 text-teal-800 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
+            ENGINEERING KNOWLEDGE BASE
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
-              <span className="block cyber-glitch" data-text="THE">
-                THE
-              </span>
-              <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] via-[var(--color-cyber-accent3)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
-                BLOG
-              </span>
-            </h1>
-            <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-wider text-sm leading-relaxed border-l-2 border-[var(--color-cyber-accent)] pl-4">
-              Practical guides on WhatsApp API, Tally integration, ERP software,
-              and digital marketing — written by the team that builds and
-              deploys these systems daily.
-            </p>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] mb-4">
+            Architecture Blueprints & <br />
+            <span className="text-teal-700">Enterprise Software Insights.</span>
+          </h1>
+
+          <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
+            Written by senior architects who design, deploy, and scale
+            enterprise ERP platforms, Meta WhatsApp API pipelines, and automated
+            accounting bridges daily.
+          </p>
+        </section>
+
+        {/* ===================== FILTER & SEARCH BAR ===================== */}
+        <section className="mb-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-y border-[#E8E8E2] py-4">
+          {/* Category Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  selectedCategory === cat
+                    ? "bg-[#111111] text-white shadow-xs"
+                    : "bg-white text-neutral-600 hover:text-neutral-900 border border-[#E8E8E2]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Search Input */}
+          <div className="relative min-w-[240px]">
+            <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search blueprints & guides..."
+              className="w-full bg-white border border-[#E8E8E2] rounded-xl pl-9 pr-4 py-2 text-xs text-[#171717] placeholder:text-neutral-400 focus:outline-none focus:border-teal-600 transition-all"
+            />
           </div>
         </section>
 
-        {/* Featured post (first) */}
-        {posts[0] && (
-          <section className="mb-16">
+        {/* ===================== FEATURED POST ===================== */}
+        {featuredPost && (
+          <section className="mb-14">
             <Link
-              href={`/blog/${posts[0].slug}`}
-              className="group block p-[2px] cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-border)] to-[var(--color-cyber-border)] hover:from-[var(--color-cyber-accent)] hover:to-[var(--color-cyber-accent2)] transition-colors duration-500"
+              href={`/blog/${featuredPost.slug}`}
+              className="precision-card rounded-3xl p-6 sm:p-10 block group"
             >
-              <div className="bg-[var(--color-cyber-card)] cyber-chamfer-reverse p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative overflow-hidden">
-                <div className="absolute -top-32 -right-32 w-80 h-80 bg-[var(--color-cyber-accent)]/5 blur-[100px] group-hover:bg-[var(--color-cyber-accent)]/10 transition-colors" />
-
-                {/* Featured Image */}
-                <div className="h-64 lg:h-80 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] group-hover:border-[var(--color-cyber-accent)]/50 transition-colors relative overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                {/* Cover Image */}
+                <div className="lg:col-span-6 rounded-2xl overflow-hidden aspect-[16/10] bg-neutral-100 border border-[#E8E8E2] relative">
                   <img
-                    src={posts[0].image}
-                    alt={posts[0].title}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                    src={featuredPost.image}
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-cyber-card)] via-transparent to-transparent opacity-80" />
-                  <div className="absolute inset-0 border border-[var(--color-cyber-accent)]/20 pointer-events-none mix-blend-overlay" />
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-teal-800 border border-[#E8E8E2] uppercase tracking-wider">
+                    FEATURED BLUEPRINT
+                  </div>
                 </div>
 
-                <div className="space-y-5 relative z-10">
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span
-                      className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest px-3 py-1 border"
-                      style={{
-                        color:
-                          categoryColors[posts[0].category] ||
-                          "var(--color-cyber-accent)",
-                        borderColor: `${categoryColors[posts[0].category] || "var(--color-cyber-accent)"}44`,
-                        background: `${categoryColors[posts[0].category] || "var(--color-cyber-accent)"}11`,
-                      }}
-                    >
-                      FEATURED
+                {/* Content */}
+                <div className="lg:col-span-6 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200/50">
+                      {featuredPost.category}
                     </span>
-                    <span className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                      {posts[0].category}
+                    <span className="text-xs text-neutral-400 font-mono flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {featuredPost.readTime}
                     </span>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-[var(--font-cyber-head)] uppercase tracking-wider text-white group-hover:text-[var(--color-cyber-accent)] transition-colors leading-tight">
-                    {posts[0].title}
+
+                  <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#171717] group-hover:text-teal-800 transition-colors leading-tight">
+                    {featuredPost.title}
                   </h2>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider">
-                    {posts[0].description}
+
+                  <p className="text-neutral-600 text-sm leading-relaxed line-clamp-3">
+                    {featuredPost.description}
                   </p>
-                  <div className="flex items-center gap-4 text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {posts[0].readTime}
-                    </span>
-                    <span>
-                      {new Date(posts[0].date).toLocaleDateString("en-GB", {
+
+                  <div className="pt-4 border-t border-[#E8E8E2] flex items-center justify-between">
+                    <span className="text-xs font-mono text-neutral-400">
+                      {new Date(featuredPost.date).toLocaleDateString("en-US", {
+                        month: "short",
                         day: "numeric",
-                        month: "long",
                         year: "numeric",
                       })}
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest font-bold group-hover:gap-4 transition-all">
-                    READ ARTICLE <ArrowRight className="w-4 h-4" />
+                    <span className="text-xs font-bold text-teal-700 group-hover:text-teal-900 inline-flex items-center gap-1">
+                      <span>Read Blueprint</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
                 </div>
               </div>
@@ -119,122 +176,123 @@ export default function Blog() {
           </section>
         )}
 
-        {/* Remaining posts */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; ALL_ARTICLES
-            </span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {posts.slice(1).map((post) => {
-              const accent =
-                categoryColors[post.category] || "var(--color-cyber-accent)";
-              return (
+        {/* ===================== ARTICLES GRID ===================== */}
+        {remainingPosts.length > 0 && (
+          <section className="mb-16">
+            <div className="mb-6 flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block">
+                [ ALL PUBLICATIONS ]
+              </span>
+              <span className="text-xs font-mono text-neutral-400">
+                {filteredPosts.length} Articles Total
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {remainingPosts.map((post) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group p-[2px] cyber-chamfer block"
-                  style={{
-                    background: `linear-gradient(135deg, ${accent}33, transparent)`,
-                  }}
+                  className="precision-card rounded-2xl p-6 flex flex-col justify-between group block"
                 >
-                  <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-8 h-full flex flex-col relative overflow-hidden group-hover:bg-[#0a0a0f] transition-colors">
-                    <div
-                      className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{
-                        background: `linear-gradient(to right, transparent, ${accent}, transparent)`,
-                      }}
-                    />
-
-                    {/* Article Cover */}
-                    <div className="h-40 border border-[var(--color-cyber-border)] bg-[var(--color-cyber-bg)] mb-6 group-hover:border-[var(--color-cyber-accent)]/50 transition-colors relative overflow-hidden">
+                  <div>
+                    {/* Thumbnail */}
+                    <div className="rounded-xl overflow-hidden aspect-[16/9] bg-neutral-100 border border-[#E8E8E2] mb-5 relative">
                       <img
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
                     </div>
 
-                    <div className="flex items-center gap-2 mb-4 flex-wrap">
-                      <span
-                        className="text-[10px] font-[var(--font-cyber-accent)] uppercase tracking-widest px-2 py-0.5 border"
-                        style={{
-                          color: accent,
-                          borderColor: `${accent}44`,
-                          background: `${accent}11`,
-                        }}
-                      >
+                    <div className="flex items-center gap-3 mb-2.5">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200/50">
                         {post.category}
                       </span>
+                      <span className="text-xs text-neutral-400 font-mono flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
                     </div>
 
-                    <h2 className="text-lg font-bold font-[var(--font-cyber-head)] uppercase tracking-wider text-white mb-3 group-hover:text-[var(--color-cyber-accent)] transition-colors leading-snug flex-1">
+                    <h3 className="font-heading font-bold text-lg text-[#171717] group-hover:text-teal-800 transition-colors mb-2 leading-snug">
                       {post.title}
-                    </h2>
-                    <p className="text-[var(--color-cyber-muted-fg)] text-xs leading-relaxed uppercase tracking-wider mb-5 line-clamp-3">
+                    </h3>
+
+                    <p className="text-xs text-neutral-600 leading-relaxed line-clamp-2 mb-4">
                       {post.description}
                     </p>
+                  </div>
 
-                    <div className="flex items-center justify-between text-xs font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> {post.readTime}
-                      </span>
-                      <span
-                        className="flex items-center gap-1"
-                        style={{ color: accent }}
-                      >
-                        READ <ArrowRight className="w-3 h-3" />
-                      </span>
-                    </div>
+                  <div className="pt-4 border-t border-[#E8E8E2] flex items-center justify-between text-xs">
+                    <span className="font-mono text-neutral-400 text-[11px]">
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <span className="font-bold text-teal-700 group-hover:text-teal-900 inline-flex items-center gap-1">
+                      <span>Read Guide</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
                 </Link>
-              );
-            })}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
-        {/* Tags cloud */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-8 md:p-12">
-          <div className="flex items-center gap-3 mb-8">
-            <Tag className="w-4 h-4 text-[var(--color-cyber-accent)]" />
-            <span className="font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest text-[var(--color-cyber-accent)]">
-              TOPICS
-            </span>
+        {/* ===================== TOPICS CLOUD ===================== */}
+        <section className="mb-16 rounded-2xl bg-white border border-[#E8E8E2] p-6 sm:p-8">
+          <div className="flex items-center gap-2 mb-4">
+            <Tag className="w-4 h-4 text-teal-700" />
+            <h3 className="font-heading font-bold text-base text-[#171717]">
+              Explore Topics & Tags
+            </h3>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {Array.from(new Set(posts.flatMap((p) => p.tags))).map((tag) => (
               <span
                 key={tag}
-                className="border border-[var(--color-cyber-border)] px-4 py-2 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)] hover:border-[var(--color-cyber-accent)] hover:text-[var(--color-cyber-accent)] transition-colors cursor-pointer"
+                onClick={() => setSearchQuery(tag)}
+                className="text-xs font-mono bg-[#FAFAF8] hover:bg-teal-50 hover:text-teal-800 border border-[#E8E8E2] hover:border-teal-300 px-3 py-1.5 rounded-lg text-neutral-600 transition-colors cursor-pointer"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="text-center border border-[var(--color-cyber-accent)] p-12 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-4 relative z-10">
-            READY TO IMPLEMENT
-            <br />
-            <span className="text-[var(--color-cyber-accent)]">
-              WHAT YOU'VE LEARNED?
+        {/* ===================== CTA BANNER ===================== */}
+        <section className="rounded-3xl bg-[#111111] text-white p-8 sm:p-12 border border-neutral-800 shadow-xl text-center relative overflow-hidden">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-widest block">
+              [ IMPLEMENTATION SUPPORT ]
             </span>
-          </h2>
-          <p className="text-[var(--color-cyber-muted-fg)] font-[var(--font-cyber-accent)] uppercase tracking-widest text-xs mb-8 relative z-10">
-            Talk to our team. Free consultation, no commitment.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-8 py-4 relative z-10"
-          >
-            GET IN TOUCH{" "}
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white">
+              Ready to Implement What You've Read?
+            </h2>
+            <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed pb-2">
+              Our engineering team builds and integrates these architectures
+              directly for your business. Book a discovery session today.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
+              >
+                <span>Schedule Architect Call</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 font-semibold text-sm border border-neutral-700 transition-all"
+              >
+                <span>All Capabilities</span>
+              </Link>
+            </div>
+          </div>
         </section>
       </div>
     </Layout>

@@ -1,6 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import {
   Database,
-  CheckCircle,
+  CheckCircle2,
   ChevronRight,
   BarChart3,
   Users,
@@ -8,8 +11,14 @@ import {
   Zap,
   Globe,
   ArrowRight,
+  Plus,
+  Minus,
+  Layers,
+  Sparkles,
+  Server,
 } from "lucide-react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
 import RelatedServices from "../../components/RelatedServices";
@@ -19,103 +28,101 @@ import ServiceBadges from "../../components/ui/ServiceBadges";
 const features = [
   {
     icon: Database,
-    title: "Custom ERP Modules",
-    desc: "We engineer ERP modules precisely for your industry — manufacturing, retail, distribution, services. No bloated generic software.",
+    title: "Custom Module Architecture",
+    desc: "Engineered specifically for your exact supply chain, accounting logic, and multi-warehouse operations. Zero bloated generic templates.",
   },
   {
     icon: Users,
-    title: "CRM & Lead Pipeline",
-    desc: "Full CRM with lead capture, pipeline management, follow-up automation, and client communication history in one dashboard.",
+    title: "CRM & Unified Lead Pipelines",
+    desc: "Complete client directory, multi-channel lead capture, automated follow-up cadences, and client interaction history in one pane of glass.",
   },
   {
     icon: BarChart3,
-    title: "Live Reporting",
-    desc: "Real-time dashboards and reports. Inventory levels, revenue trends, overdue invoices — always visible, always accurate.",
+    title: "Sub-100ms Live Telemetry",
+    desc: "Real-time query execution on inventory levels, multi-branch revenue aggregates, and overdue receivables with instant export capabilities.",
   },
   {
     icon: Zap,
-    title: "Workflow Automation",
-    desc: "Eliminate repetitive tasks. Automate purchase orders, sales invoices, approval workflows, and inter-department data flow.",
+    title: "Automated Workflow Engines",
+    desc: "Eliminate manual data reconciliation. Automated purchase order generation, dynamic invoice dispatch, and cross-department approvals.",
   },
   {
     icon: Shield,
-    title: "Role-Based Access",
-    desc: "Granular user permissions ensure each team member sees only what they need. Full audit logs for every action.",
+    title: "Role-Based ACL & Audit Logs",
+    desc: "Granular access controls ensure team members only access their authorized scope. Immutable audit logging on all financial records.",
   },
   {
     icon: Globe,
-    title: "Multi-Company & Multi-Branch",
-    desc: "Manage multiple companies, branches, and warehouses from a single unified platform — with consolidated reporting.",
+    title: "Multi-Entity & Multi-GST Ready",
+    desc: "Consolidated multi-company balance sheets, multi-currency conversion, and regional tax compliance managed seamlessly.",
   },
 ];
 
 const industries = [
   {
-    name: "Manufacturing",
+    name: "Manufacturing & Assembly",
     items: [
-      "Production planning & tracking",
-      "Raw material inventory",
-      "Quality control modules",
-      "Cost of goods sold reporting",
+      "Bill of Materials (BOM) tracking",
+      "Raw material inventory forecast",
+      "Quality assurance inspection gates",
+      "Cost of Goods Sold (COGS) analytics",
     ],
   },
   {
-    name: "Distribution & Retail",
+    name: "Wholesale & Distribution",
     items: [
-      "Multi-warehouse inventory",
-      "Purchase order automation",
-      "Customer credit management",
-      "GST & tax compliance",
+      "Multi-location warehouse sync",
+      "Dynamic wholesale price lists",
+      "Credit limit enforcement & alerts",
+      "Automated e-way bill generation",
     ],
   },
   {
-    name: "Services & Consulting",
+    name: "Professional Services",
     items: [
-      "Project tracking & billing",
-      "Timesheet management",
-      "Client invoice automation",
-      "Revenue forecasting",
+      "Milestone-based project billing",
+      "Resource allocation tracking",
+      "Automated recurring retainer invoices",
+      "Profitability forecasting dashboards",
     ],
   },
   {
-    name: "Healthcare & Education",
+    name: "Healthcare & Logistics",
     items: [
-      "Patient/student records",
-      "Appointment scheduling",
-      "Fee management",
-      "Compliance & audit trails",
+      "Batch & expiry date tracking",
+      "Cold-chain shipment telemetry",
+      "Regulatory compliance audit logs",
+      "Encrypted patient & client records",
     ],
   },
 ];
 
 const faqs = [
   {
-    q: "What is an ERP system?",
-    a: "ERP (Enterprise Resource Planning) is software that connects all departments of your business — finance, inventory, sales, HR, and operations — into a single system. Instead of using separate tools that don't talk to each other, ERP gives you one unified platform with real-time data across your whole business.",
+    q: "What is an enterprise ERP system and why build custom?",
+    a: "An Enterprise Resource Planning (ERP) platform consolidates your finance, inventory, sales, and operations into a single authoritative database. Building custom gives you complete source code ownership, eliminates monthly per-user licensing fees, and adapts 100% to your workflows instead of forcing your team into rigid SaaS constraints.",
   },
   {
-    q: "What is a CRM and how is it different from ERP?",
-    a: "CRM (Customer Relationship Management) focuses on managing your relationships with leads and clients — tracking interactions, managing pipelines, and automating follow-ups. ERP covers the broader operational picture including inventory, finance, and HR. We often deploy both together for maximum efficiency.",
+    q: "How does your custom CRM integrate with the ERP database?",
+    a: "Our CRM and ERP share a unified PostgreSQL/Node.js architecture. When a sales deal closes in the CRM, it instantly provisions invoices, inventory reservations, and billing records in the ERP with zero sync delays or API mismatches.",
   },
   {
-    q: "How long does ERP implementation take?",
-    a: "A core ERP deployment for a small to mid-size business typically takes 4–12 weeks depending on the number of modules, data migration complexity, and team size. We use an agile approach so you see working software in the first 2–3 weeks.",
+    q: "What is the typical deployment timeline for a custom ERP?",
+    a: "Using our rapid modular development methodology, core modules (invoicing, accounts, inventory) are operational in staging within 3–4 weeks. Full enterprise rollouts occur in iterative phases with continuous user training.",
   },
   {
-    q: "Can you integrate ERP with WhatsApp or Tally?",
-    a: "Yes. This is one of our specialisations. We can integrate your ERP with WhatsApp Business API for automated client communications, and with Tally for seamless accounting data flow. All our ERP deployments are built with integration-first architecture.",
+    q: "Can this ERP integrate with Tally Prime and WhatsApp Business API?",
+    a: "Yes. All our ERP deployments feature integration-first architecture. We deploy native connectors to Tally Prime for accounting sync and the official Meta WhatsApp API for instant invoice delivery and automated customer communication.",
   },
   {
-    q: "Do you provide cloud-based or on-premise ERP?",
-    a: "Both. We offer cloud-hosted ERP (lower upfront cost, accessible anywhere) and on-premise deployments (for businesses with data sovereignty requirements or existing server infrastructure). We advise based on your specific needs.",
-  },
-  {
-    q: "Can I migrate from my existing software to your ERP?",
-    a: "Yes. We handle full data migration from your existing accounting software, spreadsheets, or legacy ERP systems. Our team ensures zero data loss and minimal disruption to your daily operations.",
+    q: "Do you deploy to our cloud infrastructure or host it?",
+    a: "We deploy directly to your enterprise cloud infrastructure (AWS, Vercel, Google Cloud, or On-Premise bare-metal servers). You retain full administrative root access, database backups, and intellectual property.",
   },
 ];
 
 export default function ERPCRM() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <Layout
       title="Enterprise ERP & CRM Solutions — Custom Software Development"
@@ -140,151 +147,108 @@ export default function ERPCRM() {
         rating={4.9}
         reviewCount={345}
       />
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Hero */}
-        <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="flex gap-3 flex-wrap">
-              <span className="border border-[var(--color-cyber-accent)]/40 text-[var(--color-cyber-accent)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent)]/10">
-                Enterprise Grade
-              </span>
-              <span className="border border-[var(--color-cyber-accent2)]/40 text-[var(--color-cyber-accent2)] px-3 py-1 text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest bg-[var(--color-cyber-accent2)]/10">
-                Custom Built
-              </span>
-            </div>
 
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 space-y-6">
             <ServiceBadges rating={4.9} reviewCount={345} />
 
-            <h1 className="text-5xl md:text-6xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] leading-none text-white">
-              <span className="block cyber-glitch" data-text="ENTERPRISE">
-                ENTERPRISE
-              </span>
-              <span className="bg-gradient-to-r from-[var(--color-cyber-accent)] to-[var(--color-cyber-accent2)] bg-clip-text text-transparent">
-                ERP & CRM
-              </span>
-              <span className="block text-white text-2xl sm:text-3xl md:text-4xl mt-2">
-                SOLUTIONS
-              </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] font-heading">
+              Custom Enterprise ERP <br />
+              <span className="text-teal-700">& Scalable CRM Software.</span>
             </h1>
 
-            <p className="border-l-2 border-[var(--color-cyber-accent)] pl-4 font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider text-sm">
-              &gt; One system for your entire operation.
-              <br />
-              &gt; Custom-built for your industry and workflow.
-              <br />
-              &gt; From first module to full deployment in weeks.
-              <span className="inline-block w-2 h-4 bg-[var(--color-cyber-accent)] animate-blink ml-1 align-middle" />
+            <p className="text-neutral-600 text-base sm:text-lg leading-relaxed font-normal">
+              Eliminate operational bottlenecks, disconnected spreadsheets, and
+              expensive per-user SaaS license fees. We engineer custom business
+              software that unifies multi-warehouse inventory, billing, and
+              sales pipelines.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-8 py-4 font-bold"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm shadow-xs transition-all active:scale-95"
               >
-                REQUEST DEMO{" "}
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span>Schedule Architecture Demo</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/services"
-                className="group inline-flex items-center justify-center gap-2 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent2)] text-[var(--color-cyber-accent2)] hover:bg-[var(--color-cyber-accent2)] hover:text-black transition-all duration-300 px-8 py-4"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-semibold text-sm border border-[#E8E8E2] transition-all"
               >
-                ALL SERVICES
+                <span>All Solutions</span>
+                <ChevronRight className="w-4 h-4 text-neutral-400" />
               </Link>
             </div>
           </div>
 
-          {/* ERP Dashboard Mockup */}
-          <div className="relative p-1 cyber-chamfer-reverse bg-gradient-to-br from-[var(--color-cyber-accent)]/50 to-[var(--color-cyber-accent2)]/50 group overflow-hidden">
+          {/* Console Mockup */}
+          <div className="lg:col-span-6">
             <DashboardMockup
               title="Enterprise ERP System Overview"
               stats={[
-                { label: "Q3 Gross Revenue", value: "$4.2M" },
-                { label: "Active Enterprise Deals", value: "84" },
-                { label: "Inventory Fulfillment", value: "98.9%" },
+                { label: "Q3 Gross Revenue", value: "$4,280,000" },
+                { label: "Active Deals", value: "84 Open" },
+                { label: "Fulfillment SLA", value: "99.4%" },
               ]}
-              tableHeaders={["Deal Name", "Value", "Stage", "Assigned To"]}
+              tableHeaders={["Account Name", "Value", "Stage", "Lead Engineer"]}
               tableRows={[
-                [
-                  "Global Tech Inc - Phase 1",
-                  "$150,000",
-                  "Negotiation",
-                  "Sarah J.",
-                ],
-                [
-                  "Logistics Corp Fulfillment",
-                  "$420,000",
-                  "Closed Won",
-                  "David M.",
-                ],
-                [
-                  "Retail Supply Chain Upgrade",
-                  "$85,000",
-                  "Discovery",
-                  "Alex K.",
-                ],
+                ["Acme Global Holdings", "$150,000", "Contracted", "Sarah J."],
+                ["Vertex Logistics Ltd", "$420,000", "Deployed", "David M."],
+                ["Nexus Retail Corp", "$85,000", "In Review", "Alex K."],
               ]}
             />
-            <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-[10px] tracking-widest uppercase animate-blink">
-                ERP_DASH_LIVE
-              </span>
-            </div>
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="mb-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-cyber-border)]">
-          {[
-            { value: "4–12wk", label: "Avg. Deployment Time" },
-            { value: "99.9%", label: "Uptime SLA" },
-            { value: "20+", label: "Industries Served" },
-            { value: "100%", label: "Custom Built" },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className="bg-[var(--color-cyber-card)] p-8 text-center hover:bg-[var(--color-cyber-accent)]/5 transition-colors"
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black font-[var(--font-cyber-head)] mb-2 text-[var(--color-cyber-accent)]">
-                {s.value}
+        {/* ===================== METRICS STRIP ===================== */}
+        <section className="mb-16 rounded-2xl bg-white border border-[#E8E8E2] p-6 sm:p-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-[#E8E8E2]">
+            {[
+              { val: "3–4 Wks", label: "Core Module Delivery" },
+              { val: "99.99%", label: "Infrastructure Uptime" },
+              { val: "100%", label: "Source Code Ownership" },
+              { val: "$0", label: "Per-User License Fees" },
+            ].map((stat, sIdx) => (
+              <div key={sIdx} className="pt-4 md:pt-0 px-4">
+                <div className="font-heading font-extrabold text-2xl sm:text-3xl text-teal-700 mb-1">
+                  {stat.val}
+                </div>
+                <div className="text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-xs font-[var(--font-cyber-accent)] uppercase tracking-widest text-[var(--color-cyber-muted-fg)]">
-                {s.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </section>
 
-        {/* Features */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; CORE_MODULES
+        {/* ===================== FEATURES GRID ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ CORE CAPABILITIES ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Engineered for Enterprise Operational Velocity
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {features.map((f) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f, idx) => (
               <div
-                key={f.title}
-                className="group p-[2px] cyber-chamfer bg-gradient-to-br from-[var(--color-cyber-accent)]/20 to-transparent"
+                key={idx}
+                className="precision-card rounded-2xl p-6 flex flex-col justify-between"
               >
-                <div className="bg-[var(--color-cyber-card)] cyber-chamfer p-8 h-full relative overflow-hidden group-hover:bg-[#0a0a0f] transition-colors">
-                  <div
-                    className="absolute top-0 left-0 w-full h-[2px] opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{
-                      background:
-                        "linear-gradient(to right, transparent, var(--color-cyber-accent), transparent)",
-                    }}
-                  />
-                  <div className="w-12 h-12 border border-[var(--color-cyber-accent)]/30 flex items-center justify-center mb-6 bg-black">
-                    <f.icon
-                      className="w-6 h-6 text-[var(--color-cyber-accent)]"
-                      strokeWidth={1.5}
-                    />
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700 mb-4">
+                    <f.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-[var(--font-cyber-head)] text-base font-bold uppercase tracking-widest text-white mb-3 group-hover:text-[var(--color-cyber-accent)] transition-colors">
+                  <h3 className="font-heading font-bold text-lg text-[#171717] mb-2">
                     {f.title}
                   </h3>
-                  <p className="text-[var(--color-cyber-muted-fg)] text-sm leading-relaxed uppercase tracking-wider">
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
                     {f.desc}
                   </p>
                 </div>
@@ -293,162 +257,97 @@ export default function ERPCRM() {
           </div>
         </section>
 
-        {/* Operations Dashboard Mockup */}
-        <section className="mb-24 relative p-1 cyber-chamfer-reverse bg-[var(--color-cyber-border)] hover:bg-[var(--color-cyber-accent)] transition-colors duration-500 group overflow-hidden">
-          <DashboardMockup
-            title="Global Operations & HR"
-            stats={[
-              { label: "Total Headcount", value: "1,204" },
-              { label: "Payroll Run", value: "SUCCESS" },
-              { label: "System Uptime", value: "99.99%" },
-            ]}
-            tableHeaders={["Department", "Budget", "Spend", "Status"]}
-            tableRows={[
-              ["Engineering R&D", "$1.2M", "$850K", "On Track"],
-              ["Global Marketing", "$450K", "$410K", "Warning"],
-              ["Customer Success", "$300K", "$120K", "Optimal"],
-            ]}
-          />
-          <div className="absolute bottom-4 right-4 z-20 bg-black/80 backdrop-blur-md border border-[var(--color-cyber-accent)] px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-[10px] tracking-widest uppercase animate-blink">
-              OPS_MODULE_ACTIVE
+        {/* ===================== INDUSTRY VERTICALS ===================== */}
+        <section className="mb-16">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ VERTICALS ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              Industry-Specific Implementation Modules
+            </h2>
           </div>
-        </section>
 
-        {/* Industry Solutions */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; INDUSTRY_SOLUTIONS
-            </span>
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {industries.map((ind) => (
+            {industries.map((ind, iIdx) => (
               <div
-                key={ind.name}
-                className="border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] p-8 hover:border-[var(--color-cyber-accent)]/50 transition-colors group"
+                key={iIdx}
+                className="p-6 rounded-2xl bg-white border border-[#E8E8E2]"
               >
-                <h3 className="font-[var(--font-cyber-head)] text-lg font-bold uppercase tracking-widest text-white mb-6 group-hover:text-[var(--color-cyber-accent)] transition-colors flex items-center gap-3">
-                  <ArrowRight className="w-5 h-5 text-[var(--color-cyber-accent)]" />{" "}
-                  {ind.name}
+                <h3 className="font-heading font-bold text-lg text-[#171717] mb-4 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-teal-600" />
+                  <span>{ind.name}</span>
                 </h3>
-                <ul className="space-y-3">
-                  {ind.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-3 text-sm font-[var(--font-cyber-accent)] uppercase tracking-wider text-[var(--color-cyber-muted-fg)]"
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {ind.items.map((item, itemIdx) => (
+                    <div
+                      key={itemIdx}
+                      className="flex items-center gap-2 text-xs text-neutral-600 font-medium"
                     >
-                      <CheckCircle className="w-4 h-4 flex-shrink-0 text-[var(--color-cyber-accent)]" />
-                      {item}
-                    </li>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                      <span>{item}</span>
+                    </div>
                   ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Process */}
-        <section className="mb-24 border border-[var(--color-cyber-border)] p-6 sm:p-10 md:p-16 relative overflow-hidden">
-          <div className="absolute -top-20 -left-20 w-64 h-64 bg-[var(--color-cyber-accent)]/5 blur-[80px]" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-cyber-head)] uppercase tracking-widest text-white mb-10 sm:mb-16 flex flex-wrap items-center gap-2 sm:gap-4 break-words">
-            <span className="text-[var(--color-cyber-accent)]">&gt;&gt;</span>{" "}
-            DEPLOYMENT_PROCESS
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              {
-                n: "01",
-                title: "Discovery",
-                desc: "We audit your operations, map workflows, and define the exact modules you need.",
-              },
-              {
-                n: "02",
-                title: "Architecture",
-                desc: "We design the system architecture, database schema, and integration points for your approval.",
-              },
-              {
-                n: "03",
-                title: "Build & Test",
-                desc: "Agile development with weekly demos. You see progress every step of the way.",
-              },
-              {
-                n: "04",
-                title: "Deploy & Train",
-                desc: "We deploy to production, migrate your data, and train your entire team.",
-              },
-            ].map((p, i) => (
-              <div key={p.n} className="relative">
-                {i < 3 && (
-                  <div className="hidden md:block absolute top-5 left-full w-full h-px z-10 bg-gradient-to-r from-[var(--color-cyber-accent)] to-transparent" />
-                )}
-                <div className="font-[var(--font-cyber-head)] text-5xl font-black mb-4 text-[var(--color-cyber-accent)] opacity-20">
-                  {p.n}
                 </div>
-                <h3 className="font-[var(--font-cyber-head)] text-base font-bold uppercase tracking-widest text-white mb-3">
-                  {p.title}
-                </h3>
-                <p className="text-[var(--color-cyber-muted-fg)] text-sm uppercase tracking-wider leading-relaxed">
-                  {p.desc}
-                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="mb-24">
-          <div className="flex items-center gap-4 mb-12 border-b border-[var(--color-cyber-border)] pb-4">
-            <span className="text-[var(--color-cyber-accent)] font-[var(--font-cyber-accent)] text-sm uppercase tracking-widest">
-              &gt;&gt; FAQ // RICH_SNIPPETS
+        {/* ===================== FAQ ACCORDION ===================== */}
+        <section className="mb-16 max-w-4xl">
+          <div className="mb-8">
+            <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+              [ FAQ ]
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#171717]">
+              ERP & CRM Architecture Details
+            </h2>
           </div>
-          <div className="space-y-4 max-w-4xl">
-            {faqs.map((f, i) => (
-              <details
-                key={i}
-                className="group border border-[var(--color-cyber-border)] bg-[var(--color-cyber-card)] hover:border-[var(--color-cyber-accent)]/50 transition-colors cyber-chamfer"
-              >
-                <summary className="flex justify-between items-center p-6 cursor-pointer list-none">
-                  <h3 className="text-sm md:text-base font-bold tracking-widest uppercase font-[var(--font-cyber-head)] text-white group-hover:text-[var(--color-cyber-accent)] transition-colors pr-4">
-                    {f.q}
-                  </h3>
-                  <span className="text-[var(--color-cyber-accent)] text-xl flex-shrink-0 group-open:rotate-45 transition-transform">
-                    +
-                  </span>
-                </summary>
-                <p className="px-6 pb-6 text-sm text-[var(--color-cyber-muted-fg)] leading-relaxed uppercase tracking-wider border-t border-[var(--color-cyber-border)] pt-4">
-                  {f.a}
-                </p>
-              </details>
-            ))}
+
+          <div className="divide-y divide-[#E8E8E2] border-y border-[#E8E8E2]">
+            {faqs.map((faq, fIdx) => {
+              const isOpen = openFaq === fIdx;
+              return (
+                <div key={fIdx} className="py-4">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : fIdx)}
+                    className="w-full text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none group"
+                  >
+                    <span className="text-base font-bold text-[#171717] group-hover:text-teal-800 transition-colors">
+                      {faq.q}
+                    </span>
+                    <span className="w-7 h-7 rounded-full border border-[#E8E8E2] flex items-center justify-center text-neutral-500 shrink-0 group-hover:border-teal-600 transition-colors">
+                      {isOpen ? (
+                        <Minus className="w-3.5 h-3.5 text-teal-700" />
+                      ) : (
+                        <Plus className="w-3.5 h-3.5" />
+                      )}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="text-center border-2 border-[var(--color-cyber-accent)] p-12 md:p-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[var(--color-cyber-accent)]/3" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-widest font-[var(--font-cyber-head)] text-white mb-6 relative z-10">
-            REPLACE YOUR
-            <br />
-            <span className="text-[var(--color-cyber-accent)]">
-              SPREADSHEETS TODAY.
-            </span>
-          </h2>
-          <p className="font-[var(--font-cyber-accent)] text-[var(--color-cyber-muted-fg)] uppercase tracking-widest text-sm mb-10 relative z-10">
-            Book a free discovery call. We'll show you exactly what your ERP
-            would look like.
-          </p>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-3 font-[var(--font-cyber-accent)] uppercase tracking-widest cyber-chamfer border-2 border-[var(--color-cyber-accent)] bg-[var(--color-cyber-accent)] text-black hover:bg-transparent hover:text-[var(--color-cyber-accent)] transition-all duration-300 px-10 py-5 text-base font-bold relative z-10"
-          >
-            BOOK FREE DEMO{" "}
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </section>
-
+        {/* Related Services Navigation */}
         <RelatedServices currentId="erp-crm" />
       </div>
     </Layout>

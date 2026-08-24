@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-// Persist mouse position across page navigations (since Layout remounts)
 let globalMouseX = -100;
 let globalMouseY = -100;
 
@@ -11,15 +10,16 @@ export default function CyberCursor() {
     y: globalMouseY,
   });
   const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const updatePosition = (e: MouseEvent) => {
       globalMouseX = e.clientX;
       globalMouseY = e.clientY;
       setPosition({ x: globalMouseX, y: globalMouseY });
+      if (!isVisible) setIsVisible(true);
 
       const target = e.target as HTMLElement;
-      // Check if hovering over a clickable element
       if (
         window.getComputedStyle(target).cursor === "pointer" ||
         target.tagName.toLowerCase() === "button" ||
@@ -33,23 +33,36 @@ export default function CyberCursor() {
       }
     };
 
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
     window.addEventListener("mousemove", updatePosition);
-    return () => window.removeEventListener("mousemove", updatePosition);
-  }, []);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
+
+    return () => {
+      window.removeEventListener("mousemove", updatePosition);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+    };
+  }, [isVisible]);
+
+  if (!isVisible) return null;
 
   return (
     <>
+      {/* Smooth outer interactive ring */}
       <div
-        className="fixed top-0 left-0 w-8 h-8 border border-[var(--color-cyber-accent)] pointer-events-none z-[9999] transition-all duration-150 ease-out hidden md:flex items-center justify-center mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-teal-600/30 bg-teal-500/5 pointer-events-none z-[9999] transition-transform duration-200 ease-out hidden md:block"
         style={{
-          transform: `translate(${position.x - 16}px, ${position.y - 16}px) scale(${isHovering ? 1.5 : 1}) rotate(${isHovering ? 45 : 0}deg)`,
-          borderRadius: isHovering ? "0px" : "50%",
+          transform: `translate(${position.x - 16}px, ${position.y - 16}px) scale(${isHovering ? 1.6 : 1})`,
         }}
-      ></div>
+      />
+      {/* Precise inner point */}
       <div
-        className="fixed top-0 left-0 w-2 h-2 bg-[var(--color-cyber-accent)] pointer-events-none z-[10000] hidden md:block mix-blend-difference"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-teal-600 pointer-events-none z-[10000] hidden md:block transition-transform duration-75 ease-out"
         style={{
-          transform: `translate(${position.x - 4}px, ${position.y - 4}px)`,
+          transform: `translate(${position.x - 3}px, ${position.y - 3}px) scale(${isHovering ? 0.5 : 1})`,
         }}
       />
     </>

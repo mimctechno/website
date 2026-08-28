@@ -48,7 +48,7 @@ const contactMethods = [
     label: "Official WhatsApp Line",
     role: "Fastest Technical Response",
     value: "+1 (416) 857-8831",
-    href: "https://wa.me/14168578831",
+    href: "https://wa.me/14168578831?text=Hi%20MIMC%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20new%20software%20project%20and%20request%20an%20enterprise%20consultation.",
     hours: "Live 24/7 routing bot",
     highlight: true,
   },

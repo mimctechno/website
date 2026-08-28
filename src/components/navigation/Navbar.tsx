@@ -113,7 +113,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -168,10 +168,12 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled || menuOpen
-          ? "bg-[#FAFAF8]/95 backdrop-blur-md border-b border-[#E8E8E2] shadow-xs"
-          : "bg-[#FAFAF8]/80 backdrop-blur-xs border-b border-transparent"
+      className={`sticky top-0 z-50 transition-colors duration-200 ${
+        menuOpen
+          ? "bg-[#FAFAF8] border-b border-[#E8E8E2]"
+          : isScrolled
+            ? "bg-[#FAFAF8]/95 backdrop-blur-md border-b border-[#E8E8E2] shadow-xs"
+            : "bg-[#FAFAF8]/80 backdrop-blur-xs border-b border-transparent"
       }`}
     >
       {/* Scroll progress bar indicator */}
@@ -344,66 +346,41 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile Animated Hamburger Button */}
+        {/* Mobile Toggle Button */}
         <button
-          className={`lg:hidden relative p-2.5 rounded-2xl border transition-all duration-200 cursor-pointer ${
-            menuOpen
-              ? "bg-[#111111] text-white border-[#111111] shadow-sm"
-              : "bg-white text-neutral-800 border-[#E8E8E2] hover:border-teal-500 shadow-2xs"
-          } active:scale-90`}
+          className="lg:hidden p-2 rounded-xl text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 active:scale-90 transition-all cursor-pointer focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
-          <div className="w-5 h-5 flex flex-col justify-center items-center relative">
-            <span
-              className={`h-0.5 w-4.5 bg-current rounded-full transition-all duration-300 ${
-                menuOpen ? "rotate-45 translate-y-0.5" : "-translate-y-1"
-              }`}
-            />
-            <span
-              className={`h-0.5 w-4.5 bg-current rounded-full transition-all duration-200 ${
-                menuOpen ? "opacity-0 scale-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`h-0.5 w-4.5 bg-current rounded-full transition-all duration-300 ${
-                menuOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-1"
-              }`}
-            />
-          </div>
+          {menuOpen ? (
+            <X className="w-6 h-6 text-neutral-900" aria-hidden="true" />
+          ) : (
+            <Menu className="w-6 h-6 text-neutral-900" aria-hidden="true" />
+          )}
         </button>
       </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Full-Screen Menu Drawer */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[57px] sm:top-[61px] z-40 bg-black/30 backdrop-blur-xs lg:hidden flex flex-col justify-start"
-            onClick={() => setMenuOpen(false)}
+          <motion.nav
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            aria-label="Mobile Navigation"
+            className="fixed inset-x-0 top-[57px] sm:top-[61px] h-[calc(100dvh-57px)] sm:h-[calc(100dvh-61px)] w-full z-50 bg-[#FAFAF8] overflow-y-auto lg:hidden flex flex-col justify-between px-5 pt-3 pb-16 divide-y divide-[#E8E8E2] border-t border-[#E8E8E2]"
           >
-            {/* Drawer Content Card */}
-            <motion.nav
-              initial={{ y: -20, opacity: 0, scale: 0.98 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: -20, opacity: 0, scale: 0.98 }}
-              transition={{ type: "spring", damping: 28, stiffness: 320 }}
-              aria-label="Mobile Navigation"
-              className="bg-[#FAFAF8] border-b border-[#E8E8E2] px-5 pt-4 pb-6 shadow-2xl overflow-y-auto max-h-[85vh] divide-y divide-[#E8E8E2] space-y-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Section 1: Enterprise Solutions Accordion / Cards */}
-              <div className="pt-1">
+            <div className="space-y-3 pt-1">
+              {/* Section 1: Enterprise Solutions Accordion */}
+              <div className="rounded-2xl bg-white border border-[#E8E8E2] p-3 shadow-2xs">
                 <button
                   onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="flex items-center justify-between w-full py-1.5 text-xs font-mono font-bold uppercase tracking-wider text-teal-800 cursor-pointer"
+                  className="flex items-center justify-between w-full py-1 text-xs font-mono font-bold uppercase tracking-wider text-teal-800 cursor-pointer"
                 >
-                  <span className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+                  <span className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-teal-600" />
                     <span>Solutions & Architectures</span>
                   </span>
                   <ChevronDown
@@ -422,7 +399,7 @@ export default function Navbar() {
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="grid grid-cols-1 gap-2 pt-2.5 pb-1">
+                      <div className="grid grid-cols-1 gap-2 pt-3 pb-1">
                         {SERVICES_MENU.map((item, idx) => {
                           const isActive = pathname === item.href;
                           return (
@@ -433,12 +410,10 @@ export default function Navbar() {
                               className={`p-2.5 rounded-xl border transition-all flex items-start gap-2.5 active:scale-[0.99] ${
                                 isActive
                                   ? "bg-teal-50/80 border-teal-300 shadow-2xs"
-                                  : "bg-white border-[#E8E8E2] hover:border-teal-200 hover:bg-[#F4F4F0]"
+                                  : "bg-[#FAFAF8] border-[#E8E8E2] hover:border-teal-200 hover:bg-white"
                               }`}
                             >
-                              <div
-                                className={`p-2 rounded-lg bg-[#FAFAF8] border border-[#E8E8E2] shrink-0 text-teal-700`}
-                              >
+                              <div className="p-2 rounded-lg bg-white border border-[#E8E8E2] shrink-0 text-teal-700">
                                 <item.icon className="w-4 h-4" />
                               </div>
                               <div className="flex-1 min-w-0">
@@ -474,11 +449,7 @@ export default function Navbar() {
               </div>
 
               {/* Section 2: Core Directory Links */}
-              <div className="pt-3 space-y-1">
-                <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-1 px-1">
-                  Navigation
-                </div>
-
+              <div className="space-y-1 pt-1">
                 {QUICK_NAV.map((nav, idx) => {
                   const isActive =
                     nav.href === "/"
@@ -489,16 +460,16 @@ export default function Navbar() {
                       key={idx}
                       href={nav.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between px-3 py-2.5 rounded-xl transition-all font-medium text-sm active:scale-[0.99] ${
+                      className={`flex items-center justify-between px-3.5 py-3 rounded-xl transition-all font-medium text-sm active:scale-[0.99] ${
                         isActive
                           ? "bg-[#111111] text-white font-semibold shadow-xs"
-                          : "text-neutral-800 hover:bg-white border border-transparent hover:border-[#E8E8E2]"
+                          : "text-neutral-800 bg-white hover:bg-neutral-50 border border-[#E8E8E2]"
                       }`}
                     >
-                      <div className="flex items-center gap-2.5">
+                      <div className="flex items-center gap-3">
                         <nav.icon
                           className={`w-4 h-4 ${
-                            isActive ? "text-teal-400" : "text-neutral-500"
+                            isActive ? "text-teal-400" : "text-neutral-600"
                           }`}
                         />
                         <span>{nav.label}</span>
@@ -509,7 +480,7 @@ export default function Navbar() {
                             isActive
                               ? "bg-teal-800 text-teal-100"
                               : nav.badgeColor ||
-                                "bg-neutral-200/70 text-neutral-700"
+                                "bg-neutral-100 text-neutral-700 border border-neutral-200"
                           }`}
                         >
                           {nav.badge}
@@ -519,64 +490,64 @@ export default function Navbar() {
                   );
                 })}
               </div>
+            </div>
 
-              {/* Section 3: Direct Actions & Contact Strip */}
-              <div className="pt-3.5 space-y-3">
-                <div className="grid grid-cols-3 gap-2">
-                  <a
-                    href="https://wa.me/14168578831"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-emerald-400 hover:bg-emerald-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
-                  >
-                    <MessageSquare className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
-                    <span className="text-[11px] font-bold text-neutral-800">
-                      WhatsApp
-                    </span>
-                    <span className="text-[9px] font-mono text-emerald-700 font-bold uppercase">
-                      24/7 Live
-                    </span>
-                  </a>
-
-                  <a
-                    href="tel:+14168578831"
-                    className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-teal-400 hover:bg-teal-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
-                  >
-                    <Phone className="w-4 h-4 text-teal-700 group-hover:scale-110 transition-transform" />
-                    <span className="text-[11px] font-bold text-neutral-800">
-                      Call Hub
-                    </span>
-                    <span className="text-[9px] font-mono text-neutral-400">
-                      Direct CA/IN
-                    </span>
-                  </a>
-
-                  <a
-                    href="mailto:info@mimctechnologies.com"
-                    className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-teal-400 hover:bg-teal-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
-                  >
-                    <Mail className="w-4 h-4 text-teal-700 group-hover:scale-110 transition-transform" />
-                    <span className="text-[11px] font-bold text-neutral-800">
-                      Email
-                    </span>
-                    <span className="text-[9px] font-mono text-neutral-400">
-                      &lt;2h SLA
-                    </span>
-                  </a>
-                </div>
-
-                {/* Primary CTA */}
-                <Link
-                  href="/contact"
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-xs uppercase tracking-wider text-center shadow-md active:scale-[0.98] transition-all"
+            {/* Section 3: Direct Actions & Contact Strip */}
+            <div className="pt-4 space-y-3 mt-4">
+              <div className="grid grid-cols-3 gap-2">
+                <a
+                  href="https://wa.me/14168578831?text=Hi%20MIMC%20Technologies%2C%20I%20would%20like%20to%20inquire%20about%20your%20enterprise%20software%2C%20WhatsApp%20API%2C%20and%20ERP%20solutions."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-emerald-400 hover:bg-emerald-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
                 >
-                  <span>Schedule Architecture Review</span>
-                  <ArrowRight className="w-4 h-4 text-teal-400" />
-                </Link>
+                  <MessageSquare className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
+                  <span className="text-[11px] font-bold text-neutral-800">
+                    WhatsApp
+                  </span>
+                  <span className="text-[9px] font-mono text-emerald-700 font-bold uppercase">
+                    24/7 Live
+                  </span>
+                </a>
+
+                <a
+                  href="tel:+14168578831"
+                  className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-teal-400 hover:bg-teal-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
+                >
+                  <Phone className="w-4 h-4 text-teal-700 group-hover:scale-110 transition-transform" />
+                  <span className="text-[11px] font-bold text-neutral-800">
+                    Call Hub
+                  </span>
+                  <span className="text-[9px] font-mono text-neutral-400">
+                    Direct CA/IN
+                  </span>
+                </a>
+
+                <a
+                  href="mailto:info@mimctechnologies.com"
+                  className="p-2.5 rounded-xl bg-white border border-[#E8E8E2] hover:border-teal-400 hover:bg-teal-50/50 flex flex-col items-center justify-center gap-1 transition-all text-center group shadow-2xs"
+                >
+                  <Mail className="w-4 h-4 text-teal-700 group-hover:scale-110 transition-transform" />
+                  <span className="text-[11px] font-bold text-neutral-800">
+                    Email
+                  </span>
+                  <span className="text-[9px] font-mono text-neutral-400">
+                    &lt;2h SLA
+                  </span>
+                </a>
               </div>
-            </motion.nav>
-          </motion.div>
+
+              {/* Primary CTA */}
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-xs uppercase tracking-wider text-center shadow-md active:scale-[0.98] transition-all"
+              >
+                <span>Schedule Architecture Review</span>
+                <ArrowRight className="w-4 h-4 text-teal-400" />
+              </Link>
+            </div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

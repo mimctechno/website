@@ -1,46 +1,52 @@
 "use client";
-import { useEffect, useState } from "react";
-
-let globalMouseX = -100;
-let globalMouseY = -100;
+import { useEffect, useState, useRef } from "react";
 
 export default function CyberCursor() {
-  const [position, setPosition] = useState({
-    x: globalMouseX,
-    y: globalMouseY,
-  });
+  const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      globalMouseX = e.clientX;
-      globalMouseY = e.clientY;
-      setPosition({ x: globalMouseX, y: globalMouseY });
-      if (!isVisible) setIsVisible(true);
+    // Disable completely on mobile / touch devices
+    if (
+      typeof window === "undefined" ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768
+    ) {
+      return;
+    }
 
-      const target = e.target as HTMLElement;
-      if (
-        window.getComputedStyle(target).cursor === "pointer" ||
-        target.tagName.toLowerCase() === "button" ||
-        target.tagName.toLowerCase() === "a" ||
-        target.closest("button") ||
-        target.closest("a")
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+    const updatePosition = (e: MouseEvent) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+      rafRef.current = requestAnimationFrame(() => {
+        setPosition({ x: e.clientX, y: e.clientY });
+        if (!isVisible) setIsVisible(true);
+
+        const target = e.target as HTMLElement | null;
+        if (
+          target &&
+          target.closest?.(
+            "a, button, [role='button'], input, select, textarea",
+          )
+        ) {
+          setIsHovering(true);
+        } else {
+          setIsHovering(false);
+        }
+      });
     };
 
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", updatePosition);
+    window.addEventListener("mousemove", updatePosition, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", updatePosition);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import Marquee from "react-fast-marquee";
 import {
   Shield,
   Zap,
@@ -32,13 +31,18 @@ import {
   HelpCircle,
 } from "lucide-react";
 import Layout from "../components/Layout";
-import gsap from "gsap";
 import {
   IndiaFlag,
   CanadaFlag,
   UAEFlag,
   USFlag,
 } from "@/components/ui/FlagIcon";
+
+// Lazy-load ticker marquee
+const Marquee = dynamic(() => import("react-fast-marquee"), {
+  ssr: false,
+  loading: () => null,
+});
 
 // Lazy-load Three.js canvas on client only (Zero SSR/LCP penalty)
 const HeroCanvas = dynamic(() => import("../components/HeroCanvas"), {
@@ -109,53 +113,6 @@ export default function Home() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeService, setActiveService] = useState<number | null>(null);
-
-  const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
-  const heroSubRef = useRef<HTMLParagraphElement>(null);
-  const heroCtaRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.from(".hero-badge", {
-        y: -15,
-        opacity: 0,
-        duration: 0.6,
-        delay: 0.1,
-      })
-        .from(
-          ".hero-title-line",
-          {
-            y: 35,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.12,
-          },
-          "-=0.3",
-        )
-        .from(
-          heroSubRef.current,
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.7,
-          },
-          "-=0.4",
-        )
-        .from(
-          heroCtaRef.current,
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.6,
-          },
-          "-=0.4",
-        );
-    });
-
-    return () => ctx.revert();
-  }, []);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -369,10 +326,7 @@ export default function Home() {
           </div>
 
           {/* High-Intent Keyword H1 */}
-          <h1
-            ref={heroHeadlineRef}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-[74px] font-extrabold tracking-[-0.04em] text-[#171717] leading-[1.05] mb-6 font-heading"
-          >
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[74px] font-extrabold tracking-[-0.04em] text-[#171717] leading-[1.05] mb-6 font-heading">
             <span className="hero-title-line block">
               Official WhatsApp Business API,
             </span>
@@ -385,10 +339,7 @@ export default function Home() {
           </h1>
 
           {/* Plain English Sub-headline */}
-          <p
-            ref={heroSubRef}
-            className="text-base sm:text-xl text-[#525252] max-w-3xl mx-auto leading-relaxed font-normal mb-8"
-          >
+          <p className="text-base sm:text-xl text-[#525252] max-w-3xl mx-auto leading-relaxed font-normal mb-8">
             We help businesses across India, Canada, UAE, and 100+ global cities
             set up official WhatsApp Business API in 48 hours, build custom ERP
             software with 100% code ownership, and automate Tally Prime invoice
@@ -396,10 +347,7 @@ export default function Home() {
           </p>
 
           {/* Action CTAs */}
-          <div
-            ref={heroCtaRef}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-medium text-base shadow-sm hover:shadow-md transition-all active:scale-[0.98]"

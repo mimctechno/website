@@ -119,14 +119,21 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const totalScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const currentScroll = window.scrollY;
-      if (totalScroll > 0) {
-        setScrollProgress((currentScroll / totalScroll) * 100);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const totalScroll =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const currentScroll = window.scrollY;
+          if (totalScroll > 0) {
+            setScrollProgress((currentScroll / totalScroll) * 100);
+          }
+          setIsScrolled(currentScroll > 20);
+          ticking = false;
+        });
+        ticking = true;
       }
-      setIsScrolled(currentScroll > 20);
     };
 
     const handleClickOutside = (event: MouseEvent) => {

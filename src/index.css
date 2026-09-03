@@ -1,16 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
-  --font-heading: "Bricolage Grotesque", sans-serif;
-  --font-display: "Bricolage Grotesque", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-sans:
+    var(--font-dm-sans), "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
 
-  --font-cyber-head: "Bricolage Grotesque", sans-serif;
-  --font-cyber-body: "DM Sans", sans-serif;
-  --font-cyber-accent: "Bricolage Grotesque", sans-serif;
-  --font-kinetic-main: "Bricolage Grotesque", sans-serif;
+  --font-cyber-head: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-cyber-body: var(--font-dm-sans), "DM Sans", sans-serif;
+  --font-cyber-accent: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-kinetic-main: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
 
   --color-warm-bg: #fafaf8;
   --color-warm-surface: #ffffff;

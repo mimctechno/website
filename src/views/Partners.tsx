@@ -220,6 +220,10 @@ export default function Partners() {
                         <img
                           src={partner.logo}
                           alt={`${partner.name} logo`}
+                          width={160}
+                          height={40}
+                          loading="lazy"
+                          decoding="async"
                           className="max-h-10 max-w-[160px] object-contain"
                           onError={(e) => {
                             (e.target as HTMLElement).style.display = "none";

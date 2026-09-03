@@ -181,6 +181,7 @@ export default function Navbar() {
         className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-teal-500 via-teal-600 to-emerald-500 transition-all duration-75 z-50"
         style={{ width: `${scrollProgress}%` }}
         role="progressbar"
+        aria-label="Reading progress"
         aria-valuenow={Math.round(scrollProgress)}
         aria-valuemin={0}
         aria-valuemax={100}

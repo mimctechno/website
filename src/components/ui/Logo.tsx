@@ -13,6 +13,10 @@ export function LogoIcon({ className = "w-10 h-10" }: LogoProps) {
       <img
         src="/logo.webp"
         alt="MIMC Technologies"
+        width={40}
+        height={40}
+        loading="eager"
+        decoding="async"
         className="w-full h-full object-contain"
       />
     </div>
@@ -44,6 +48,10 @@ export default function Logo({
         <img
           src="/logo.webp"
           alt="MIMC Technologies Logo"
+          width={isLarge ? 52 : 44}
+          height={isLarge ? 52 : 44}
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-contain"
         />
       </div>

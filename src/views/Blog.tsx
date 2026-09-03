@@ -130,6 +130,10 @@ export default function Blog() {
                   <img
                     src={featuredPost.image}
                     alt={featuredPost.title}
+                    width={1200}
+                    height={750}
+                    loading="eager"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-teal-800 border border-[#E8E8E2] uppercase tracking-wider">
@@ -201,6 +205,10 @@ export default function Blog() {
                       <img
                         src={post.image}
                         alt={post.title}
+                        width={1200}
+                        height={675}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                       />
                     </div>

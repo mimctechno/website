@@ -59,7 +59,8 @@ export default function CyberImage({
           <img
             src={src}
             alt={alt}
-            loading="lazy" // Critical for Core Web Vitals
+            loading="lazy"
+            decoding="async"
             onLoad={() => setIsLoaded(true)}
             onError={() => setError(true)}
             className={cn(

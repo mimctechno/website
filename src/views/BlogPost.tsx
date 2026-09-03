@@ -237,6 +237,11 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           <img
             src={post.image}
             alt={post.title}
+            width={1376}
+            height={768}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>

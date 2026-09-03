@@ -491,7 +491,7 @@ export default function Home() {
                 databases, our infrastructure is built for 99.99% uptime and
                 zero latency.
               </p>
-              <div className="text-[10px] font-mono text-neutral-500 pt-1">
+              <div className="text-[10px] font-mono text-neutral-400 pt-1">
                 * Based on internal deployment telemetry and verified client
                 logs.
               </div>
@@ -505,7 +505,7 @@ export default function Home() {
                 <div className="text-xs sm:text-sm font-semibold text-neutral-200">
                   Enterprises Deployed
                 </div>
-                <div className="text-[11px] text-neutral-500 mt-0.5">
+                <div className="text-[11px] text-neutral-400 mt-0.5">
                   India, Canada, UAE & Global
                 </div>
               </div>
@@ -517,7 +517,7 @@ export default function Home() {
                 <div className="text-xs sm:text-sm font-semibold text-neutral-200">
                   Messages Dispatched
                 </div>
-                <div className="text-[11px] text-neutral-500 mt-0.5">
+                <div className="text-[11px] text-neutral-400 mt-0.5">
                   Via Meta Official Cloud API
                 </div>
               </div>
@@ -529,7 +529,7 @@ export default function Home() {
                 <div className="text-xs sm:text-sm font-semibold text-neutral-200">
                   Uptime Guarantee
                 </div>
-                <div className="text-[11px] text-neutral-500 mt-0.5">
+                <div className="text-[11px] text-neutral-400 mt-0.5">
                   High-Availability Cloud SLA
                 </div>
               </div>
@@ -642,7 +642,7 @@ export default function Home() {
                 <Link href={item.href} className="block">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
                     <div className="lg:col-span-2 flex items-baseline justify-between lg:block">
-                      <span className="font-mono text-xl sm:text-2xl font-bold text-neutral-400 group-hover:text-teal-700 transition-colors">
+                      <span className="font-mono text-xl sm:text-2xl font-bold text-neutral-600 group-hover:text-teal-700 transition-colors">
                         {item.num}
                       </span>
                       <span className="lg:mt-1.5 block text-[11px] font-mono uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200/50 w-fit">
@@ -659,7 +659,7 @@ export default function Home() {
                       </p>
                     </div>
 
-                    <div className="lg:col-span-3 space-y-1 text-xs text-neutral-500 font-medium">
+                    <div className="lg:col-span-3 space-y-1 text-xs text-neutral-700 font-medium">
                       {item.bullets.map((b, bIdx) => (
                         <div key={bIdx} className="flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
@@ -669,7 +669,7 @@ export default function Home() {
                     </div>
 
                     <div className="lg:col-span-1 flex justify-end items-center">
-                      <div className="w-9 h-9 rounded-full border border-[#E8E8E2] group-hover:border-teal-600 group-hover:bg-teal-600 group-hover:text-white text-neutral-400 flex items-center justify-center transition-all duration-300">
+                      <div className="w-9 h-9 rounded-full border border-[#E8E8E2] group-hover:border-teal-600 group-hover:bg-teal-600 group-hover:text-white text-neutral-600 flex items-center justify-center transition-all duration-300">
                         <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
                     </div>
@@ -788,6 +788,10 @@ export default function Home() {
                 <img
                   src={partner.logo}
                   alt={partner.alt}
+                  width={120}
+                  height={48}
+                  loading="lazy"
+                  decoding="async"
                   className={`${partner.customClass} object-contain transition-transform duration-300 group-hover:scale-105`}
                 />
               </div>

@@ -17,31 +17,29 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { JOBS } from "../data/jobs";
+import { JOBS, generateJobPostingSchema } from "../data/jobs";
 
 const DEPARTMENTS = [
   "All Departments",
-  "Engineering",
-  "Cloud Infrastructure",
-  "Sales & Growth",
+  ...Array.from(new Set(JOBS.map((j) => j.department))),
 ];
 
 const benefits = [
   {
-    title: "Remote-First Architecture",
-    desc: "Work flexibly from anywhere across Canada, India, or globally with asynchronous communication tools.",
+    title: "Remote-First Flexibility",
+    desc: "Work flexibly from anywhere across Canada or India with transparent asynchronous communication.",
   },
   {
     title: "Competitive Compensation",
-    desc: "Top-of-market compensation packages with uncapped performance bonuses and equity alignment.",
+    desc: "Transparent, top-tier compensation packages with performance bonuses and direct growth opportunities.",
   },
   {
-    title: "Annual Hardware Stipend",
-    desc: "Top-tier MacBook Pro, 4K monitors, ergonomic workspace allowances, and home office setups.",
+    title: "Fast-Paced Learning",
+    desc: "Direct hands-on experience with modern tech stacks, enterprise marketing, and international clients.",
   },
   {
-    title: "Comprehensive Health",
-    desc: "Full medical, dental, vision, and mental wellness coverage for you and your family.",
+    title: "Supportive Culture",
+    desc: "Mentorship from experienced leaders, collaborative team dynamics, and room for rapid advancement.",
   },
 ];
 
@@ -55,29 +53,13 @@ export default function Careers() {
 
   const careersSchema = {
     "@context": "https://schema.org",
-    "@graph": JOBS.map((job) => ({
-      "@type": "JobPosting",
-      title: job.title,
-      description: job.summary,
-      datePosted: "2026-07-29",
-      validThrough: "2026-12-31",
-      employmentType: "FULL_TIME",
-      hiringOrganization: {
-        "@type": "Organization",
-        name: "MIMC Technologies",
-        sameAs: "https://www.mimctechnologies.com",
-        logo: "https://www.mimctechnologies.com/logo.webp",
-      },
-      jobLocationType: job.location.toLowerCase().includes("remote")
-        ? "TELECOMMUTE"
-        : undefined,
-    })),
+    "@graph": JOBS.map((job) => generateJobPostingSchema(job)),
   };
 
   return (
     <Layout
-      title="Careers — Join the Engineering Team | MIMC Technologies"
-      description="Explore open engineering, product, and sales positions at MIMC Technologies. Remote-first flexibility across Canada and India with top-tier compensation."
+      title="Careers — Join the Team | MIMC Technologies"
+      description="Explore open marketing, SEO, internship, and sales positions at MIMC Technologies across Canada and India."
     >
       <script
         type="application/ld+json"
@@ -93,14 +75,14 @@ export default function Careers() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#171717] leading-[1.08] mb-4">
-            Build Mission-Critical <br />
-            <span className="text-teal-700">Enterprise Software.</span>
+            Build Your Career with <br />
+            <span className="text-teal-700">MIMC Technologies.</span>
           </h1>
 
           <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-            We are looking for exceptional software engineers, solutions
-            architects, and enterprise sales directors to engineer
-            high-throughput ERPs and Meta WhatsApp API infrastructure.
+            We are looking for passionate SEO consultants, creative social media
+            marketers, and results-driven sales consultants to grow with our
+            global team across Canada and India.
           </p>
         </section>
 
@@ -111,7 +93,7 @@ export default function Careers() {
               [ PERKS & CULTURE ]
             </span>
             <h2 className="text-2xl font-bold tracking-tight text-[#171717]">
-              Why Senior Engineers Choose MIMC
+              Why Talented Professionals Choose MIMC
             </h2>
           </div>
 

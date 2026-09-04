@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { type Job } from "../data/jobs";
+import { type Job, generateJobPostingSchema } from "../data/jobs";
 
 export default function JobDetail({ job }: { job: Job }) {
   const [submitted, setSubmitted] = useState(false);
@@ -43,21 +43,7 @@ export default function JobDetail({ job }: { job: Job }) {
 
   const jobSchema = {
     "@context": "https://schema.org",
-    "@type": "JobPosting",
-    title: job.title,
-    description: job.summary,
-    datePosted: "2026-07-29",
-    validThrough: "2026-12-31",
-    employmentType: "FULL_TIME",
-    hiringOrganization: {
-      "@type": "Organization",
-      name: "MIMC Technologies",
-      sameAs: "https://www.mimctechnologies.com",
-      logo: "https://www.mimctechnologies.com/logo.webp",
-    },
-    jobLocationType: job.location.toLowerCase().includes("remote")
-      ? "TELECOMMUTE"
-      : undefined,
+    ...generateJobPostingSchema(job),
   };
 
   return (
@@ -193,8 +179,8 @@ export default function JobDetail({ job }: { job: Job }) {
                   Apply for this Role
                 </h3>
                 <p className="text-xs text-neutral-500 mt-1">
-                  Our engineering leads review every submission directly within
-                  48 hours.
+                  Our hiring team reviews every submission directly within 48
+                  hours.
                 </p>
               </div>
 
@@ -310,8 +296,7 @@ export default function JobDetail({ job }: { job: Job }) {
 
             <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
               Thank you for applying for <strong>{job.title}</strong>. Our
-              engineering leads will review your portfolio and reach out
-              directly.
+              hiring team will review your application and reach out directly.
             </p>
 
             <button

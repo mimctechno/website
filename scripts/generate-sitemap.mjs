@@ -23,6 +23,8 @@ const staticRoutes = [
   "/blog",
 ];
 
+const TALLY_COUNTRY_CODES = new Set(["IN", "AE", "SA", "QA", "KW", "BH", "OM"]);
+
 function generateSitemap() {
   // Read posts to get dynamic slugs
   const postsFilePath = path.join(process.cwd(), "src", "data", "posts.ts");
@@ -56,13 +58,21 @@ function generateSitemap() {
     "data",
     "whatsappLocations.json",
   );
-  let locationSlugs = [];
+  let legacyLocationSlugs = [];
+  let citySlugs = [];
+  let tallyCitySlugs = [];
+
   if (fs.existsSync(locationsFilePath)) {
     const locationsContent = JSON.parse(
       fs.readFileSync(locationsFilePath, "utf-8"),
     );
     locationsContent.forEach((loc) => {
-      locationSlugs.push(loc.slug);
+      legacyLocationSlugs.push(loc.slug);
+      const citySlug = loc.slug.replace(/^whatsapp-api-/, "");
+      citySlugs.push(citySlug);
+      if (TALLY_COUNTRY_CODES.has(loc.countryCode)) {
+        tallyCitySlugs.push(citySlug);
+      }
     });
   }
 
@@ -100,13 +110,73 @@ function generateSitemap() {
     xml += `  </url>\n`;
   });
 
-  // Add dynamic location routes
-  locationSlugs.forEach((slug) => {
+  // Add Tally Prime Invoicing regional routes (India & GCC only)
+  tallyCitySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/tally-whatsapp-integration/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Add Enterprise ERP & CRM regional routes (All commercial metros)
+  citySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/erp-crm/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Add Official Meta WhatsApp API regional routes (All commercial metros)
+  citySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/whatsapp-api/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Add Modern Web & Next.js Development regional routes
+  citySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/web-development/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Add Technical SEO & Programmatic Search regional routes
+  citySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/digital-marketing/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Add Enterprise Architecture & IT Consulting regional routes
+  citySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/enterprise-consulting/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
+  // Keep legacy location routes for search crawler backwards compatibility
+  legacyLocationSlugs.forEach((slug) => {
     xml += `  <url>\n`;
     xml += `    <loc>${domain}/services/${slug}/</loc>\n`;
     xml += `    <lastmod>${today}</lastmod>\n`;
     xml += `    <changefreq>monthly</changefreq>\n`;
-    xml += `    <priority>0.7</priority>\n`;
+    xml += `    <priority>0.6</priority>\n`;
     xml += `  </url>\n`;
   });
 
@@ -115,9 +185,14 @@ function generateSitemap() {
   // Write to public/sitemap.xml
   const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
   fs.writeFileSync(sitemapPath, xml);
-  console.log(
-    `✅ Successfully generated sitemap.xml with ${staticRoutes.length + blogSlugs.length + locationSlugs.length} routes.`,
-  );
+  const totalUrls =
+    staticRoutes.length +
+    jobSlugs.length +
+    blogSlugs.length +
+    tallyCitySlugs.length +
+    citySlugs.length * 5 +
+    legacyLocationSlugs.length;
+  console.log(`✅ Successfully generated sitemap.xml with ${totalUrls} routes.`);
 }
 
 generateSitemap();

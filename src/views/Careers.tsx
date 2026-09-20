@@ -211,10 +211,10 @@ export default function Careers() {
               leader, we always make room for top 1% talent.
             </p>
             <a
-              href="mailto:hr@mimctechnologies.com?subject=General%20Application%20—%20Engineering%20Talent"
+              href="mailto:hr@mimctechnologies.com?cc=info@mimctechnologies.com&subject=General%20Application%20—%20Engineering%20Talent"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
             >
-              <span>Email Your Resume to HR</span>
+              <span>Email Your Resume to HR & Team</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

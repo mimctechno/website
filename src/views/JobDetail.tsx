@@ -27,6 +27,9 @@ export default function JobDetail({ job }: { job: Job }) {
     setSubmitting(true);
     const form = e.currentTarget;
     const data = new FormData(form);
+    if (!data.get("_cc")) {
+      data.append("_cc", "info@mimctechnologies.com");
+    }
     try {
       await fetch("https://formsubmit.co/ajax/hr@mimctechnologies.com", {
         method: "POST",
@@ -189,6 +192,11 @@ export default function JobDetail({ job }: { job: Job }) {
                 <input type="hidden" name="_captcha" value="false" />
                 <input
                   type="hidden"
+                  name="_cc"
+                  value="info@mimctechnologies.com"
+                />
+                <input
+                  type="hidden"
                   name="_subject"
                   value={`Job Application: ${job.title} (${job.id})`}
                 />
@@ -262,12 +270,12 @@ export default function JobDetail({ job }: { job: Job }) {
               </form>
 
               <div className="pt-4 border-t border-[#E8E8E2] flex items-center justify-between text-[11px] text-neutral-400 font-mono">
-                <span>Direct HR Email:</span>
+                <span>Hiring Team:</span>
                 <a
-                  href="mailto:hr@mimctechnologies.com"
+                  href={`mailto:hr@mimctechnologies.com?cc=info@mimctechnologies.com&subject=Job%20Application%20—%20${encodeURIComponent(job.title)}`}
                   className="text-teal-700 hover:text-teal-900 font-semibold"
                 >
-                  hr@mimctechnologies.com
+                  hr@ & info@mimctechnologies.com
                 </a>
               </div>
             </div>

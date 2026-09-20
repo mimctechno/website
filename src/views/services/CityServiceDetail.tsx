@@ -125,7 +125,7 @@ export default function CityServiceDetail({
     const form = e.currentTarget;
     const data = new FormData(form);
     try {
-      await fetch("https://formsubmit.co/ajax/hr@mimctechnologies.com", {
+      await fetch("https://formsubmit.co/ajax/info@mimctechnologies.com", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: data,
@@ -529,7 +529,7 @@ export default function CityServiceDetail({
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
-                href={`mailto:hr@mimctechnologies.com?subject=Enterprise%20Inquiry%20—%20${encodeURIComponent(serviceTitle)}%20(${location.city})`}
+                href={`mailto:info@mimctechnologies.com?subject=Enterprise%20Inquiry%20—%20${encodeURIComponent(serviceTitle)}%20(${location.city})`}
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
               >
                 <span>Email Our Technical Team</span>

@@ -170,16 +170,6 @@ function generateSitemap() {
     xml += `  </url>\n`;
   });
 
-  // Keep legacy location routes for search crawler backwards compatibility
-  legacyLocationSlugs.forEach((slug) => {
-    xml += `  <url>\n`;
-    xml += `    <loc>${domain}/services/${slug}/</loc>\n`;
-    xml += `    <lastmod>${today}</lastmod>\n`;
-    xml += `    <changefreq>monthly</changefreq>\n`;
-    xml += `    <priority>0.6</priority>\n`;
-    xml += `  </url>\n`;
-  });
-
   xml += `</urlset>`;
 
   // Write to public/sitemap.xml
@@ -190,9 +180,8 @@ function generateSitemap() {
     jobSlugs.length +
     blogSlugs.length +
     tallyCitySlugs.length +
-    citySlugs.length * 5 +
-    legacyLocationSlugs.length;
-  console.log(`✅ Successfully generated sitemap.xml with ${totalUrls} routes.`);
+    citySlugs.length * 5;
+  console.log(`✅ Successfully generated clean canonical sitemap.xml with ${totalUrls} routes.`);
 }
 
 generateSitemap();

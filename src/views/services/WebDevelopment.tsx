@@ -21,6 +21,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Layout from "../../components/Layout";
 import DashboardMockup from "../../components/ui/DashboardMockup";
 import RelatedServices from "../../components/RelatedServices";
+import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
 
@@ -350,6 +351,12 @@ export default function WebDevelopment() {
             })}
           </div>
         </section>
+
+        {/* Regional Hubs Network */}
+        <ServiceRegionalHubs
+          serviceId="web-development"
+          serviceTitle="Next.js Web & Cloud Development"
+        />
 
         {/* Related Services Navigation */}
         <RelatedServices currentId="web-development" />

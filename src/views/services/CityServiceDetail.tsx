@@ -22,7 +22,10 @@ import {
   Phone,
 } from "lucide-react";
 import Layout from "@/components/Layout";
-import { CanonicalLocation } from "@/data/canonicalLocations";
+import {
+  CanonicalLocation,
+  CANONICAL_LOCATIONS,
+} from "@/data/canonicalLocations";
 import { ResolvedCityServiceData } from "@/data/servicesRegistry";
 import { getCountryFlag } from "@/components/ui/FlagIcon";
 
@@ -51,6 +54,21 @@ export default function CityServiceDetail({
   } = data;
 
   const canonicalUrl = `https://www.mimctechnologies.com/services/${serviceId}/${location.citySlug}/`;
+
+  // Related regional hubs for this service (same country first, then global tier-1)
+  const sameCountry = CANONICAL_LOCATIONS.filter(
+    (l) =>
+      l.citySlug !== location.citySlug &&
+      l.countryCode === location.countryCode &&
+      (serviceId === "tally-whatsapp-integration" ? l.supportsTally : true),
+  );
+  const fallbackHubs = CANONICAL_LOCATIONS.filter(
+    (l) =>
+      l.citySlug !== location.citySlug &&
+      l.countryCode !== location.countryCode &&
+      (serviceId === "tally-whatsapp-integration" ? l.supportsTally : true),
+  );
+  const siblingLocations = [...sameCountry, ...fallbackHubs].slice(0, 8);
 
   // Structured Data
   const serviceSchema = {
@@ -446,6 +464,52 @@ export default function CityServiceDetail({
                   </div>
                 )}
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===================== REGIONAL SERVICE SIBLING HUBS ===================== */}
+        <section className="mb-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <span className="text-xs font-mono font-bold text-teal-700 uppercase tracking-widest block mb-1">
+                [ REGIONAL COVERAGE NETWORK ]
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#171717]">
+                Other {serviceTitle} Hubs
+              </h2>
+            </div>
+            <Link
+              href="/locations/"
+              className="text-xs font-mono font-bold text-teal-700 hover:text-teal-900 inline-flex items-center gap-1.5"
+            >
+              <span>View All 100+ Commercial Locations</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+            {siblingLocations.map((sib) => (
+              <Link
+                key={sib.citySlug}
+                href={`/services/${serviceId}/${sib.citySlug}/`}
+                className="p-3.5 rounded-2xl bg-white border border-[#E8E8E2] hover:border-teal-300 hover:bg-teal-50/50 transition-all group flex flex-col justify-between shadow-2xs"
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-heading font-bold text-xs sm:text-sm text-[#171717] group-hover:text-teal-800 transition-colors">
+                    {sib.city}
+                  </span>
+                  <span className="text-[10px] font-mono text-neutral-400">
+                    {sib.countryCode}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-[11px] font-mono text-teal-700">
+                  <span>{sib.state}</span>
+                  <span className="group-hover:translate-x-0.5 transition-transform">
+                    →
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </section>

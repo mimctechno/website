@@ -90,18 +90,21 @@ export default function Footer() {
             </div>
             <ul className="space-y-2.5 text-sm">
               {[
-                ["Enterprise ERP & Custom CRM", "/services/erp-crm"],
-                ["Official Meta WhatsApp API", "/services/whatsapp-api"],
+                ["Enterprise ERP & Custom CRM", "/services/erp-crm/"],
+                ["Official Meta WhatsApp API", "/services/whatsapp-api/"],
                 [
                   "Tally Prime WhatsApp Invoicing",
-                  "/services/tally-whatsapp-integration",
+                  "/services/tally-whatsapp-integration/",
                 ],
-                ["Next.js Web & Cloud Platform", "/services/web-development"],
+                ["Next.js Web & Cloud Platform", "/services/web-development/"],
                 [
                   "Technical SEO & Search Growth",
-                  "/services/digital-marketing",
+                  "/services/digital-marketing/",
                 ],
-                ["Enterprise IT Consulting", "/services/enterprise-consulting"],
+                [
+                  "Enterprise IT Consulting",
+                  "/services/enterprise-consulting/",
+                ],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link
@@ -125,7 +128,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link
-                  href="/about"
+                  href="/about/"
                   className="text-neutral-400 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <span className="text-neutral-600 text-xs">›</span>
@@ -134,7 +137,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/careers"
+                  href="/careers/"
                   className="text-neutral-400 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all group/item"
                 >
                   <span className="text-neutral-600 text-xs">›</span>
@@ -146,7 +149,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/partners"
+                  href="/partners/"
                   className="text-neutral-400 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <span className="text-neutral-600 text-xs">›</span>
@@ -155,16 +158,16 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/locations"
+                  href="/locations/"
                   className="text-neutral-400 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <span className="text-neutral-600 text-xs">›</span>
-                  <span>Global Hubs (30+)</span>
+                  <span>Global Hubs (100+)</span>
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/blog"
+                  href="/blog/"
                   className="text-neutral-400 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <span className="text-neutral-600 text-xs">›</span>
@@ -173,7 +176,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="text-neutral-400 hover:text-white hover:translate-x-1 inline-flex items-center gap-1.5 transition-all"
                 >
                   <span className="text-neutral-600 text-xs">›</span>
@@ -240,14 +243,14 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-6">
             <Link
-              href="/privacy"
+              href="/privacy/"
               className="hover:text-neutral-300 transition-colors"
             >
               PRIVACY POLICY
             </Link>
             <span className="text-neutral-700">/</span>
             <Link
-              href="/terms"
+              href="/terms/"
               className="hover:text-neutral-300 transition-colors"
             >
               TERMS OF SERVICE

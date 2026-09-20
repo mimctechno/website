@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     "Automatically dispatch PDF invoices, outstanding payment reminders, and ledger statements directly from Tally Prime & ERP 9 to WhatsApp in < 3 seconds. 100% Meta Official API.",
   alternates: {
     canonical:
-      "https://www.mimctechnologies.com/services/tally-whatsapp-integration",
+      "https://www.mimctechnologies.com/services/tally-whatsapp-integration/",
   },
   openGraph: {
-    url: "https://www.mimctechnologies.com/services/tally-whatsapp-integration",
+    url: "https://www.mimctechnologies.com/services/tally-whatsapp-integration/",
     title:
       "Tally Prime WhatsApp Integration — Auto Invoice & Payment Reminders | MIMC",
     description:

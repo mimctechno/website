@@ -19,14 +19,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const title = `WhatsApp API Provider in ${locationData.city} | MIMC Technologies`;
   const description = `Official WhatsApp Business API integration in ${locationData.city}. Secure ERP & Tally solutions for local enterprises by MIMC Technologies.`;
-  const url = `https://www.mimctechnologies.com/services/${locationData.slug}/`;
+  const citySlug = locationData.slug.replace(/^whatsapp-api-/, "");
+  const canonicalUrl = `https://www.mimctechnologies.com/services/whatsapp-api/${citySlug}/`;
 
   return {
     title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
-      url,
+      url: canonicalUrl,
       title,
       description,
       type: "website",

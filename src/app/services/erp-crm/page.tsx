@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description:
     "Replace expensive per-user SaaS licenses with custom ERP software you own 100%. Multi-warehouse inventory, billing, manufacturing, and CRM systems for mid-market businesses.",
   alternates: {
-    canonical: "https://www.mimctechnologies.com/services/erp-crm",
+    canonical: "https://www.mimctechnologies.com/services/erp-crm/",
   },
   openGraph: {
-    url: "https://www.mimctechnologies.com/services/erp-crm",
+    url: "https://www.mimctechnologies.com/services/erp-crm/",
     title:
       "Custom ERP & CRM Software Development — India, Canada & Global | MIMC",
     description:

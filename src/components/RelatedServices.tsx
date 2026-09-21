@@ -5,45 +5,52 @@ import { ArrowRight, Layers } from "lucide-react";
 
 const allServices = [
   {
+    id: "tally-cloud",
+    title: "Tally on Cloud Hosting",
+    tagline: "Access Tally Prime on Mac, PC & Browser anywhere",
+    path: "/services/tally-cloud/",
+    tag: "Cloud Hosting",
+  },
+  {
     id: "whatsapp-api",
     title: "Official Meta WhatsApp API",
     tagline: "High-volume broadcast & webhook automation",
-    path: "/services/whatsapp-api",
+    path: "/services/whatsapp-api/",
     tag: "Partner",
   },
   {
     id: "tally-integration",
     title: "Tally ERP WhatsApp Sync",
     tagline: "Instant encrypted PDF invoice dispatches",
-    path: "/services/tally-whatsapp-integration",
+    path: "/services/tally-whatsapp-integration/",
     tag: "Connector",
   },
   {
     id: "erp-crm",
     title: "Enterprise ERP & CRM",
     tagline: "Multi-branch resource planning & pipelines",
-    path: "/services/erp-crm",
+    path: "/services/erp-crm/",
     tag: "Mission Critical",
   },
   {
     id: "web-development",
     title: "Modern Web & Edge Cloud",
     tagline: "Sub-second Next.js conversion architecture",
-    path: "/services/web-development",
+    path: "/services/web-development/",
     tag: "Full Stack",
   },
   {
     id: "digital-marketing",
     title: "Technical SEO & Growth",
     tagline: "Programmatic search ranking domination",
-    path: "/services/digital-marketing",
+    path: "/services/digital-marketing/",
     tag: "Revenue",
   },
   {
     id: "enterprise-consulting",
     title: "IT Architecture Consulting",
     tagline: "Strategy, system audits & zero lock-in",
-    path: "/services/enterprise-consulting",
+    path: "/services/enterprise-consulting/",
     tag: "Advisory",
   },
 ];

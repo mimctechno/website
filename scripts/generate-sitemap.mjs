@@ -13,6 +13,7 @@ const staticRoutes = [
   "/privacy",
   "/terms",
   "/services",
+  "/services/tally-cloud",
   "/services/whatsapp-api",
   "/services/tally-whatsapp-integration",
   "/services/erp-crm",
@@ -110,6 +111,16 @@ function generateSitemap() {
     xml += `  </url>\n`;
   });
 
+  // Add Tally on Cloud Hosting regional routes (India & GCC only)
+  tallyCitySlugs.forEach((citySlug) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${domain}/services/tally-cloud/${citySlug}/</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += `  </url>\n`;
+  });
+
   // Add Tally Prime Invoicing regional routes (India & GCC only)
   tallyCitySlugs.forEach((citySlug) => {
     xml += `  <url>\n`;
@@ -179,7 +190,7 @@ function generateSitemap() {
     staticRoutes.length +
     jobSlugs.length +
     blogSlugs.length +
-    tallyCitySlugs.length +
+    tallyCitySlugs.length * 2 +
     citySlugs.length * 5;
   console.log(`✅ Successfully generated clean canonical sitemap.xml with ${totalUrls} routes.`);
 }

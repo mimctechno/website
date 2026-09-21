@@ -129,10 +129,22 @@ export default function Home() {
         "Automated Payment Reminders & Ledgers",
         "Broadcast Campaigns with Live Analytics",
       ],
-      href: "/services/whatsapp-api",
+      href: "/services/whatsapp-api/",
     },
     {
       num: "02",
+      title: "Tally on Cloud Hosting (Mac & Browser Access)",
+      tag: "Cloud Hosting",
+      desc: "Run Tally Prime securely from anywhere on Mac, PC, phone, or web browser. High-speed NVMe SSD cloud servers, multi-user concurrency, 1-click office printing, and daily ransomware-proof backups.",
+      bullets: [
+        "Run on Mac, Windows, iPad & Browser",
+        "99.99% Uptime with NVMe SSD Speed",
+        "Daily Automated Ransomware-Proof Backups",
+      ],
+      href: "/services/tally-cloud/",
+    },
+    {
+      num: "03",
       title: "Automated Tally Prime WhatsApp Invoicing Connectors",
       tag: "Specialized Sync",
       desc: "Automatic invoice dispatch from Tally Prime / ERP 9 directly to client WhatsApp in under 3 seconds. Includes PDF vouchers, ledger summaries, and automated overdue payment reminders.",
@@ -141,10 +153,10 @@ export default function Home() {
         "Multi-Company & Multi-GST Support",
         "Digital Signature & Bank-Grade Security",
       ],
-      href: "/services/tally-whatsapp-integration",
+      href: "/services/tally-whatsapp-integration/",
     },
     {
-      num: "03",
+      num: "04",
       title: "Custom Enterprise ERP & CRM Software Development",
       tag: "100% Code Ownership",
       desc: "Custom business software built for your exact inventory, manufacturing, wholesale distribution, and billing workflows. Zero recurring per-user license fees.",
@@ -153,10 +165,10 @@ export default function Home() {
         "Multi-Warehouse Inventory & Automated Billing",
         "Fast Sub-100ms Financial Reports",
       ],
-      href: "/services/erp-crm",
+      href: "/services/erp-crm/",
     },
     {
-      num: "04",
+      num: "05",
       title: "High-Performance Next.js Web Development",
       tag: "Sub-Second Speed",
       desc: "Modern web applications and commercial platforms engineered with Next.js App Router for 100/100 Core Web Vitals, ultra-fast load times, and high search engine conversion.",
@@ -165,10 +177,10 @@ export default function Home() {
         "Global Edge CDN & Automated Failover",
         "Programmatic SEO Architecture",
       ],
-      href: "/services/web-development",
+      href: "/services/web-development/",
     },
     {
-      num: "05",
+      num: "06",
       title: "Technical SEO & Programmatic Search Growth",
       tag: "Organic Pipeline",
       desc: "Dominate search engine rankings with high-intent keyword architecture, structured JSON-LD schema, and local search landing systems engineered for qualified B2B lead flow.",
@@ -177,11 +189,31 @@ export default function Home() {
         "AI Search Engine Optimization (GEO)",
         "High-Intent Commercial Funnel Focus",
       ],
-      href: "/services/digital-marketing",
+      href: "/services/digital-marketing/",
+    },
+    {
+      num: "07",
+      title: "Enterprise Architecture & IT Consulting",
+      tag: "Strategy & Code",
+      desc: "Senior engineering audits of your current software architecture, cloud hosting costs, and database bottlenecks. Actionable roadmaps with zero software vendor lock-in.",
+      bullets: [
+        "Cloud Cost & Infrastructure Audits",
+        "Database & API Bottleneck Resolution",
+        "Zero Software Vendor Lock-In",
+      ],
+      href: "/services/enterprise-consulting/",
     },
   ];
 
   const homepageFaqs = [
+    {
+      q: "Can I run Tally Prime on Mac, iPad, or web browser with Tally on Cloud?",
+      a: "Yes. Our Tally on Cloud hosting allows you and your team to run your genuine Tally Prime smoothly on MacBook, iMac, Windows laptops, iPads, tablets, or directly inside Google Chrome and Safari. You get fast NVMe SSD speed, multi-user support with zero lag, 1-click printing to your local office printers, and automatic daily ransomware-safe backups.",
+    },
+    {
+      q: "How fast can we migrate our existing Tally data to Cloud?",
+      a: "Migration takes under 2 hours with zero downtime and zero data loss. Our cloud engineers take a secure backup of your existing Tally data, configure your high-speed cloud environment, verify your company ledgers, and provide a free live test drive for your team before going live.",
+    },
     {
       q: "What is the difference between WhatsApp Business App and WhatsApp Business API?",
       a: "The standard WhatsApp Business App is designed for small single-person shops with manual typing and a 256-contact broadcast limit. The official WhatsApp Business API is built for growing enterprises: it enables unlimited automated messages, multi-agent customer support dashboards, direct Tally/ERP software integrations, verified Green Checkmarks, and zero risk of phone number bans.",
@@ -231,7 +263,7 @@ export default function Home() {
           height: 630,
         },
         description:
-          "Official WhatsApp Business API setup, custom ERP software, automated Tally integration, and enterprise software engineering.",
+          "Official WhatsApp Business API setup, managed Tally on Cloud hosting, custom ERP software, and automated Tally Prime integration.",
         foundingDate: "2020",
         areaServed: [
           "India",
@@ -296,8 +328,8 @@ export default function Home() {
 
   return (
     <Layout
-      title="Official WhatsApp Business API, Custom ERP & Tally Integration | MIMC Technologies"
-      description="Official WhatsApp Business API onboarding, custom ERP development, and automated Tally Prime integration. Live in 48 hours for enterprises in India, Canada, UAE & 100+ cities."
+      title="Official WhatsApp Business API, Tally on Cloud & Custom ERP | MIMC Technologies"
+      description="Official WhatsApp Business API onboarding, fast Tally on Cloud hosting for Mac and PC, and custom ERP development. Live in 48 hours for enterprises in India, Canada, UAE & 100+ cities."
     >
       <script
         type="application/ld+json"
@@ -331,7 +363,7 @@ export default function Home() {
               Official WhatsApp Business API,
             </span>
             <span className="hero-title-line block text-teal-700">
-              Custom ERP & Tally Integration
+              Tally on Cloud & Custom ERP
             </span>
             <span className="hero-title-line block font-normal text-neutral-500 text-2xl sm:text-4xl lg:text-5xl mt-1">
               Built for Enterprises Worldwide.
@@ -341,9 +373,9 @@ export default function Home() {
           {/* Plain English Sub-headline */}
           <p className="text-base sm:text-xl text-[#525252] max-w-3xl mx-auto leading-relaxed font-normal mb-8">
             We help businesses across India, Canada, UAE, and 100+ global cities
-            set up official WhatsApp Business API in 48 hours, build custom ERP
-            software with 100% code ownership, and automate Tally Prime invoice
-            delivery.
+            set up official WhatsApp Business API in 48 hours, run Tally Prime
+            securely on cloud from Mac or web browser, and build custom ERP
+            software with 100% code ownership.
           </p>
 
           {/* Action CTAs */}
@@ -373,6 +405,10 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-teal-600" />
+              <span>Tally on Cloud · Mac & Browser Access</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-teal-600" />
               <span>Sub-3-Second Tally Invoice Dispatch</span>
             </div>
             <div className="flex items-center gap-2">
@@ -390,6 +426,11 @@ export default function Home() {
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-600" /> OFFICIAL
               META WHATSAPP BUSINESS API
+            </span>
+            <span className="text-neutral-300">/</span>
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-600" /> TALLY ON
+              CLOUD (MAC & BROWSER ACCESS)
             </span>
             <span className="text-neutral-300">/</span>
             <span className="flex items-center gap-2">
@@ -562,10 +603,10 @@ export default function Home() {
             </h2>
           </div>
           <Link
-            href="/services"
+            href="/services/"
             className="mt-3 md:mt-0 inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-900 transition-colors"
           >
-            <span>View All 6 Solutions</span>
+            <span>View All 7 Solutions</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

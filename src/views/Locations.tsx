@@ -50,6 +50,11 @@ const SERVICE_TABS = [
     badge: "Global Metros",
   },
   {
+    id: "tally-cloud",
+    label: "Tally on Cloud Hosting",
+    badge: "India & GCC Only",
+  },
+  {
     id: "tally-whatsapp-integration",
     label: "Tally Prime WhatsApp Invoicing",
     badge: "India & GCC Only",
@@ -86,7 +91,8 @@ export default function Locations() {
     return CANONICAL_LOCATIONS.filter((loc) => {
       // Service filter
       if (
-        selectedService === "tally-whatsapp-integration" &&
+        (selectedService === "tally-whatsapp-integration" ||
+          selectedService === "tally-cloud") &&
         !loc.supportsTally
       ) {
         return false;
@@ -401,6 +407,14 @@ export default function Locations() {
                               >
                                 IT Advisory
                               </Link>
+                              {city.supportsTallyCloud && (
+                                <Link
+                                  href={`/services/tally-cloud/${city.citySlug}/`}
+                                  className="px-2 py-0.5 rounded-md bg-sky-50 hover:bg-sky-100 text-[10px] font-mono font-semibold text-sky-800 border border-sky-200 transition-all"
+                                >
+                                  Tally Cloud
+                                </Link>
+                              )}
                               {city.supportsTally && (
                                 <Link
                                   href={`/services/tally-whatsapp-integration/${city.citySlug}/`}

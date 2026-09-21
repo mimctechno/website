@@ -1,6 +1,7 @@
 import { CanonicalLocation } from "./canonicalLocations";
 
 export type ServiceId =
+  | "tally-cloud"
   | "tally-whatsapp-integration"
   | "erp-crm"
   | "whatsapp-api"
@@ -44,6 +45,72 @@ export interface ResolvedCityServiceData {
 }
 
 export const SERVICES_CONFIG: Record<ServiceId, ServiceConfig> = {
+  "tally-cloud": {
+    id: "tally-cloud",
+    title: "Tally on Cloud Hosting",
+    shortTitle: "Tally on Cloud",
+    badge: "MANAGED CLOUD HOSTING",
+    category: "Cloud Accounting & Remote Infrastructure",
+    tagline:
+      "Run Tally Prime securely from anywhere on Mac, PC, phone, or web browser.",
+    getH1: (city) =>
+      `Tally on Cloud Hosting in ${city.city} — Access Anywhere on Mac & PC.`,
+    getMetaTitle: (city) =>
+      `Tally on Cloud Provider in ${city.city} | Fast Tally Prime Cloud Hosting`,
+    getMetaDescription: (city) =>
+      `Run Tally Prime securely on cloud in ${city.city}. Access on Mac, Windows, tablet or browser. Fast SSD speed, multi-user support & automatic daily backup. Free demo.`,
+    getHeroDescription: (city) =>
+      `Stop running Tally on slow office desktop computers. Host your Tally Prime on high-speed NVMe cloud servers with 99.99% uptime. Work securely from home, factory, branch office, or client meetings in ${city.city}. 100% ransomware safe with daily automated backups.`,
+    getFeatures: (city) => [
+      {
+        title: "Access Tally on Mac, iPad, Windows & Mobile",
+        desc: "Open your real Tally Prime directly on MacBook, iMac, tablet, or any web browser without complicated setups.",
+      },
+      {
+        title: "Super-Fast Speed for Multi-User Teams",
+        desc: "High-frequency CPU cores and NVMe SSD drives mean zero freezing, even when multiple accountants run heavy balance sheets at once.",
+      },
+      {
+        title: "100% Ransomware-Proof & Daily Backups",
+        desc: `Your data is backed up automatically every day in Tier-4 ISO-certified data centers. Even if a local laptop gets a virus or crashes, your Tally data in ${city.city} is completely safe.`,
+      },
+      {
+        title: "1-Click Local Printing & GST Ready",
+        desc: `Print invoices and delivery challans straight to your regular local office printer in ${city.city} with one click. Fully ready for GST, e-Invoicing, and e-Way bills.`,
+      },
+    ],
+    getFaqs: (city) => [
+      {
+        q: `How do I access Tally on Cloud from ${city.city}?`,
+        a: "You can log in through our secure desktop client or directly from any web browser (Chrome, Safari, Edge) on your Mac, Windows PC, iPad, or Android phone. Enter your credentials and your full Tally Prime desktop opens in seconds.",
+      },
+      {
+        q: "Can I print invoices on my local office printer?",
+        a: "Yes! Our cloud architecture passes print jobs straight through to your local USB, Wi-Fi, or network printer in your office without manual downloading.",
+      },
+      {
+        q: "How long does it take to migrate our existing Tally data?",
+        a: `Migration typically takes under 2 hours. Simply share your latest Tally backup with our team. We configure your cloud server, test data integrity, set up user logins for your ${city.city} team, and hand over access with zero business downtime.`,
+      },
+      {
+        q: "Is our financial data safe from ransomware and unauthorized access?",
+        a: "Yes. Your Tally data is isolated in private cloud storage with bank-grade 256-bit SSL encryption, granular user permissions, and automated off-site daily backups. Nobody can copy or extract data without admin authorization.",
+      },
+      {
+        q: "Can multiple users in different branches work on Tally at the same time?",
+        a: "Yes! With Tally Multi-User (Gold), your head office, retail counters, and remote warehouses can all create vouchers and check stock simultaneously with zero lag.",
+      },
+    ],
+    breadcrumbs: (city) => [
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services/" },
+      { name: "Tally on Cloud", url: "/services/tally-cloud/" },
+      {
+        name: city.city,
+        url: `/services/tally-cloud/${city.citySlug}/`,
+      },
+    ],
+  },
   "tally-whatsapp-integration": {
     id: "tally-whatsapp-integration",
     title: "Automated Tally Prime WhatsApp Invoicing",

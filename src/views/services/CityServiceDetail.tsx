@@ -56,17 +56,19 @@ export default function CityServiceDetail({
   const canonicalUrl = `https://www.mimctechnologies.com/services/${serviceId}/${location.citySlug}/`;
 
   // Related regional hubs for this service (same country first, then global tier-1)
+  const isTallyService =
+    serviceId === "tally-cloud" || serviceId === "tally-whatsapp-integration";
   const sameCountry = CANONICAL_LOCATIONS.filter(
     (l) =>
       l.citySlug !== location.citySlug &&
       l.countryCode === location.countryCode &&
-      (serviceId === "tally-whatsapp-integration" ? l.supportsTally : true),
+      (isTallyService ? l.supportsTally : true),
   );
   const fallbackHubs = CANONICAL_LOCATIONS.filter(
     (l) =>
       l.citySlug !== location.citySlug &&
       l.countryCode !== location.countryCode &&
-      (serviceId === "tally-whatsapp-integration" ? l.supportsTally : true),
+      (isTallyService ? l.supportsTally : true),
   );
   const siblingLocations = [...sameCountry, ...fallbackHubs].slice(0, 8);
 

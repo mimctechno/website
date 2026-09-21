@@ -12,20 +12,20 @@ interface ServiceSchemaProps {
   name: string;
   description: string;
   url: string;
-  faqs: FAQ[];
-  breadcrumbs: Breadcrumb[];
-  rating: number;
-  reviewCount: number;
+  faqs?: FAQ[];
+  breadcrumbs?: Breadcrumb[];
+  rating?: number;
+  reviewCount?: number;
 }
 
 export default function ServiceSchema({
   name,
   description,
   url,
-  faqs,
-  breadcrumbs,
-  rating,
-  reviewCount,
+  faqs = [],
+  breadcrumbs = [],
+  rating = 4.9,
+  reviewCount = 120,
 }: ServiceSchemaProps) {
   const schema = {
     "@context": "https://schema.org",

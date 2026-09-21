@@ -117,7 +117,7 @@ export default function ServiceRegionalHubs({
   serviceTitle: string;
 }) {
   const hubs =
-    serviceId === "tally-whatsapp-integration"
+    serviceId === "tally-whatsapp-integration" || serviceId === "tally-cloud"
       ? TALLY_FEATURED_SLUGS
       : GLOBAL_FEATURED_SLUGS;
 

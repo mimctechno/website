@@ -13,6 +13,7 @@ export interface CanonicalLocation {
   complianceNote: string;
   localTrustSignal: string;
   supportsTally: boolean;
+  supportsTallyCloud: boolean;
   supportsERP: boolean;
   supportsWhatsApp: boolean;
   supportsWebDev: boolean;
@@ -64,6 +65,7 @@ export const CANONICAL_LOCATIONS: CanonicalLocation[] = (
       loc.localTrustSignal ||
       `Serving commercial enterprises and growing businesses across the ${loc.city} metropolitan area.`,
     supportsTally: isTallyEligible,
+    supportsTallyCloud: isTallyEligible,
     supportsERP: true,
     supportsWhatsApp: true,
     supportsWebDev: true,
@@ -87,6 +89,7 @@ export function getLocationByLegacySlug(
 
 export function getLocationsForService(
   serviceId:
+    | "tally-cloud"
     | "tally-whatsapp-integration"
     | "erp-crm"
     | "whatsapp-api"
@@ -95,6 +98,8 @@ export function getLocationsForService(
     | "enterprise-consulting",
 ): CanonicalLocation[] {
   switch (serviceId) {
+    case "tally-cloud":
+      return CANONICAL_LOCATIONS.filter((l) => l.supportsTallyCloud);
     case "tally-whatsapp-integration":
       return CANONICAL_LOCATIONS.filter((l) => l.supportsTally);
     case "erp-crm":

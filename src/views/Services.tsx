@@ -7,6 +7,7 @@ import {
   Database,
   Zap,
   Terminal,
+  Cloud,
   Globe,
   BarChart3,
   Shield,
@@ -73,6 +74,30 @@ const allServices = [
     ],
     sla: "< 2s API Delivery",
     timeline: "48h Fast Track",
+  },
+  {
+    slug: "tally-cloud",
+    category: "Cloud Hosting",
+    icon: Cloud,
+    badge: "MANAGED CLOUD HOSTING",
+    title: "Tally on Cloud Hosting",
+    tagline:
+      "Run Tally Prime securely from anywhere on Mac, PC, phone, or web browser.",
+    desc: "Host your Tally Prime on fast NVMe cloud servers. Access your accounting from any MacBook, Windows laptop, tablet, or browser with 99.99% uptime, 1-click office printing, and automated daily backups.",
+    techStack: [
+      "Tier-4 Cloud Servers",
+      "NVMe SSD Storage",
+      "HTML5 Web Client",
+      "Daily Automated Backups",
+    ],
+    bullets: [
+      "Run on Mac, Windows, iPad, Android & Web Browser",
+      "Super-Fast Multi-User Concurrency with Zero Lag",
+      "100% Ransomware-Proof Daily Cloud Backups",
+      "Direct 1-Click Local Office Printer Support",
+    ],
+    sla: "99.99% Guaranteed SLA",
+    timeline: "2-Hour Fast Migration",
   },
   {
     slug: "tally-whatsapp-integration",

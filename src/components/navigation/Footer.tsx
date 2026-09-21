@@ -257,6 +257,17 @@ export default function Footer() {
               TERMS OF SERVICE
             </Link>
             <span className="text-neutral-700">/</span>
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new Event("open-cookie-settings"));
+                }
+              }}
+              className="hover:text-neutral-300 transition-colors uppercase cursor-pointer"
+            >
+              COOKIE SETTINGS
+            </button>
+            <span className="text-neutral-700">/</span>
             <span className="text-teal-500">ENTERPRISE EDITION V3.4</span>
           </div>
         </div>

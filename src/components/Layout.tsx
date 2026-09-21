@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Navbar from "./navigation/Navbar";
 import Footer from "./navigation/Footer";
 import BreadcrumbNav from "./ui/BreadcrumbNav";
+import CookieBanner from "./ui/CookieBanner";
 
 function CommercialGrid() {
   return (
@@ -123,6 +124,9 @@ export default function Layout({
 
       {/* Extracted Footer Component */}
       <Footer />
+
+      {/* Persistent GDPR & DPDP Cookie Consent Banner */}
+      <CookieBanner />
     </div>
   );
 }

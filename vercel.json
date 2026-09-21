@@ -1,26 +1,46 @@
 {
   "outputDirectory": "out",
+  "trailingSlash": true,
   "redirects": [
     {
-      "source": "/careers/senior-frontend-engineer/?",
+      "source": "/careers/senior-frontend-engineer",
       "destination": "/careers/",
       "permanent": true
     },
     {
-      "source": "/careers/whatsapp-api-integration-engineer/?",
+      "source": "/careers/senior-frontend-engineer/",
       "destination": "/careers/",
       "permanent": true
     },
     {
-      "source": "/careers/enterprise-sales-executive/?",
+      "source": "/careers/whatsapp-api-integration-engineer",
       "destination": "/careers/",
       "permanent": true
     },
     {
-      "source": "/services/whatsapp-api-:city/?",
+      "source": "/careers/whatsapp-api-integration-engineer/",
+      "destination": "/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/careers/enterprise-sales-executive",
+      "destination": "/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/careers/enterprise-sales-executive/",
+      "destination": "/careers/",
+      "permanent": true
+    },
+    {
+      "source": "/services/whatsapp-api-:city",
+      "destination": "/services/whatsapp-api/:city/",
+      "permanent": true
+    },
+    {
+      "source": "/services/whatsapp-api-:city/",
       "destination": "/services/whatsapp-api/:city/",
       "permanent": true
     }
   ]
 }
-

@@ -24,6 +24,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
 
 const features = [
   {
@@ -298,6 +299,22 @@ export default function WebDevelopment() {
             ))}
           </div>
         </section>
+
+        {/* Dedicated Web Development & SEO Inquiry Form */}
+        <ServiceInquirySection
+          serviceId="web-development"
+          serviceTitle="Enterprise Web Development & Programmatic SEO"
+          subtitle="Build custom Next.js web applications, headless architectures, and programmatic search funnels engineered for 100/100 Core Web Vitals and high conversion."
+          scopePills={[
+            "Next.js App Router Web Platform",
+            "Programmatic SEO Directory Engine",
+            "Headless CMS & Custom Admin Dashboard",
+            "100/100 Core Web Vitals Performance",
+            "E-Commerce & Payment Integration",
+            "AI Search Engine Optimization (LLM Citations)",
+          ]}
+          placeholder="e.g. We need a high-performance Next.js web application with a programmatic SEO structure and lead generation pipelines..."
+        />
 
         {/* ===================== FAQ ACCORDION ===================== */}
         <section className="mb-16 max-w-4xl">

@@ -24,6 +24,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
 
 const features = [
   {
@@ -266,6 +267,22 @@ export default function EnterpriseConsulting() {
             ))}
           </div>
         </section>
+
+        {/* Dedicated Enterprise Advisory Inquiry Form */}
+        <ServiceInquirySection
+          serviceId="enterprise-consulting"
+          serviceTitle="Enterprise IT Consulting & Software Advisory"
+          subtitle="Commission an independent technology audit, architectural review, or digital transformation blueprint from our senior enterprise consultants."
+          scopePills={[
+            "Full-Stack Tech Architecture Audit",
+            "Legacy Software Modernization Blueprint",
+            "Vendor & SaaS Evaluation",
+            "Database & Query Performance Tuning",
+            "Cloud Security & Compliance Roadmap",
+            "Interim Fractional CTO / Principal Architect",
+          ]}
+          placeholder="e.g. Looking to audit our legacy monolithic application stack, eliminate performance bottlenecks, and design a phased migration roadmap..."
+        />
 
         {/* ===================== FAQ ACCORDION ===================== */}
         <section className="mb-16 max-w-4xl">

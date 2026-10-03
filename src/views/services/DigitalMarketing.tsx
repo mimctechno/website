@@ -24,6 +24,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
 
 const features = [
   {
@@ -283,6 +284,22 @@ export default function DigitalMarketing() {
             ))}
           </div>
         </section>
+
+        {/* Dedicated Growth & SEO Inquiry Form */}
+        <ServiceInquirySection
+          serviceId="digital-marketing"
+          serviceTitle="Enterprise Digital Marketing & Programmatic SEO"
+          subtitle="Scale verified B2B pipeline generation with data-driven search architecture, programmatic content clusters, and high-conversion PPC campaigns."
+          scopePills={[
+            "Programmatic SEO & Content Cluster Architecture",
+            "B2B Google Ads (SEM) & Lead Generation",
+            "AI Search Optimization (Perplexity/ChatGPT Citations)",
+            "Conversion Rate Optimization (CRO) & Funnels",
+            "LinkedIn B2B Account-Based Marketing",
+            "Technical Core Web Vitals SEO Audit",
+          ]}
+          placeholder="e.g. We want to scale organic lead generation across regional markets with programmatic SEO and high-intent Google Ads campaigns..."
+        />
 
         {/* ===================== FAQ ACCORDION ===================== */}
         <section className="mb-16 max-w-4xl">

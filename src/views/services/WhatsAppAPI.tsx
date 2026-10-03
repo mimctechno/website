@@ -25,6 +25,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
 
 import {
   IndiaFlag,
@@ -299,6 +300,22 @@ export default function WhatsAppAPI() {
             ))}
           </div>
         </section>
+
+        {/* Dedicated WhatsApp API Inquiry Form */}
+        <ServiceInquirySection
+          serviceId="whatsapp-api"
+          serviceTitle="Official Meta WhatsApp Business API"
+          subtitle="Deploy direct Meta Cloud API infrastructure with zero per-message aggregator markup, verified green tick onboarding, and sub-second message throughput."
+          scopePills={[
+            "Meta Verified Green Tick Onboarding",
+            "High-Volume OTP & Transaction Alerts",
+            "Custom Multi-Agent Support Chatbot",
+            "ERP / CRM Webhook Integration",
+            "Marketing Broadcasts & Campaign Engine",
+            "Payment Gateway Integration in WhatsApp",
+          ]}
+          placeholder="e.g. We plan to send 100k transactional & promotional messages per month integrated with our customer database and need multi-agent chat support..."
+        />
 
         {/* ===================== FAQ ACCORDION ===================== */}
         <section className="mb-16 max-w-4xl">

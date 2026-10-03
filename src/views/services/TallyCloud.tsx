@@ -28,6 +28,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import { enrichFormDataWithAttribution } from "../../utils/leadAttribution";
 
 const features = [
   {
@@ -144,7 +145,8 @@ export default function TallyCloud() {
     e.preventDefault();
     setSubmitting(true);
     const form = e.currentTarget;
-    const data = new FormData(form);
+    let data = new FormData(form);
+    data = enrichFormDataWithAttribution(data);
     try {
       await fetch("https://formsubmit.co/ajax/info@mimctechnologies.com", {
         method: "POST",

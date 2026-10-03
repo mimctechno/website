@@ -26,6 +26,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import Layout from "../components/Layout";
+import { getLeadAttributionData } from "../utils/leadAttribution";
 
 const allServices = [
   {
@@ -542,6 +543,7 @@ export default function Services() {
                   e.preventDefault();
                   const form = e.currentTarget;
                   const email = new FormData(form).get("email");
+                  const attribution = getLeadAttributionData();
                   try {
                     await fetch(
                       "https://formsubmit.co/ajax/info@mimctechnologies.com",
@@ -553,8 +555,8 @@ export default function Services() {
                         },
                         body: JSON.stringify({
                           email: email,
-                          _subject:
-                            "Services Consultation Request from MIMC Redesign",
+                          _subject: "Services Overview Consultation Request",
+                          ...attribution,
                         }),
                       },
                     );

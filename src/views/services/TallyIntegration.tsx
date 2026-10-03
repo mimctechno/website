@@ -25,6 +25,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
 
 const features = [
   {
@@ -353,6 +354,22 @@ export default function TallyIntegration() {
             </div>
           </div>
         </section>
+
+        {/* Dedicated Tally Prime Integration Inquiry Form */}
+        <ServiceInquirySection
+          serviceId="tally-whatsapp-integration"
+          serviceTitle="Tally Prime WhatsApp & Cloud Integration"
+          subtitle="Automate instant PDF invoice dispatch, payment ledger reminders, and real-time biometric/e-way bill sync directly from your Tally Prime instance."
+          scopePills={[
+            "Instant Automated PDF Invoice Dispatch (< 3s)",
+            "Payment Reminder & Outstanding Cadence Bot",
+            "Multi-Company / Multi-Branch Tally Setup",
+            "Customer Ledger & Statement on Demand",
+            "Custom TDL (Tally Definition Language) Module",
+            "Tally on Cloud & Remote Multi-User Access",
+          ]}
+          placeholder="e.g. We have 3 Tally Prime companies and want to automatically dispatch invoices via WhatsApp with payment reminder schedules..."
+        />
 
         {/* ===================== FAQ ACCORDION ===================== */}
         <section className="mb-16 max-w-4xl">

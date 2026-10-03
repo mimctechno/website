@@ -37,6 +37,7 @@ import {
   UAEFlag,
   USFlag,
 } from "@/components/ui/FlagIcon";
+import { getLeadAttributionData } from "../utils/leadAttribution";
 
 // Lazy-load ticker marquee
 const Marquee = dynamic(() => import("react-fast-marquee"), {
@@ -936,6 +937,7 @@ export default function Home() {
                   e.preventDefault();
                   const form = e.currentTarget;
                   const email = new FormData(form).get("email");
+                  const attribution = getLeadAttributionData();
                   try {
                     await fetch(
                       "https://formsubmit.co/ajax/info@mimctechnologies.com",
@@ -948,7 +950,8 @@ export default function Home() {
                         body: JSON.stringify({
                           email: email,
                           _subject:
-                            "Enterprise Consultation Request from MIMC Redesign",
+                            "Enterprise Consultation Request from Home Page",
+                          ...attribution,
                         }),
                       },
                     );

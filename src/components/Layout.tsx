@@ -1,10 +1,11 @@
 "use client";
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "./navigation/Navbar";
 import Footer from "./navigation/Footer";
 import BreadcrumbNav from "./ui/BreadcrumbNav";
 import CookieBanner from "./ui/CookieBanner";
+import { initLeadAttribution } from "../utils/leadAttribution";
 
 function CommercialGrid() {
   return (
@@ -28,6 +29,10 @@ export default function Layout({
 }) {
   const pathname = usePathname();
   const isHome = (pathname ?? "/") === "/";
+
+  useEffect(() => {
+    initLeadAttribution();
+  }, [pathname]);
 
   // Breadcrumb schema — built from current pathname
   const pathParts = (pathname ?? "/").split("/").filter(Boolean);

@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import Layout from "../components/Layout";
 import { type Job, generateJobPostingSchema } from "../data/jobs";
+import { enrichFormDataWithAttribution } from "../utils/leadAttribution";
 
 export default function JobDetail({ job }: { job: Job }) {
   const [submitted, setSubmitted] = useState(false);
@@ -26,7 +27,8 @@ export default function JobDetail({ job }: { job: Job }) {
     e.preventDefault();
     setSubmitting(true);
     const form = e.currentTarget;
-    const data = new FormData(form);
+    let data = new FormData(form);
+    data = enrichFormDataWithAttribution(data);
     if (!data.get("_cc")) {
       data.append("_cc", "info@mimctechnologies.com");
     }

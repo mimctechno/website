@@ -25,6 +25,7 @@ import RelatedServices from "../../components/RelatedServices";
 import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
+import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
 
 const features = [
   {
@@ -294,6 +295,22 @@ export default function ERPCRM() {
             ))}
           </div>
         </section>
+
+        {/* Dedicated Service Inquiry Form */}
+        <ServiceInquirySection
+          serviceId="erp-crm"
+          serviceTitle="Enterprise ERP & Custom CRM"
+          subtitle="Get a direct architectural consultation, custom schema blueprint, and fixed-price quotation from our lead engineers in Toronto & Delhi NCR."
+          scopePills={[
+            "Automated Invoicing & 3-Way Reconciliation",
+            "Multi-Branch Inventory & Warehousing",
+            "Custom CRM & Sales Pipeline",
+            "Tally / SAP Accounting Sync",
+            "Automated Bank & Ledger Reconciliation",
+            "Client & Vendor Self-Service Portal",
+          ]}
+          placeholder="e.g. Looking to build custom inventory and multi-branch accounting workflows with role-based dashboard approvals..."
+        />
 
         {/* ===================== FAQ ACCORDION ===================== */}
         <section className="mb-16 max-w-4xl">

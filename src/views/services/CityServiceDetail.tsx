@@ -28,6 +28,7 @@ import {
 } from "@/data/canonicalLocations";
 import { ResolvedCityServiceData } from "@/data/servicesRegistry";
 import { getCountryFlag } from "@/components/ui/FlagIcon";
+import { enrichFormDataWithAttribution } from "@/utils/leadAttribution";
 
 export default function CityServiceDetail({
   location,
@@ -125,7 +126,8 @@ export default function CityServiceDetail({
     e.preventDefault();
     setSubmitting(true);
     const form = e.currentTarget;
-    const data = new FormData(form);
+    let data = new FormData(form);
+    data = enrichFormDataWithAttribution(data);
     try {
       await fetch("https://formsubmit.co/ajax/info@mimctechnologies.com", {
         method: "POST",

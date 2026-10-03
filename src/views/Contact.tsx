@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Layout from "../components/Layout";
 import { IndiaFlag, CanadaFlag } from "../components/ui/FlagIcon";
+import { enrichFormDataWithAttribution } from "../utils/leadAttribution";
 
 const contactMethods = [
   {
@@ -62,7 +63,8 @@ export default function Contact() {
     e.preventDefault();
     setSending(true);
     const form = e.currentTarget;
-    const data = new FormData(form);
+    let data = new FormData(form);
+    data = enrichFormDataWithAttribution(data);
     try {
       await fetch("https://formsubmit.co/ajax/info@mimctechnologies.com", {
         method: "POST",

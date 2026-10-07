@@ -137,14 +137,14 @@ export default function About() {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-6">
             <Link
-              href="/contact"
+              href="/contact/"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm shadow-xs transition-all active:scale-95"
             >
               <span>Connect with an Architect</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/services"
+              href="/services/"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-semibold text-sm border border-[#E8E8E2] transition-all"
             >
               <span>Explore Capabilities</span>
@@ -287,14 +287,14 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/contact"
+                href="/contact/"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
               >
                 <span>Schedule Discovery Session</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/services/whatsapp-api"
+                href="/services/whatsapp-api/"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 font-semibold text-sm border border-neutral-700 transition-all"
               >
                 <span>Explore WhatsApp API</span>

@@ -274,14 +274,14 @@ export default function Navbar() {
                   {/* Dropdown Footer Strip */}
                   <div className="pt-3 border-t border-[#E8E8E2] flex items-center justify-between px-2 text-xs font-mono">
                     <Link
-                      href="/services"
+                      href="/services/"
                       className="font-bold text-teal-700 hover:text-teal-900 inline-flex items-center gap-1"
                     >
                       <span>Explore All Capabilities</span>
                       <ArrowRight className="w-3 h-3" />
                     </Link>
                     <Link
-                      href="/locations"
+                      href="/locations/"
                       className="text-neutral-500 hover:text-neutral-900 inline-flex items-center gap-1"
                     >
                       <MapPin className="w-3 h-3 text-teal-600" />
@@ -294,7 +294,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href="/locations"
+            href="/locations/"
             className={`transition-colors relative py-1 text-sm ${
               pathname === "/locations"
                 ? "text-teal-800 font-semibold"
@@ -305,7 +305,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/partners"
+            href="/partners/"
             className={`transition-colors relative py-1 text-sm ${
               pathname === "/partners"
                 ? "text-teal-800 font-semibold"
@@ -316,7 +316,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/careers"
+            href="/careers/"
             className={`transition-colors relative py-1 text-sm inline-flex items-center gap-1.5 ${
               pathname.startsWith("/careers")
                 ? "text-teal-800 font-semibold"
@@ -330,7 +330,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/blog"
+            href="/blog/"
             className={`transition-colors relative py-1 text-sm ${
               pathname.startsWith("/blog")
                 ? "text-teal-800 font-semibold"
@@ -341,7 +341,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/about"
+            href="/about/"
             className={`transition-colors relative py-1 text-sm ${
               pathname === "/about"
                 ? "text-teal-800 font-semibold"
@@ -355,7 +355,7 @@ export default function Navbar() {
         {/* Desktop CTA Button */}
         <div className="hidden lg:flex items-center gap-4">
           <Link
-            href="/contact"
+            href="/contact/"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs active:scale-[0.98]"
           >
             <span>Schedule Discovery</span>
@@ -452,7 +452,7 @@ export default function Navbar() {
                         })}
 
                         <Link
-                          href="/services"
+                          href="/services/"
                           onClick={() => setMenuOpen(false)}
                           className="mt-1 py-2 px-3 rounded-lg bg-teal-50 border border-teal-200/60 text-teal-900 flex items-center justify-between text-xs font-bold font-mono uppercase tracking-wide hover:bg-teal-100/70 transition-colors"
                         >
@@ -556,7 +556,7 @@ export default function Navbar() {
 
               {/* Primary CTA */}
               <Link
-                href="/contact"
+                href="/contact/"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-xs uppercase tracking-wider text-center shadow-md active:scale-[0.98] transition-all"
               >

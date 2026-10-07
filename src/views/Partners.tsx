@@ -303,14 +303,14 @@ export default function Partners() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/contact"
+                href="/contact/"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
               >
                 <span>Initiate Project Discovery</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/services"
+                href="/services/"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 font-semibold text-sm border border-neutral-700 transition-all"
               >
                 <span>Browse All Solutions</span>

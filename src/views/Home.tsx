@@ -382,7 +382,7 @@ export default function Home() {
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href="/contact/"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-medium text-base shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
             >
               <span>Get Free 48-Hour Setup Quote</span>
@@ -390,7 +390,7 @@ export default function Home() {
             </Link>
 
             <Link
-              href="/locations"
+              href="/locations/"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-medium text-base border border-[#E8E8E2] transition-all"
             >
               <Globe2 className="w-4 h-4 text-teal-700" />
@@ -692,14 +692,14 @@ export default function Home() {
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
-                href="/services/tally-whatsapp-integration"
+                href="/services/tally-whatsapp-integration/"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-teal-50 text-teal-950 font-semibold text-sm transition-all shadow-md active:scale-95"
               >
                 <span>Explore Tally Integration Details</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/contact"
+                href="/contact/"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-teal-800/80 hover:bg-teal-700/80 text-white font-semibold text-sm border border-teal-600/60 transition-all"
               >
                 <span>Request Free Consultation</span>
@@ -771,7 +771,7 @@ export default function Home() {
           ].map((partner, i) => (
             <Link
               key={i}
-              href="/partners"
+              href="/partners/"
               className="p-5 rounded-2xl bg-white border border-[#E8E8E2] flex flex-col items-center justify-between gap-3 hover:border-teal-500 hover:shadow-sm transition-all duration-200 min-h-[120px] group"
             >
               <div className="flex-1 flex items-center justify-center w-full">
@@ -864,7 +864,7 @@ export default function Home() {
               </h3>
             </div>
             <Link
-              href="/locations"
+              href="/locations/"
               className="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 font-mono uppercase"
             >
               <span>View All 100+ Hubs</span>
@@ -889,7 +889,7 @@ export default function Home() {
             ].map((hub, hIdx) => (
               <Link
                 key={hIdx}
-                href="/locations"
+                href="/locations/"
                 className="p-3 rounded-xl bg-[#FAFAF8] hover:bg-teal-50 border border-[#E8E8E2] hover:border-teal-300 transition-all flex flex-col justify-between"
               >
                 <span className="font-bold text-neutral-900 font-heading">

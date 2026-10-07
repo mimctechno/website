@@ -64,7 +64,7 @@ export default function JobDetail({ job }: { job: Job }) {
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Back Link */}
         <Link
-          href="/careers"
+          href="/careers/"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-teal-800 transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

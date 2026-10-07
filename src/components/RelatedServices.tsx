@@ -70,7 +70,7 @@ export default function RelatedServices({ currentId }: { currentId: string }) {
           </h2>
         </div>
         <Link
-          href="/services"
+          href="/services/"
           className="mt-2 sm:mt-0 text-xs font-semibold text-teal-700 hover:text-teal-900 inline-flex items-center gap-1"
         >
           <span>All Capabilities</span>

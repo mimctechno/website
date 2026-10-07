@@ -34,6 +34,14 @@ function parseInlineMarkdown(text: string): React.ReactNode[] {
         url.startsWith("http") ||
         url.startsWith("mailto:") ||
         url.startsWith("tel:");
+      const normalizedUrl =
+        !isExternal &&
+        !url.includes("?") &&
+        !url.includes("#") &&
+        !url.includes(".") &&
+        !url.endsWith("/")
+          ? `${url}/`
+          : url;
 
       elements.push(
         isExternal ? (
@@ -49,7 +57,7 @@ function parseInlineMarkdown(text: string): React.ReactNode[] {
         ) : (
           <Link
             key={match.index}
-            href={url}
+            href={normalizedUrl}
             className="text-teal-700 hover:text-teal-900 underline underline-offset-3 font-semibold transition-colors"
           >
             {label}
@@ -175,7 +183,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 py-10 sm:py-12">
         {/* Back Link */}
         <Link
-          href="/blog"
+          href="/blog/"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-teal-800 transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -306,21 +314,21 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                 Our senior software architects in Canada and India handle
                 complete end-to-end implementation — from{" "}
                 <Link
-                  href="/services/whatsapp-api"
+                  href="/services/whatsapp-api/"
                   className="text-teal-300 underline"
                 >
                   Official Meta WhatsApp API onboarding
                 </Link>{" "}
                 and{" "}
                 <Link
-                  href="/services/tally-whatsapp-integration"
+                  href="/services/tally-whatsapp-integration/"
                   className="text-teal-300 underline"
                 >
                   Tally Prime automated invoicing
                 </Link>{" "}
                 to{" "}
                 <Link
-                  href="/services/erp-crm"
+                  href="/services/erp-crm/"
                   className="text-teal-300 underline"
                 >
                   custom enterprise ERP software
@@ -329,14 +337,14 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
               </p>
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs uppercase tracking-wider transition-all shadow-sm active:scale-95"
                 >
                   <span>Schedule Free Architecture Review</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/locations"
+                  href="/locations/"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 font-semibold text-xs border border-neutral-700 transition-all"
                 >
                   <span>View 100+ Global City Hubs</span>

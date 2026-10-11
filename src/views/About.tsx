@@ -51,10 +51,10 @@ const principles = [
 
 const hubs = [
   {
-    city: "Toronto, Canada",
+    city: "Mississauga (Greater Toronto), Canada",
     flag: <CanadaFlag className="w-5 h-3.5" />,
     role: "Global Headquarters & Enterprise Strategy",
-    address: "Toronto Financial & Tech Corridor, Ontario, Canada",
+    address: "989 Derry Road East, Suite 420, Mississauga, ON L5T 2J8",
     phone: "+1 416-857-8831",
     focus: [
       "Enterprise Solution Architecture",
@@ -64,10 +64,11 @@ const hubs = [
     ],
   },
   {
-    city: "Delhi NCR, India",
+    city: "Gurugram (Delhi NCR), India",
     flag: <IndiaFlag className="w-5 h-3.5" />,
     role: "Core Engineering & API Innovation Hub",
-    address: "Technology & Software Development Park, India",
+    address:
+      "Unit 407, Emaar Digital Greens, Sector 61, Gurugram, Haryana 122102",
     phone: "+91 925941-8994",
     focus: [
       "Custom ERP & CRM Core Engineering",

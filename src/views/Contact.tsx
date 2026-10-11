@@ -22,7 +22,7 @@ import { enrichFormDataWithAttribution } from "../utils/leadAttribution";
 const contactMethods = [
   {
     flag: <CanadaFlag className="w-5 h-3.5" />,
-    label: "North America Hub (Toronto)",
+    label: "North America Hub (Mississauga / Toronto)",
     role: "Enterprise Strategy & Sales",
     value: "+1 416-857-8831",
     href: "tel:+14168578831",
@@ -30,7 +30,7 @@ const contactMethods = [
   },
   {
     flag: <IndiaFlag className="w-5 h-3.5" />,
-    label: "South Asia Hub (Delhi NCR)",
+    label: "South Asia Hub (Gurugram, Delhi NCR)",
     role: "Core Engineering & Tally Center",
     value: "+91 925941-8994",
     href: "tel:+919259418994",
@@ -103,14 +103,20 @@ export default function Contact() {
     address: [
       {
         "@type": "PostalAddress",
-        addressCountry: "CA",
+        streetAddress: "989 Derry Road East, Suite 420",
+        addressLocality: "Mississauga",
         addressRegion: "Ontario",
-        addressLocality: "Toronto",
+        postalCode: "L5T 2J8",
+        addressCountry: "CA",
       },
       {
         "@type": "PostalAddress",
+        streetAddress:
+          "Unit 407, Emaar Digital Greens, 1, Golf Course Ext Rd, Baharampur Naya, Sector 61",
+        addressLocality: "Gurugram, Ghata",
+        addressRegion: "Haryana",
+        postalCode: "122102",
         addressCountry: "IN",
-        addressRegion: "Delhi",
       },
     ],
   };

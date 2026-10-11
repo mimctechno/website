@@ -74,8 +74,8 @@ export default function Footer() {
             </p>
 
             <div className="pt-2 text-xs font-mono text-neutral-500 space-y-1.5">
-              <div>HQ: Toronto, Ontario, Canada</div>
-              <div>Engineering Hub: Delhi NCR, India</div>
+              <div>HQ: Mississauga (Toronto GTA), Ontario, Canada</div>
+              <div>Engineering Hub: Gurugram (Delhi NCR), Haryana, India</div>
               <div className="text-teal-400/90 font-medium">
                 99.99% Guaranteed Cloud SLA
               </div>
@@ -200,7 +200,7 @@ export default function Footer() {
                 <div className="flex items-center justify-between text-neutral-200 font-semibold mb-1">
                   <div className="flex items-center gap-1.5">
                     <CanadaFlag className="w-4 h-3 shrink-0" />
-                    <span>Toronto, Canada (HQ)</span>
+                    <span>Mississauga / Toronto (HQ)</span>
                   </div>
                   <span className="text-[10px] font-mono text-teal-400 bg-teal-950/60 border border-teal-800/40 px-1.5 py-0.5 rounded">
                     EST
@@ -220,7 +220,7 @@ export default function Footer() {
                 <div className="flex items-center justify-between text-neutral-200 font-semibold mb-1">
                   <div className="flex items-center gap-1.5">
                     <IndiaFlag className="w-4 h-3 shrink-0" />
-                    <span>Delhi NCR, India (R&D)</span>
+                    <span>Gurugram, Delhi NCR (R&D)</span>
                   </div>
                   <span className="text-[10px] font-mono text-teal-400 bg-teal-950/60 border border-teal-800/40 px-1.5 py-0.5 rounded">
                     IST

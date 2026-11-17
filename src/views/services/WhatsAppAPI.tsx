@@ -26,6 +26,10 @@ import ServiceRegionalHubs from "../../components/ServiceRegionalHubs";
 import ServiceSchema from "../../components/seo/ServiceSchema";
 import ServiceBadges from "../../components/ui/ServiceBadges";
 import ServiceInquirySection from "../../components/forms/ServiceInquirySection";
+import WhatsAppComparison from "../../components/whatsapp/WhatsAppComparison";
+import WhatsAppCalculator from "../../components/whatsapp/WhatsAppCalculator";
+import WhatsAppEmbeddedSignupCard from "../../components/whatsapp/WhatsAppEmbeddedSignupCard";
+import WhatsAppFloatingCTA from "../../components/whatsapp/WhatsAppFloatingCTA";
 
 import {
   IndiaFlag,
@@ -185,20 +189,20 @@ export default function WhatsAppAPI() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <Link
-                href="/contact/"
+              <a
+                href="#inquire"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-teal-700 text-white font-semibold text-sm shadow-xs transition-all active:scale-95"
               >
-                <span>Deploy WhatsApp API</span>
+                <span>Deploy Direct Meta API</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/services/tally-whatsapp-integration/"
+              </a>
+              <a
+                href="#savings-calculator"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-[#F4F4F0] text-neutral-800 font-semibold text-sm border border-[#E8E8E2] transition-all"
               >
-                <span>Tally Integration Sync</span>
+                <span>Calculate Cost Savings</span>
                 <ChevronRight className="w-4 h-4 text-neutral-400" />
-              </Link>
+              </a>
             </div>
 
             {/* Official Meta Badges Trust Row */}
@@ -304,6 +308,14 @@ export default function WhatsAppAPI() {
           </div>
         </section>
 
+        {/* ===================== COMPARISON SECTION ===================== */}
+        <WhatsAppComparison />
+
+        {/* ===================== ROI SAVINGS CALCULATOR ===================== */}
+        <div id="savings-calculator">
+          <WhatsAppCalculator />
+        </div>
+
         {/* ===================== FEATURES GRID ===================== */}
         <section className="mb-16">
           <div className="mb-8">
@@ -375,6 +387,9 @@ export default function WhatsAppAPI() {
             ))}
           </div>
         </section>
+
+        {/* ===================== EMBEDDED SIGNUP & RATE CARD ===================== */}
+        <WhatsAppEmbeddedSignupCard />
 
         {/* Dedicated WhatsApp API Inquiry Form */}
         <ServiceInquirySection
@@ -454,6 +469,9 @@ export default function WhatsAppAPI() {
         {/* Related Services Navigation */}
         <RelatedServices currentId="whatsapp-api" />
       </div>
+
+      {/* Floating 1-Click WhatsApp Architect Contact */}
+      <WhatsAppFloatingCTA />
     </Layout>
   );
 }

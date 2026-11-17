@@ -92,6 +92,7 @@ export default function Footer() {
               {[
                 ["Enterprise ERP & Custom CRM", "/services/erp-crm/"],
                 ["Official Meta WhatsApp API", "/services/whatsapp-api/"],
+                ["Cloud API vs Aggregators", "/compare/whatsapp-api/"],
                 ["Tally on Cloud Hosting", "/services/tally-cloud/"],
                 [
                   "Tally Prime WhatsApp Invoicing",

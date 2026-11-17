@@ -15,6 +15,7 @@ const staticRoutes = [
   "/services",
   "/services/tally-cloud",
   "/services/whatsapp-api",
+  "/compare/whatsapp-api",
   "/services/tally-whatsapp-integration",
   "/services/erp-crm",
   "/services/web-development",

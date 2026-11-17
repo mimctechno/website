@@ -426,7 +426,7 @@ export default function Home() {
           <div className="flex items-center gap-12 text-xs font-mono uppercase tracking-widest text-neutral-600 px-6">
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-600" /> OFFICIAL
-              META WHATSAPP BUSINESS API
+              META WHATSAPP CLOUD API PROVIDER
             </span>
             <span className="text-neutral-300">/</span>
             <span className="flex items-center gap-2">
@@ -522,6 +522,81 @@ export default function Home() {
                 <div className="text-[11px] text-neutral-400 mt-0.5">
                   High-Availability Cloud SLA
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Official Alliance & Security Compliance Badges */}
+          <div className="relative z-10 mt-10 pt-6 border-t border-neutral-800/80 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-neutral-300">
+                OFFICIAL ECOSYSTEM ALLIANCES:
+              </span>
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+                <img
+                  src="/badges/Official-Meta-Business-Partner.webp"
+                  alt="Official Meta Business Partner"
+                  className="h-11 md:h-13 w-auto object-contain brightness-110"
+                  loading="lazy"
+                  width={180}
+                  height={52}
+                />
+                <img
+                  src="/badges/Meta-badge.png"
+                  alt="WhatsApp for Business Technical Certified Company"
+                  className="h-12 md:h-14 w-auto object-contain rounded-md shadow-xs"
+                  loading="lazy"
+                  width={170}
+                  height={56}
+                />
+                <img
+                  src="/badges/Meta-badge-2.png"
+                  alt="Business Messaging Strategy Certified Company"
+                  className="h-12 md:h-14 w-auto object-contain rounded-md shadow-xs"
+                  loading="lazy"
+                  width={170}
+                  height={56}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-neutral-300">
+                SECURITY & PRIVACY:
+              </span>
+              <div className="flex items-center gap-3 sm:gap-4">
+                <img
+                  src="/badges/foot-soc-2-type-ii.svg"
+                  alt="AICPA SOC 2 Type II Certified"
+                  className="h-11 md:h-12 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                />
+                <img
+                  src="/badges/foot-iso-27001.svg"
+                  alt="ISO 27001 Information Security Certified"
+                  className="h-11 md:h-12 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                />
+                <img
+                  src="/badges/foot-gdpr.svg"
+                  alt="GDPR Privacy Compliant"
+                  className="h-11 md:h-12 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                />
+                <img
+                  src="/badges/foot-ccpa.svg"
+                  alt="CCPA Privacy Compliant"
+                  className="h-11 md:h-12 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                />
               </div>
             </div>
           </div>

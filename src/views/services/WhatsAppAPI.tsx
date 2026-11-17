@@ -200,6 +200,39 @@ export default function WhatsAppAPI() {
                 <ChevronRight className="w-4 h-4 text-neutral-400" />
               </Link>
             </div>
+
+            {/* Official Meta Badges Trust Row */}
+            <div className="pt-6 border-t border-[#E8E8E2] space-y-3">
+              <div className="text-xs font-mono uppercase tracking-widest text-neutral-600 font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
+                <span>OFFICIAL META CLOUD ARCHITECTURE & CERTIFICATIONS</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+                <div className="bg-[#0D0D0D] px-4 py-2 rounded-xl border border-neutral-800 shadow-xs flex items-center">
+                  <img
+                    src="/badges/Official-Meta-Business-Partner.webp"
+                    alt="Official Meta Business Partner"
+                    className="h-10 sm:h-12 w-auto object-contain brightness-110"
+                    width={180}
+                    height={52}
+                  />
+                </div>
+                <img
+                  src="/badges/Meta-badge.png"
+                  alt="WhatsApp for Business Technical Certified Company"
+                  className="h-12 sm:h-14 w-auto object-contain rounded-lg border border-neutral-200/90 shadow-xs"
+                  width={170}
+                  height={56}
+                />
+                <img
+                  src="/badges/Meta-badge-2.png"
+                  alt="Business Messaging Strategy Certified Company"
+                  className="h-12 sm:h-14 w-auto object-contain rounded-lg border border-neutral-200/90 shadow-xs"
+                  width={170}
+                  height={56}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Smartphone Chat Mockup Container */}
@@ -226,6 +259,48 @@ export default function WhatsAppAPI() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Compliance & Security Assurance Strip */}
+          <div className="mt-8 pt-6 border-t border-[#E8E8E2] flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="text-xs font-mono text-neutral-600 uppercase tracking-wider font-semibold flex items-center gap-2">
+              <Shield className="w-4 h-4 text-teal-700" />
+              <span>Bank-Grade Security & Global Data Privacy Compliant</span>
+            </div>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <img
+                src="/badges/foot-soc-2-type-ii.svg"
+                alt="AICPA SOC 2 Type II Certified"
+                className="h-10 sm:h-12 w-auto object-contain"
+                loading="lazy"
+                width={48}
+                height={48}
+              />
+              <img
+                src="/badges/foot-iso-27001.svg"
+                alt="ISO 27001 Information Security Certified"
+                className="h-10 sm:h-12 w-auto object-contain"
+                loading="lazy"
+                width={48}
+                height={48}
+              />
+              <img
+                src="/badges/foot-gdpr.svg"
+                alt="GDPR Privacy Compliant"
+                className="h-10 sm:h-12 w-auto object-contain"
+                loading="lazy"
+                width={48}
+                height={48}
+              />
+              <img
+                src="/badges/foot-ccpa.svg"
+                alt="CCPA Privacy Compliant"
+                className="h-10 sm:h-12 w-auto object-contain"
+                loading="lazy"
+                width={48}
+                height={48}
+              />
+            </div>
           </div>
         </section>
 

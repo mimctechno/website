@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tally on Cloud - Official Social Media Poster</title>
+  <!-- Non-AI Google Fonts: Montserrat & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 896px;
+      height: 1200px;
+      background: #FAFAF8;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .base-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 896px;
+      height: 1200px;
+      z-index: 1;
+    }
+
+    /* Clean overlay for the footer bar to remove 'Delhi NCR, India' */
+    .footer-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 896px;
+      height: 74px;
+      background: #111822;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 24px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #FFFFFF;
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .footer-link.highlight {
+      color: #34D399; /* WhatsApp Vibrant Green */
+    }
+
+    .footer-dot {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 14px;
+    }
+
+    /* Crisp Non-AI Headline Overlay with solid cream background mask */
+    .headline-overlay {
+      position: absolute;
+      top: 124px;
+      left: 40px;
+      width: 816px;
+      text-align: center;
+      z-index: 10;
+      background: #F7F6F0;
+      padding: 16px 20px;
+      border-radius: 16px;
+    }
+
+    .title-pill {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #173832;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .sub-headline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #111111;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .body-desc {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #4B5563;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    /* Crisp Non-AI CTA Button Overlay */
+    .button-overlay {
+      position: absolute;
+      top: 868px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: #0D9488;
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 15px 38px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(13, 148, 136, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    /* Crisp Card Labels Overlay with solid white mask */
+    .card-label-1 {
+      position: absolute;
+      top: 782px;
+      left: 48px;
+      width: 176px;
+      height: 72px;
+      background: #FFFFFF;
+      text-align: center;
+      z-index: 10;
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.3;
+      padding-top: 4px;
+    }
+    .card-label-1 span {
+      display: block;
+      font-weight: 600;
+      font-size: 11px;
+      color: #4B5563;
+      margin-top: 3px;
+    }
+
+    .card-label-2 {
+      position: absolute;
+      top: 782px;
+      left: 256px;
+      width: 176px;
+      height: 72px;
+      background: #FFFFFF;
+      text-align: center;
+      z-index: 10;
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.3;
+      padding-top: 4px;
+    }
+    .card-label-2 span {
+      display: block;
+      font-weight: 600;
+      font-size: 11px;
+      color: #4B5563;
+      margin-top: 3px;
+    }
+
+    .card-label-3 {
+      position: absolute;
+      top: 782px;
+      left: 464px;
+      width: 176px;
+      height: 72px;
+      background: #FFFFFF;
+      text-align: center;
+      z-index: 10;
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.3;
+      padding-top: 4px;
+    }
+    .card-label-3 span {
+      display: block;
+      font-weight: 600;
+      font-size: 11px;
+      color: #4B5563;
+      margin-top: 3px;
+    }
+
+    .card-label-4 {
+      position: absolute;
+      top: 782px;
+      left: 672px;
+      width: 176px;
+      height: 72px;
+      background: #FFFFFF;
+      text-align: center;
+      z-index: 10;
+      font-size: 13px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.3;
+      padding-top: 4px;
+    }
+    .card-label-4 span {
+      display: block;
+      font-weight: 600;
+      font-size: 11px;
+      color: #4B5563;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Base High-Impact 3D Visual Poster -->
+  <img class="base-image" src="file:///home/sid/website_working/rawals_it/public/posters/tally_india_poster_backup.jpg" alt="Tally on Cloud Poster Base">
+
+  <!-- Crisp Non-AI Headline Overlay -->
+  <div class="headline-overlay">
+    <div class="title-pill">TALLY ON CLOUD</div>
+    <div class="sub-headline">RUN TALLY PRIME FROM ANYWHERE, ANYTIME</div>
+    <div class="body-desc">
+      High-speed cloud hosting for Indian businesses with instant WhatsApp invoice delivery & GST compliance.
+    </div>
+  </div>
+
+  <!-- Crisp Non-AI Feature Card Labels -->
+  <div class="card-label-1">
+    Multi-Device Access
+    <span>Mac, Windows & Mobile</span>
+  </div>
+
+  <div class="card-label-2">
+    Instant WhatsApp Sync
+    <span>Invoices & Reminders</span>
+  </div>
+
+  <div class="card-label-3">
+    100% GST Ready
+    <span>Automated e-Way Bills</span>
+  </div>
+
+  <div class="card-label-4">
+    Daily Cloud Backups
+    <span>Anti-Ransomware Defense</span>
+  </div>
+
+  <!-- Crisp Non-AI CTA Button -->
+  <div class="button-overlay">
+    <span>BOOK 7-DAY FREE TRIAL</span>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </div>
+
+  <!-- Dedicated Clean India Footer Ribbon (Zero Delhi NCR text) -->
+  <div class="footer-overlay">
+    <div class="footer-link highlight">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+      <span>Call & WhatsApp: +91 92594 18994</span>
+    </div>
+
+    <span class="footer-dot">•</span>
+
+    <div class="footer-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      <span>info@mimctechnologies.com</span>
+    </div>
+
+    <span class="footer-dot">•</span>
+
+    <div class="footer-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      <span>www.mimctechnologies.com</span>
+    </div>
+  </div>
+</body>
+</html>

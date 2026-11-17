@@ -43,19 +43,19 @@ const partners = [
     ],
   },
   {
-    name: "Official Meta BSP Network",
+    name: "Official Meta WhatsApp Cloud API",
     category: "AI & Messaging",
-    logo: "/whatsapp-meta.webp",
+    logo: "/badges/Official-Meta-Business-Partner.webp",
     fallbackText: "Meta Partner",
-    tag: "WHATSAPP GATEWAY",
+    tag: "OFFICIAL CLOUD API",
     icon: Zap,
     website: "https://business.whatsapp.com",
     description:
-      "Direct technical onboarding through Meta's Business Solution Provider network, enabling high-throughput automated broadcasts, green checkmark verifications, and custom webhooks.",
+      "Direct technical onboarding through Meta's official Cloud API infrastructure, enabling high-throughput automated broadcasts, green checkmark verifications, and custom ERP webhooks with zero aggregator markups.",
     benefits: [
       "Official Green Checkmark verification",
       "Unlimited daily broadcast throughput",
-      "Zero account ban risks",
+      "Meta-hosted Embedded Signup in 3 minutes",
       "Direct ERP & Tally webhook bridges",
     ],
   },
@@ -224,7 +224,11 @@ export default function Partners() {
                           height={40}
                           loading="lazy"
                           decoding="async"
-                          className="max-h-10 max-w-[160px] object-contain"
+                          className={`max-h-10 max-w-[160px] object-contain ${
+                            partner.logo.includes("Official-Meta")
+                              ? "bg-[#0D0D0D] px-2.5 py-1 rounded-lg"
+                              : ""
+                          }`}
                           onError={(e) => {
                             (e.target as HTMLElement).style.display = "none";
                           }}
@@ -248,6 +252,31 @@ export default function Partners() {
                   <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6">
                     {partner.description}
                   </p>
+
+                  {/* Meta Certifications Showcase */}
+                  {partner.name.includes("Meta") && (
+                    <div className="flex flex-wrap items-center gap-4 mb-6 p-4 rounded-xl bg-neutral-50 border border-neutral-200">
+                      <span className="text-[11px] font-mono font-bold text-neutral-600 uppercase tracking-wider w-full">
+                        VERIFIED META CREDENTIALS:
+                      </span>
+                      <img
+                        src="/badges/Meta-badge.png"
+                        alt="WhatsApp for Business Technical Certified Company"
+                        className="h-12 sm:h-14 w-auto object-contain rounded-md border border-neutral-200/80 shadow-xs"
+                        loading="lazy"
+                        width={170}
+                        height={56}
+                      />
+                      <img
+                        src="/badges/Meta-badge-2.png"
+                        alt="Business Messaging Strategy Certified Company"
+                        className="h-12 sm:h-14 w-auto object-contain rounded-md border border-neutral-200/80 shadow-xs"
+                        loading="lazy"
+                        width={170}
+                        height={56}
+                      />
+                    </div>
+                  )}
 
                   {/* Architecture Benefits */}
                   <div className="space-y-2 pt-4 border-t border-[#E8E8E2]">
